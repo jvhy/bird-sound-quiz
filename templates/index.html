@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bird Sound Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="grid-container">
+    <h1 class="header">Welcome to Bird Sound Quiz!</h1>
+    <form id="option-form" action="{{ url_for('index')}}" method="POST" style="grid-column: 2; grid-row: 2; text-align: center;">
+      <label for="quiz-difficulty">Difficulty:</label><br>
+      <input type="range" id="qdiff" name="quiz-difficulty" min="1" max="5"><br>
+      <label for="quiz-length">Quiz length:</label><br>
+      <input type="range" id="qlen" name="quiz-length" min="5" max="25" step="5"><br>
+      <label for="wildcard">Wildcard filter:</label><br>
+      <input type="text" id="qwc" name="wildcard"><br>
+      <button id="play-btn" type="submit">PLAY</button>
+    </form>
+  </div>
+  
+  <script>
+    var optionform = document.getElementById('option-form');
+    optionform.onsubmit = function(event) {
+      var playbtn = document.getElementById('play-btn')
+      playbtn.setAttribute("disabled", true)
+      return true;
+    }
+  </script>
+</body>
+</html>

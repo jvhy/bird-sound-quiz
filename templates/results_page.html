@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bird Sound Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="centered">
+    <p>Points: {{ session['points'] }} / {{ session['max_points'] }}</p>
+    <form action="{{ url_for('index') }}" method="GET">
+      <button type="submit">Back</button>
+    </form>
+  </div>
+</body>
+</html>

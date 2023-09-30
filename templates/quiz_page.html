@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bird Sound Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="grid-container">
+    <div class="header">
+      <h2>Identify the species:</h2>
+    </div>
+    <div class="guess-list" style="grid-column: 1; grid-row: 1 / 4;"></div>
+    <div class="centered-container" style="grid-column: 2; grid-row: 2;">
+      <audio controls controlsList="nodownload">
+        <source src="{{ species.current_sound['sound_file_path'] }}" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="centered-container" style="grid-column: 2; grid-row: 3;">
+      <div style="width: 250px; height: 150px">
+        <p>
+          xeno-canto <a href="https:{{ species.current_sound.url }}" target="_blank"> {{ species.current_sound.xc_id }}</a> <br>
+          {{ species.current_sound.recordist }}<br>
+          {{ species.current_sound.location }}, {{ species.current_sound.country }}<br>
+          {{ species.current_sound.license_type }}<br>
+        </p>
+      </div>
+    </div>
+    <div class="centered-container" style="grid-column: 2; grid-row: 4;">
+      {% if session['questions_left'] != 0 %}
+        <form action="{{ url_for('quiz') }}" method="POST">
+          <input type="text" id="ans" name="answer">
+          <button type="submit">Submit</button>
+        </form>
+      {% else %}
+        <form action="{{ url_for('results') }}" method="GET">
+          <button type="submit">See results</button>
+        </form>
+      {% endif %}
+    </div>
+    <div class="centered" style="grid-column: 2; grid-row: 5;">
+      {% if session['correct'] == True %}
+        <p>That's correct! Hooray!</p>
+      {% elif session['correct'] == False %}
+        <p>Oops! Correct answer was {{ session['correct_answer'] }}</p>
+      {% else %}
+        <p></p>
+      {% endif %}
+    </div>
+    <div class="guess-list" style="grid-column: 3; grid-row: 1 / 4;"></div>
+  </div>
+</body>
+</html>
