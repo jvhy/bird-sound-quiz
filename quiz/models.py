@@ -1,3 +1,17 @@
 from django.db import models
 
-# Create your models here.
+
+class Species(models.Model):
+    name_en = models.CharField(max_length=50, verbose_name="English name")
+    name_sci = models.CharField(max_length=50, verbose_name="Scientific (latin) name")
+
+
+class Recording(models.Model):
+    species_id = models.ForeignKey(Species, on_delete=models.CASCADE)
+    url = models.CharField(max_length=50, unique=True, verbose_name="Xeno-Canto URL")
+    recordist = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+    location = models.CharField(max_length=255)
+    sound_type = models.CharField(max_length=100, null=True)
+    license = models.CharField(max_length=30, verbose_name="Creative Commons license type")
+    audio = models.FileField(upload_to="audio", unique=True)
