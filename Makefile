@@ -11,7 +11,7 @@ help:    ##  Show help message
 
 
 serve:    ## Launch quiz app
-	uv run bird_sound_quiz/manage.py runserver
+	uv run manage.py runserver
 
 style:    ## Check code style with ruff
 	uv run ruff check
