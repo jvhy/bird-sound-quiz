@@ -1,0 +1,12 @@
+{# templates/home.html #}
+{% extends "base.html" %}
+
+{% block title %}Home | Bird Quiz{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Bird Sound Quiz!🐦</h1>
+        <p class="lead">Test your bird call identification skills.</p>
+        <a href="{% url 'quiz' %}" class="btn btn-success btn-lg mt-3">Start Quiz</a>
+    </div>
+{% endblock %}
