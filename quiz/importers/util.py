@@ -14,11 +14,10 @@ def get_retry_request_session(retries: int = 5) -> requests.Session:
     retry_strategy = Retry(
         total=retries,
         status_forcelist=[408, 429, 500, 502, 503, 504],
-        backoff_factor=2
+        backoff_factor=1
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session = requests.Session()
     session.mount("http://", adapter)
     session.mount("https://", adapter)
-
     return session

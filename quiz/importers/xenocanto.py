@@ -84,3 +84,19 @@ def convert_to_recording(recording: dict, species: Species) -> Recording | None:
     except ValidationError:
         return
     return recording_obj
+
+
+def download_audio(recording: Recording, session: requests.Session) -> bytes:
+    """
+    Downloads an audio file of a recording object from Xeno-Canto.
+
+    :param recording: Recording object for which an audio file is downloaded.
+    :param session: Request session.
+    :return audio: Audio file bytes.
+    :raises: HTTPError if request fails.
+    """
+    download_url = "https:" + recording.url + "/download"
+    response = session.get(download_url)
+    response.raise_for_status()
+    audio = response.content
+    return audio
