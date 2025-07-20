@@ -136,3 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API keys, needed for populating db
 LAJIFI_API_TOKEN = env("LAJIFI_API_TOKEN", default=None)
 XENOCANTO_API_KEY = env("XENOCANTO_API_KEY", default=None)
+
+# App media configuration
+MEDIA_ROOT = BASE_DIR / "media"
