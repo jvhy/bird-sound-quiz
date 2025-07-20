@@ -16,3 +16,4 @@ class Recording(models.Model):
     sound_type = models.CharField(max_length=100, null=True)
     license = models.CharField(max_length=30, verbose_name="Creative Commons license type")
     audio = models.FileField(upload_to="audio", max_length=255, unique=True)
+    downloaded = models.BooleanField(verbose_name="Audio file downloaded", default=False)
