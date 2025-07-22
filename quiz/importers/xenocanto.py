@@ -67,7 +67,7 @@ def convert_to_recording(recording: dict, species: Species) -> Recording | None:
     :return recording: Converted Recording db object or None if validation fails.
     """
     extension = extract_file_extension(recording["file-name"])
-    file_name = f"XC{recording["id"]}{extension}"
+    file_name = f"audio/XC{recording["id"]}{extension}"
     recording_obj = Recording(
         id=recording["id"],
         species=species,

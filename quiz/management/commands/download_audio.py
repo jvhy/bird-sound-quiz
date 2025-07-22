@@ -1,6 +1,7 @@
 """Commmand for downloading audio files of recordings"""
 
 import os
+from pathlib import Path
 
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -20,16 +21,18 @@ class Command(BaseCommand):
         session = get_retry_request_session()
         recordings = Recording.objects.all()
         for recording in tqdm(recordings):
-            if os.path.exists(settings.MEDIA_ROOT / f"audio/{recording.audio.name}"):
-               continue  # skip files that have already been downloaded
+            audio_path = Path(settings.MEDIA_ROOT) / recording.audio.name
+            if os.path.exists(audio_path):
+                continue  # skip files that have already been downloaded
             try:
                 audio = download_audio(recording, session)
             except Exception as e:
                 self.stderr.write(f"Failed to download {recording.url} with error: {repr(e)}")
                 continue
+            filename = Path(recording.audio.name).name
+            recording.audio.save(filename, ContentFile(audio), save=False)
             recording.downloaded = True
             recording.save()
-            recording.audio.save(recording.audio.name, ContentFile(audio), save=False)  # saving here would mess up audio.name
         self.stdout.write(
             self.style.SUCCESS('Finished downloading files.')
         )
@@ -42,8 +45,8 @@ class Command(BaseCommand):
                 answer = input().lower()
                 match answer:
                     case "y" | "yes":
-                        dropped = failed.delete()[0]
-                        self.stdout.write(self.style.NOTICE(f"Dropped {len(dropped)} rows."))
+                        dropped, _ = failed.delete()
+                        self.stdout.write(self.style.NOTICE(f"Dropped {dropped} rows."))
                         break
                     case "n" | "no":
                         break
