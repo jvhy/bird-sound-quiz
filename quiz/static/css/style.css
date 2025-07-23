@@ -1,0 +1,17 @@
+.footer-url:link {
+  color: lightgreen;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.footer-url:visited {
+  color: greenyellow;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.footer-url:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
