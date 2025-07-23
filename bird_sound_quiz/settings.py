@@ -139,3 +139,5 @@ XENOCANTO_API_KEY = env("XENOCANTO_API_KEY", default=None)
 
 # App media configuration
 MEDIA_ROOT = BASE_DIR / "media"
+
+MEDIA_URL = "media/"
