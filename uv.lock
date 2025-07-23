@@ -19,8 +19,6 @@ dependencies = [
     { name = "django" },
     { name = "django-environ" },
     { name = "psycopg" },
-    { name = "requests" },
-    { name = "tqdm" },
 ]
 
 [package.dev-dependencies]
@@ -30,14 +28,16 @@ dev = [
     { name = "pytest-cov" },
     { name = "ruff" },
 ]
+import = [
+    { name = "requests" },
+    { name = "tqdm" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=5.2.4" },
     { name = "django-environ", specifier = ">=0.12.0" },
     { name = "psycopg", specifier = ">=3.2.9" },
-    { name = "requests", specifier = ">=2.32.4" },
-    { name = "tqdm", specifier = ">=4.67.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -46,6 +46,10 @@ dev = [
     { name = "pytest", specifier = ">=8.4.1" },
     { name = "pytest-cov", specifier = ">=6.2.1" },
     { name = "ruff", specifier = ">=0.12.3" },
+]
+import = [
+    { name = "requests", specifier = ">=2.32.4" },
+    { name = "tqdm", specifier = ">=4.67.1" },
 ]
 
 [[package]]
