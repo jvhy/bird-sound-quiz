@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Results | Bird Quiz{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1 class="display-4">Results</h1>
+        <p class="lead">Your final score is: {{ score }} / 10 points</p>
+        <a href="{% url 'index' %}" class="btn btn-success btn-lg mt-3">Home</a>
+    </div>
+{% endblock %}
