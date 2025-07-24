@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Quiz | Bird Quiz{% endblock %}
 
 {% block content %}
@@ -27,9 +29,8 @@
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="card shadow p-4 bg-light rounded-4">
             <div class="row justify-content-center mb-3">
-              <!-- Square image placeholder -->
               <div class="col-md-4 d-flex justify-content-center">
-                <div class="bg-secondary rounded" style="width: 250px; height: 250px; background-image: url(''); background-size: cover; background-position: center;"></div>
+                <img src="{% static 'images/mysterybird.png' %}" alt="Mystery bird" class="rounded" style="width: 250px; height: 250px; object-fit: cover;">
               </div>
             </div>
 
