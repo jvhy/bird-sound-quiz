@@ -37,40 +37,40 @@
     <a href="{% url 'index' %}" class="btn btn-success btn-lg mt-3">Home</a>
 </div>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    let currentAudio = null;
-    let currentButton = null;
+    document.addEventListener("DOMContentLoaded", () => {
+        let currentAudio = null;
+        let currentButton = null;
 
-    document.querySelectorAll('.play-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const src = button.getAttribute('data-audio');
+        document.querySelectorAll('.play-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const src = button.getAttribute('data-audio');
 
-        // If the same audio is playing, pause it
-        if (currentAudio && currentAudio.src.endsWith(src) && !currentAudio.paused) {
-          currentAudio.pause();
-          button.querySelector("i").className = "bi bi-play-fill";
-          return;
-        }
+                // If the same audio is playing, pause it
+                if (currentAudio && currentAudio.src.endsWith(src) && !currentAudio.paused) {
+                    currentAudio.pause();
+                    button.querySelector("i").className = "bi bi-play-fill";
+                    return;
+                }
 
-        // Pause current and reset button
-        if (currentAudio) {
-          currentAudio.pause();
-          if (currentButton) {
-            currentButton.querySelector("i").className = "bi bi-play-fill";
-          }
-        }
+                // Pause current and reset button
+                if (currentAudio) {
+                    currentAudio.pause();
+                    if (currentButton) {
+                        currentButton.querySelector("i").className = "bi bi-play-fill";
+                    }
+                }
 
-        // Play new audio
-        currentAudio = new Audio(src);
-        currentButton = button;
-        currentAudio.play();
-        button.querySelector("i").className = "bi bi-pause-fill";
+                // Play new audio
+                currentAudio = new Audio(src);
+                currentButton = button;
+                currentAudio.play();
+                button.querySelector("i").className = "bi bi-pause-fill";
 
-        currentAudio.addEventListener('ended', () => {
-          button.querySelector("i").className = "bi bi-play-fill";
+                currentAudio.addEventListener('ended', () => {
+                button.querySelector("i").className = "bi bi-play-fill";
+                });
+            });
         });
-      });
     });
-  });
 </script>
 {% endblock %}

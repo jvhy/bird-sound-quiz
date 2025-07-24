@@ -6,110 +6,109 @@
 
 {% block content %}
 <form method="post" action="{% url 'results' %}">
-  {% csrf_token %}
-  <div class="container my-5">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold text-success">Who's that bird?</h2>
-    </div>
-
-    <div id="quizCarousel" class="carousel slide" data-bs-interval="false">
-      <div class="carousel-indicators mb-1">
-        {% for recording in recordings %}
-          <button type="button"
-                  data-bs-target="#quizCarousel"
-                  data-bs-slide-to="{{ forloop.counter0 }}"
-                  {% if forloop.first %}class="active" aria-current="true"{% endif %}
-                  aria-label="Slide {{ forloop.counter }}"
-                  style="background-color: green;">
-          </button>
-        {% endfor %}
-      </div>
-      <div class="carousel-inner">
-        {% for recording in recordings %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-          <div class="card shadow p-4 bg-light rounded-4">
-            <div class="row justify-content-center mb-3">
-              <div class="col-md-4 d-flex justify-content-center">
-                <img src="{% static 'images/mysterybird.png' %}" alt="Mystery bird" class="rounded" style="width: 250px; height: 250px; object-fit: cover;">
-              </div>
-            </div>
-
-            <div class="row justify-content-center mb-3">
-              <div class="col-md-6 text-center">
-                <audio controls controlsList="noplaybackrate nodownload" class="w-100">
-                  <source src="{{ recording.audio.url }}" type="audio/mpeg">
-                </audio>
-              </div>
-            </div>
-
-            <div class="row justify-content-center mb-3">
-              <div class="col-md-8 col-lg-6">
-                <div class="bg-white border rounded-3 p-3" style="height: 180px;">
-                  <p class="mb-2"><strong>Xeno-Canto:</strong> XC{{ recording.id }}</p>
-                  <p class="mb-2"><strong>Recorded by:</strong> {{ recording.recordist }}</p>
-                  <p class="mb-2"><strong>Location:</strong> {{ recording.location }}, {{ recording.country }}</p>
-                  <p class="mb-0"><strong>License:</strong> {{ recording.license }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-center">
-              <div class="col-md-4">
-                <input type="text" name="answers[]" class="form-control mb-2" placeholder="Your answer">
-                <input type="hidden" name="ids[]" value="{{ recording.id }}">
-                <input type="hidden" name="audio_urls[]" value="{{ recording.audio.url }}">
-              </div>
-            </div>
-          </div>
+    {% csrf_token %}
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-success">Who's that bird?</h2>
         </div>
-        {% endfor %}
-      </div>
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#quizCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon bg-success rounded-circle p-3" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#quizCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon bg-success rounded-circle p-3" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+        <div id="quizCarousel" class="carousel slide" data-bs-interval="false">
+            <div class="carousel-indicators mb-1">
+                {% for recording in recordings %}
+                <button type="button"
+                        data-bs-target="#quizCarousel"
+                        data-bs-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                        aria-label="Slide {{ forloop.counter }}"
+                        style="background-color: green;">
+                </button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for recording in recordings %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="card shadow p-4 bg-light rounded-4">
+                        <div class="row justify-content-center mb-3">
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <img src="{% static 'images/mysterybird.png' %}" alt="Mystery bird" class="rounded" style="width: 250px; height: 250px; object-fit: cover;">
+                        </div>
+                        </div>
 
-    <div class="text-center mt-4">
-      <button type="submit" id="submit-button" class="btn btn-success btn-lg mt-3">Submit answers</button>
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-md-6 text-center">
+                                <audio controls controlsList="noplaybackrate nodownload" class="w-100">
+                                    <source src="{{ recording.audio.url }}" type="audio/mpeg">
+                                </audio>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-md-8 col-lg-6">
+                                <div class="bg-white border rounded-3 p-3" style="height: 180px;">
+                                    <p class="mb-2"><strong>Xeno-Canto:</strong> XC{{ recording.id }}</p>
+                                    <p class="mb-2"><strong>Recorded by:</strong> {{ recording.recordist }}</p>
+                                    <p class="mb-2"><strong>Location:</strong> {{ recording.location }}, {{ recording.country }}</p>
+                                    <p class="mb-0"><strong>License:</strong> {{ recording.license }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                <input type="text" name="answers[]" class="form-control mb-2" placeholder="Your answer">
+                                <input type="hidden" name="ids[]" value="{{ recording.id }}">
+                                <input type="hidden" name="audio_urls[]" value="{{ recording.audio.url }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#quizCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-success rounded-circle p-3" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#quizCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-success rounded-circle p-3" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" id="submit-button" class="btn btn-success btn-lg mt-3">Submit answers</button>
+        </div>
     </div>
-  </div>
 </form>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    const inputs = document.querySelectorAll('input[name="answers[]"]');
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const inputs = document.querySelectorAll('input[name="answers[]"]');
 
-    form.addEventListener("submit", function(event) {
-      // Check for empty answers on submission and ask for confirmation if found
-      const anyEmpty = Array.from(inputs).some(input => input.value.trim() === '');
+        form.addEventListener("submit", function(event) {
+            // Check for empty answers on submission and ask for confirmation if found
+            const anyEmpty = Array.from(inputs).some(input => input.value.trim() === '');
 
-      if (anyEmpty) {
-        const confirmSubmit = confirm("Some answers are empty. Are you sure you want to submit?");
-        if (!confirmSubmit) {
-          event.preventDefault();
-        }
-      }
+            if (anyEmpty) {
+                const confirmSubmit = confirm("Some answers are empty. Are you sure you want to submit?");
+                if (!confirmSubmit) {
+                event.preventDefault();
+                }
+            }
+        });
     });
-  });
 
-  // Pause audio on slide change
-  document.addEventListener("DOMContentLoaded", function () {
-    const pauseAllAudio = () => {
-      document.querySelectorAll("audio").forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-      });
-    };
-    document.querySelectorAll(".carousel-control-prev, .carousel-control-next, .carousel-indicators button")
-      .forEach(control => {
-        control.addEventListener("click", pauseAllAudio);
-      });
-  });
+    // Pause audio on slide change
+    document.addEventListener("DOMContentLoaded", function () {
+        const pauseAllAudio = () => {
+            document.querySelectorAll("audio").forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        };
+        document.querySelectorAll(".carousel-control-prev, .carousel-control-next, .carousel-indicators button")
+            .forEach(control => {
+                control.addEventListener("click", pauseAllAudio);
+            });
+    });
 </script>
 {% endblock %}
