@@ -29,7 +29,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&4=q@00^fd0fc@cirn+^b%mu$*)nis%cudd5#mz-c6x-w^90do'
+SECRET_KEY = env("SECRET_KEY", default='django-insecure-&4=q@00^fd0fc@cirn+^b%mu$*)nis%cudd5#mz-c6x-w^90do')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
@@ -84,10 +84,12 @@ WSGI_APPLICATION = 'bird_sound_quiz.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {
-            "service": "quiz_service"
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DATABASE_NAME', default='quizdb'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST', default='localhost'),
+        'PORT': env('DATABASE_PORT', default='5432'),
     }
 }
 
