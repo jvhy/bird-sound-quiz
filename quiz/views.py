@@ -15,10 +15,11 @@ def quiz_page(request):
 
 def results_page(request):
     recording_ids = request.POST.getlist("ids[]")
-    answers = [a.lower().strip() for a in request.POST.getlist("answers[]")]
+    user_answers = [ans.capitalize() if ans else "<no answer>" for ans in request.POST.getlist("answers[]")]
+    audio_urls = request.POST.getlist("audio_urls[]")
     recordings = Recording.objects.filter(id__in=recording_ids).select_related("species")
     recordings_by_id = {str(r.id): r for r in recordings}
-    correct_answers = [recordings_by_id[rec_id].species.name_en.lower() for rec_id in recording_ids]
-    results = zip(answers, correct_answers)
-    score = sum(ua == ca.strip().lower() for ua, ca in results)
-    return render(request, 'results.html', context={"score": score})
+    correct_answers = [recordings_by_id[rec_id].species.name_en.capitalize() for rec_id in recording_ids]
+    results = list(zip(user_answers, correct_answers, audio_urls))
+    score = sum(ua == ca for ua, ca, _ in results)
+    return render(request, 'results.html', context={"score": score, "results": results})
