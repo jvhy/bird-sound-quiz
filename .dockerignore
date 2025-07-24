@@ -1,0 +1,29 @@
+# caches etc.
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.cache
+*.log
+
+# uv related
+.python-version
+pyproject.toml
+uv.lock
+
+# development
+.venv
+.env
+Makefile
+README.md
+.coverage
+
+# version control
+.git
+.gitignore
+
+# app media
+media
