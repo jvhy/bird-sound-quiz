@@ -14,3 +14,8 @@ wheels/
 
 # App media
 media/
+
+# Misc
+dump.sql
+dev_start.sh
+dev_stop.sh
