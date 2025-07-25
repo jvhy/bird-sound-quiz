@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 
 from quiz.models import Recording
@@ -10,7 +11,8 @@ def index(request):
 
 def quiz_page(request):
     recordings = get_quiz_recordings(10)
-    return render(request, 'quiz.html', context={"recordings": recordings})
+    audio_field = "audio.url" if settings.SELF_HOST_AUDIO else "xc_audio_url"
+    return render(request, 'quiz.html', context={"recordings": recordings, "audio_field": audio_field})
 
 
 def results_page(request):

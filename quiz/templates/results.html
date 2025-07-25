@@ -46,7 +46,7 @@
                 const src = button.getAttribute('data-audio');
 
                 // If the same audio is playing, pause it
-                if (currentAudio && currentAudio.src.endsWith(src) && !currentAudio.paused) {
+                if (currentAudio && decodeURIComponent(currentAudio.src).endsWith(src) && !currentAudio.paused) {
                     currentAudio.pause();
                     button.querySelector("i").className = "bi bi-play-fill";
                     return;
@@ -62,6 +62,9 @@
 
                 // Play new audio
                 currentAudio = new Audio(src);
+                console.log(currentAudio.src)
+                console.log(src)
+                console.log()
                 currentButton = button;
                 currentAudio.play();
                 button.querySelector("i").className = "bi bi-pause-fill";

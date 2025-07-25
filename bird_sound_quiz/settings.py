@@ -141,5 +141,7 @@ XENOCANTO_API_KEY = env("XENOCANTO_API_KEY", default=None)
 
 # App media configuration
 MEDIA_ROOT = BASE_DIR / "media"
-
 MEDIA_URL = "media/"
+
+# Determines whether to self-host downloaded audio files or to use files hosted by Xeno-Canto instead
+SELF_HOST_AUDIO = env("SELF_HOST_AUDIO", default=False)
