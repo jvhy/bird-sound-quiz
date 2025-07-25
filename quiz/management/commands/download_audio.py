@@ -23,6 +23,8 @@ class Command(BaseCommand):
         for recording in tqdm(recordings):
             audio_path = Path(settings.MEDIA_ROOT) / recording.audio.name
             if os.path.exists(audio_path):
+                recording.downloaded = True
+                recording.save()
                 continue  # skip files that have already been downloaded
             try:
                 audio = download_audio(recording, session)
@@ -42,7 +44,7 @@ class Command(BaseCommand):
                 self.style.NOTICE(f"Download failed for {len(failed)} rows. Drop rows? (y/n) ")
             )
             while True:
-                answer = input().lower()
+                answer = input("> ").lower()
                 match answer:
                     case "y" | "yes":
                         dropped, _ = failed.delete()

@@ -57,6 +57,20 @@ def extract_file_extension(file_name: str) -> str:
     return extension
 
 
+def construct_audio_url(recording: dict) -> str:
+    """
+    Constructs a URL to Xeno-Canto hosted audio file.
+
+    :param recording: Recording object from Xeno-Canto API response.
+    :returns audio_url: URL to audio file hosted by Xeno-Canto.
+    """
+    filename = recording["file-name"]
+    sono_path = pathlib.Path(recording["sono"]["small"])
+    audio_path_parent = str(sono_path.parents[1])
+    audio_url = f"https:{audio_path_parent}/{filename}"
+    return audio_url
+
+
 def convert_to_recording(recording: dict, species: Species) -> Recording | None:
     """
     Converts recording object in Xeno-Canto API schema to Recording database object and validates the fields.
@@ -72,11 +86,13 @@ def convert_to_recording(recording: dict, species: Species) -> Recording | None:
         id=recording["id"],
         species=species,
         url=recording["url"],
+        xc_audio_url=construct_audio_url(recording),
         recordist=recording["rec"],
         country=recording["cnt"],
         location=recording["loc"],
         sound_type=recording["type"],
         license=extract_license_type(recording["lic"]),
+        license_url=recording["lic"],
         audio=file_name
     )
     try:
@@ -95,7 +111,7 @@ def download_audio(recording: Recording, session: requests.Session) -> bytes:
     :return audio: Audio file bytes.
     :raises: HTTPError if request fails.
     """
-    download_url = "https:" + recording.url + "/download"
+    download_url = f"https:{recording.url}/download"
     response = session.get(download_url)
     response.raise_for_status()
     audio = response.content
