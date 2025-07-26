@@ -136,6 +136,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # API keys, needed for populating db
+EBIRD_API_KEY = env("EBIRD_API_KEY", default=None)
 LAJIFI_API_TOKEN = env("LAJIFI_API_TOKEN", default=None)
 XENOCANTO_API_KEY = env("XENOCANTO_API_KEY", default=None)
 
