@@ -18,7 +18,6 @@ source = { virtual = "." }
 dependencies = [
     { name = "django" },
     { name = "django-environ" },
-    { name = "psycopg" },
 ]
 
 [package.dev-dependencies]
@@ -32,12 +31,17 @@ import = [
     { name = "requests" },
     { name = "tqdm" },
 ]
+mysql = [
+    { name = "mysqlclient" },
+]
+postgres = [
+    { name = "psycopg" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=5.2.4" },
     { name = "django-environ", specifier = ">=0.12.0" },
-    { name = "psycopg", specifier = ">=3.2.9" },
 ]
 
 [package.metadata.requires-dev]
@@ -51,6 +55,8 @@ import = [
     { name = "requests", specifier = ">=2.32.4" },
     { name = "tqdm", specifier = ">=4.67.1" },
 ]
+mysql = [{ name = "mysqlclient", specifier = ">=2.2.7" }]
+postgres = [{ name = "psycopg", specifier = ">=3.2.9" }]
 
 [[package]]
 name = "certifi"
@@ -191,6 +197,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a2/6e/371856a3fb9d31ca8dac321cda606860fa4548858c0cc45d9d1d4ca2628b/mypy_extensions-1.1.0.tar.gz", hash = "sha256:52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558", size = 6343, upload-time = "2025-04-22T14:54:24.164Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/79/7b/2c79738432f5c924bef5071f933bcc9efd0473bac3b4aa584a6f7c1c8df8/mypy_extensions-1.1.0-py3-none-any.whl", hash = "sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505", size = 4963, upload-time = "2025-04-22T14:54:22.983Z" },
+]
+
+[[package]]
+name = "mysqlclient"
+version = "2.2.7"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/61/68/810093cb579daae426794bbd9d88aa830fae296e85172d18cb0f0e5dd4bc/mysqlclient-2.2.7.tar.gz", hash = "sha256:24ae22b59416d5fcce7e99c9d37548350b4565baac82f95e149cac6ce4163845", size = 91383, upload-time = "2025-01-10T12:06:00.763Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/29/01/e80141f1cd0459e4c9a5dd309dee135bbae41d6c6c121252fdd853001a8a/mysqlclient-2.2.7-cp313-cp313-win_amd64.whl", hash = "sha256:201a6faa301011dd07bca6b651fe5aaa546d7c9a5426835a06c3172e1056a3c5", size = 208000, upload-time = "2025-01-10T11:56:32.293Z" },
 ]
 
 [[package]]
