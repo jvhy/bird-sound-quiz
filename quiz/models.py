@@ -33,3 +33,11 @@ class Region(models.Model):
 class Observation(models.Model):
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["species", "region"],
+                name="unique_species_region"
+            )
+        ]
