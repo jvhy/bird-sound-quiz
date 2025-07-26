@@ -1,8 +1,18 @@
+import warnings
+
 from django.conf import settings
 from django.shortcuts import render
 
 from quiz.models import Recording
-from quiz.services import get_quiz_recordings
+
+match settings.DATABASES["default"]["ENGINE"]:
+    case "postgresql":
+        from quiz.services import get_quiz_recordings_postgres as get_quiz_recordings
+    case "mysql":
+        from quiz.services import get_quiz_recordings_mysql as get_quiz_recordings
+    case _:
+        warnings.warn("DB backends other than postgres and mysql are not tested.")
+        from quiz.services import get_quiz_recordings_mysql as get_quiz_recordings
 
 
 def index(request):

@@ -1,11 +1,13 @@
+from collections import defaultdict
 import random
 
 from quiz.models import Recording
 
 
-def get_quiz_recordings(n_species: int)  -> list[Recording]:
+def get_quiz_recordings_postgres(n_species: int)  -> list[Recording]:
     """
     Select recordings to be used in a quiz. One recording per each of n species is selected.
+    Uses DISTINCT ON which is only supported by postgres.
 
     :param n_species: How many species a recording is selected for.
     :returns recordings: Selected recording objects.
@@ -22,3 +24,33 @@ def get_quiz_recordings(n_species: int)  -> list[Recording]:
     )
     random.shuffle(recordings)
     return recordings
+
+
+def get_quiz_recordings_mysql(n_species: int)  -> list[Recording]:
+    """
+    Select recordings to be used in a quiz. One recording per each of n species is selected.
+
+    :param n_species: How many species a recording is selected for.
+    :returns recordings: Selected recording objects.
+    """
+    species_ids = (
+        Recording.objects
+        .values_list('species_id', flat=True)
+        .distinct()
+    )
+    random_species_ids = random.sample(list(species_ids), n_species)
+    candidate_recordings = Recording.objects.filter(
+        species_id__in=random_species_ids
+    ).select_related('species')
+
+    recordings_by_species = defaultdict(list)
+    for rec in candidate_recordings:
+        recordings_by_species[rec.species_id].append(rec)
+
+    selected_recordings = [
+        random.choice(recordings)
+        for recordings in recordings_by_species.values()
+    ]
+
+    random.shuffle(selected_recordings)
+    return selected_recordings
