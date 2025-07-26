@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 import re
 import pathlib
 
@@ -7,26 +8,32 @@ import requests
 from quiz.models import Recording, Species
 
 
-def get_recordings_by_species(species: str, session: requests.Session, api_key: str):
+def get_recordings_by_species(species: Species, session: requests.Session, api_key: str) -> Iterator[dict]:
     """
     Fetches metadata of bird call audio recordings for given species from Xeno-Canto API.
     Query filters used in API request:
-        - species name
+        - species name (scientific by default, English is used if that yields no results)
         - only match recordings of birds
         - minimum recording quality A (best quality)
-        - lenght between 5 and 30 seconds
+        - length between 5 and 30 seconds
 
-    :param species:  Scientific name of a bird species.
+    :param species:  Species object with scientific and English names.
     :param session:  Request session.
     :param api_key:  Xeno-Canto API key.
-    :return result:
+    :return: Iterator that contains Xeno-Canto response dicts.
     """
     url = "https://xeno-canto.org/api/3/recordings"
     params = {
-        "query": f'sp:"{species}" grp:birds q:A len:5-30',
+        "query": f'sp:"{species.name_sci}" grp:birds q:A len:5-30',
         "key": api_key
     }
     first_page = session.get(url, params=params).json()
+    if first_page["numRecordings"] == "0":  # on empty result, try querying with English name
+        params = {
+            "query": f'en:"={species.name_en}" grp:birds q:A len:5-30',
+            "key": api_key
+        }
+        first_page = session.get(url, params=params).json()
     yield first_page
     num_pages = first_page['numPages']
     for page in range(2, num_pages + 1):

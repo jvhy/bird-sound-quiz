@@ -25,10 +25,8 @@ class Command(BaseCommand):
             update_fields=["name_en", "name_sci"],
             unique_fields=["name_sci"]
         )
-
-        name_to_species = {sp_obj.name_sci: sp_obj for sp_obj in inserted_species_objs}
-        for sp_name, sp_obj in tqdm(name_to_species.items()):
-            recording_pages = get_recordings_by_species(species=sp_name, session=session, api_key=settings.XENOCANTO_API_KEY)
+        for sp_obj in tqdm(inserted_species_objs):
+            recording_pages = get_recordings_by_species(species=sp_obj, session=session, api_key=settings.XENOCANTO_API_KEY)
             for page in recording_pages:
                 batch = page["recordings"]
                 rec_objs = [convert_to_recording(rec, sp_obj) for rec in batch]
