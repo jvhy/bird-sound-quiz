@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 import requests
 
-from quiz.models import Species
+from quiz.models import Species, Region
 
 
 def get_species_info(session: requests.Session, api_key: str) -> list[dict]:
@@ -45,3 +45,46 @@ def convert_to_species(species_obj: dict) -> Species | None:
     except ValidationError:
         return
     return species
+
+
+def get_regions(session: requests.Session, api_key: str, parent_region: str = "world") -> list[dict[str, str]]:
+    """
+    Get a list of eBird subregions of a parent region from the eBird API.
+    If parent region is "world", lists countries.
+    If parent region is a country, lists subnational regions.
+    If parent region is a subnational regions, lists sub-subnational regions.
+
+    :param parent_region: Region whose subregions are listed.
+    :returns regions: List of region dicts with keys "code" and "name".
+    """
+    if parent_region == "world":
+        region_type = "country"
+    else:
+        match len(parent_region.split("-")):
+            case 1:
+                region_type = "subnational1"
+            case 2:
+                region_type = "subnational2"
+            case _:
+                raise ValueError("Invalid parent region")
+    url = f"https://api.ebird.org/v2/ref/region/list/{region_type}/{parent_region}"
+    params = {"fmt": "json"}
+    headers = {"X-eBirdApiToken": api_key}
+    response = session.get(url, params=params, headers=headers)
+    return response.json()
+
+
+def convert_to_region(region_obj: dict) -> Region | None:
+    """
+    Converts eBird region object to Region database object and validates the fields.
+    If field validation fails, returns None.
+
+    :param region_obj: Region object from eBird API response.
+    :return region: Converted Region db object or None if validation fails.
+    """
+    region = Region(**region_obj)
+    try:
+        region.clean_fields()
+    except ValidationError:
+        return
+    return region
