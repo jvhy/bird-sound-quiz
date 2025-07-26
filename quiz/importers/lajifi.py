@@ -18,7 +18,7 @@ def get_species_info(session: requests.Session, access_token: str) -> list[dict[
         "taxonRanks": "MX.species",
         "parentTaxonId": "MX.37580",  # taxon id for class Aves (birds)
         "onlyFinnish": True,  # include only Finnish species
-        "selectedFields": "vernacularName,scientificName",
+        "selectedFields": "vernacularName,scientificName,parent",
         "lang": "en",
         "pageSize": 1000  # will fit all species, no need to paginate further
     }
@@ -27,17 +27,20 @@ def get_species_info(session: requests.Session, access_token: str) -> list[dict[
     return result
 
 
-def convert_to_species(taxon_obj: dict) -> Species | None:
+def convert_to_species(species_obj: dict) -> Species | None:
     """
-    Converts laji.fi taxon object to Species database object and validates the fields.
+    Converts laji.fi species object to Species database object and validates the fields.
     If field validation fails, returns None.
 
-    :param taxon_obj: Taxon object from laji.fi API response.
+    :param taxon_obj: Species object from laji.fi API response.
     :return species: Converted Species db object or None if validation fails.
     """
     species = Species(
-        name_en=taxon_obj["vernacularName"],
-        name_sci=taxon_obj["scientificName"]
+        name_en=species_obj["vernacularName"],
+        name_sci=species_obj["scientificName"],
+        order=species_obj["parent"]["order"]["scientificName"],
+        family=species_obj["parent"]["family"]["scientificName"],
+        genus=species_obj["parent"]["genus"]["scientificName"]
     )
     try:
         species.clean_fields()

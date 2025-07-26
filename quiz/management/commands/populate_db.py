@@ -19,10 +19,12 @@ class Command(BaseCommand):
         taxa = get_species_info(session, settings.LAJIFI_API_TOKEN)
         species_objs = [convert_to_species(taxon) for taxon in taxa]
         valid_species_objs = [obj for obj in species_objs if obj is not None]
+        if len(species_objs) > len(valid_species_objs):
+            self.style.WARNING(f"Validation failed for {len(species_objs) - len(valid_species_objs)} species. Omitting failed species.")
         inserted_species_objs = Species.objects.bulk_create(
             valid_species_objs,
             update_conflicts=True,
-            update_fields=["name_en", "name_sci"],
+            update_fields=["name_en", "name_sci", "order", "family"],
             unique_fields=["name_sci"]
         )
         for sp_obj in tqdm(inserted_species_objs):
