@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'bird_sound_quiz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': f'django.db.backends.{env('DATABASE_BACKEND', default="postgres")}',
         'NAME': env('DATABASE_NAME', default='quizdb'),
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
