@@ -26,7 +26,7 @@ class Recording(models.Model):
 
 
 class Region(models.Model):
-    code = models.CharField(max_length=9)
+    code = models.CharField(max_length=9, unique=True)
     name = models.CharField(max_length=100)
 
 

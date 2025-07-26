@@ -19,7 +19,9 @@ class Command(BaseCommand):
 
         Region.objects.bulk_create(
             valid_region_objs,
-            update_conflicts=False
+            update_conflicts=True,
+            update_fields=["code", "name"],
+            unique_fields=["code"]
         )
         self.stdout.write(
             self.style.SUCCESS('Successfully populated the region table')
