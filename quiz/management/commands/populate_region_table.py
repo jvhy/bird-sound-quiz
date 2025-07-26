@@ -16,13 +16,13 @@ class Command(BaseCommand):
         valid_region_objs = [obj for obj in region_objs if obj is not None]
         if len(region_objs) > len(valid_region_objs):
             self.style.WARNING(f"Validation failed for {len(region_objs) - len(valid_region_objs)} regions. Omitting failed regions.")
-
-        Region.objects.bulk_create(
-            valid_region_objs,
-            update_conflicts=True,
-            update_fields=["code", "name"],
-            unique_fields=["code"]
-        )
+        for region in valid_region_objs:
+            Region.objects.update_or_create(
+                code=region.code,
+                defaults={
+                    "name": region.name
+                }
+            )
         self.stdout.write(
             self.style.SUCCESS('Successfully populated the region table')
         )

@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from tqdm import tqdm
 
 import quiz.importers.ebird as ebird
 import quiz.importers.lajifi as lajifi
@@ -35,12 +36,17 @@ class Command(BaseCommand):
         valid_species_objs = [obj for obj in species_objs if obj is not None]
         if len(species_objs) > len(valid_species_objs):
             self.style.WARNING(f"Validation failed for {len(species_objs) - len(valid_species_objs)} species. Omitting failed species.")
-        Species.objects.bulk_create(
-            valid_species_objs,
-            update_conflicts=True,
-            update_fields=["name_en", "name_sci", "order", "family", "genus", "code"],
-            unique_fields=["name_sci"]
-        )
+        for species in tqdm(valid_species_objs):
+            Species.objects.update_or_create(
+                name_sci=species.name_sci,
+                defaults={
+                    "name_en": species.name_en,
+                    "order": species.order,
+                    "family": species.family,
+                    "genus": species.genus,
+                    "code": species.code,
+                }
+            )
         self.stdout.write(
             self.style.SUCCESS('Successfully populated the species table')
         )
