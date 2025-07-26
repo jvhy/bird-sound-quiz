@@ -55,7 +55,7 @@ def get_regions(session: requests.Session, api_key: str, parent_region: str = "w
     If parent region is a subnational regions, lists sub-subnational regions.
 
     :param parent_region: Region whose subregions are listed.
-    :returns regions: List of region dicts with keys "code" and "name".
+    :returns: List of region dicts with keys "code" and "name".
     """
     if parent_region == "world":
         region_type = "country"
@@ -88,3 +88,16 @@ def convert_to_region(region_obj: dict) -> Region | None:
     except ValidationError:
         return
     return region
+
+
+def get_species_codes_by_region(region_code: str, session: requests.Session, api_key: str) -> list[dict]:
+    """
+    Get list of codes for species that have been observed in a region from the eBird API.
+
+    :param region_code: Region code.
+    :returns: List of species codes.
+    """
+    url = f"https://api.ebird.org/v2/product/spplist/{region_code}"
+    headers = {"X-eBirdApiToken": api_key}
+    response = session.get(url, headers=headers)
+    return response.json()
