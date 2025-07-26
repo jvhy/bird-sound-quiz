@@ -7,6 +7,7 @@ class Species(models.Model):
     order = models.CharField(max_length=50, verbose_name="Taxonomic order", null=True, default=None)
     family = models.CharField(max_length=50, verbose_name="Taxonomic family", null=True, default=None)
     genus = models.CharField(max_length=50, verbose_name="Taxonomic genus", null=True, default=None)
+    code = models.CharField(max_length=9, verbose_name="eBird species code", null=True, blank=True, default=None)
 
 
 class Recording(models.Model):
