@@ -11,7 +11,7 @@ match settings.DATABASES["default"]["ENGINE"]:
     case "mysql":
         from quiz.services import get_quiz_recordings_mysql as get_quiz_recordings
     case _:
-        warnings.warn("DB backends other than postgres and mysql are not tested.")
+        warnings.warn("DB backends other than postgresql and mysql are not tested.")
         from quiz.services import get_quiz_recordings_mysql as get_quiz_recordings
 
 
