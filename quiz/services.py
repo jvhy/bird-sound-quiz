@@ -1,7 +1,9 @@
 from collections import defaultdict
 import random
 
-from quiz.models import Recording
+from django.db.models.query import QuerySet
+
+from quiz.models import Recording, Region
 
 
 def get_quiz_recordings_postgres(n_species: int)  -> list[Recording]:
@@ -54,3 +56,9 @@ def get_quiz_recordings_mysql(n_species: int)  -> list[Recording]:
 
     random.shuffle(selected_recordings)
     return selected_recordings
+
+
+def get_available_regions() -> QuerySet[Region]:
+    """List all regions in the database that appear in at least one observation."""
+    regions = Region.objects.filter(observation__isnull=False).distinct().order_by("name")
+    return regions
