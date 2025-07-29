@@ -3,7 +3,22 @@ import random
 
 from django.db.models.query import QuerySet
 
-from quiz.models import Recording, Region
+from quiz.models import Species, Recording, Region
+
+
+def get_species_by_region(region_id: int, num_species: int) -> QuerySet[Species]:
+    """
+    Select n random species that have been observed in a region and have at least one recording.
+
+    :param region_id: ID of the region that each selected species has to be observed in.
+    :param num_species: Number of random species to be selected.
+    :returns species_set: Query set of random species.
+    """
+    species_set = Species.objects.filter(
+        observation__region_id=region_id,
+        recording__isnull=False
+    ).distinct().order_by("?")[:num_species]
+    return species_set
 
 
 def get_quiz_recordings_postgres(n_species: int)  -> list[Recording]:
