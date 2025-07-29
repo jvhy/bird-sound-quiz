@@ -20,6 +20,7 @@ def quiz_page(request):
     return render(request, 'quiz.html', context={"recordings": recordings, "audio_field": audio_field})
 
 
+@require_http_methods(["POST"])
 def results_page(request):
     recording_ids = request.POST.getlist("ids[]")
     user_answers = [ans.capitalize() if ans else "<no answer>" for ans in request.POST.getlist("answers[]")]
