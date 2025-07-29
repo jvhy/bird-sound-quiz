@@ -3,9 +3,41 @@
 {% block title %}Home | Bird Sound Quiz{% endblock %}
 
 {% block content %}
-    <div class="text-center">
-        <h1 class="display-4">Welcome to Bird Sound Quiz!🐦</h1>
-        <p class="lead">Test your bird call identification skills.</p>
-        <a href="{% url 'quiz' %}" class="btn btn-success btn-lg mt-3">Start Quiz</a>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="text-center mb-4">
+                <h1 class="display-4">Welcome to Bird Sound Quiz!🐦</h1>
+                <p class="lead">Test your bird call identification skills.</p>
+            </div>
+            <div class="card shadow-sm rounded-4">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Select a Region</h5>
+                    <form method="post" action="{% url 'quiz' %}" class="mb-3">
+                        {% csrf_token %}
+                        <select id="regionSelect" name="region" class="form-select" required>
+                            <option value="" disabled selected>-- No region selected --</option>
+                            {% for region in regions %}
+                            <option value="{{ region.id }}">{{ region.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-success btn-lg w-100">Start Quiz</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+    <script>
+    const regionSelect = document.getElementById('regionSelect');
+    const startButton = document.querySelector('button[type="submit"]');
+    // Disable Start Quiz button until region is selected
+    function toggleButton() {
+        startButton.disabled = !regionSelect.value;
+    }
+    toggleButton();
+    regionSelect.addEventListener('change', toggleButton);
+</script>
 {% endblock %}

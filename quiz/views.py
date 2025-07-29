@@ -4,6 +4,7 @@ from django.conf import settings
 from django.shortcuts import render
 
 from quiz.models import Recording
+from quiz.services import get_available_regions
 
 match settings.DATABASES["default"]["ENGINE"]:
     case "postgresql":
@@ -16,7 +17,8 @@ match settings.DATABASES["default"]["ENGINE"]:
 
 
 def index(request):
-    return render(request, 'index.html')
+    regions = get_available_regions()
+    return render(request, 'index.html', context={"regions": regions})
 
 
 def quiz_page(request):
