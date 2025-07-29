@@ -1,19 +1,9 @@
-import warnings
-
 from django.conf import settings
 from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
 
 from quiz.models import Recording
-from quiz.services import get_available_regions
-
-match settings.DATABASES["default"]["ENGINE"]:
-    case "postgresql":
-        from quiz.services import get_quiz_recordings_postgres as get_quiz_recordings
-    case "mysql":
-        from quiz.services import get_quiz_recordings_mysql as get_quiz_recordings
-    case _:
-        warnings.warn("DB backends other than postgresql and mysql are not tested.")
-        from quiz.services import get_quiz_recordings_mysql as get_quiz_recordings
+from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings
 
 
 def index(request):
@@ -21,8 +11,11 @@ def index(request):
     return render(request, 'index.html', context={"regions": regions})
 
 
+@require_http_methods(["POST"])
 def quiz_page(request):
-    recordings = get_quiz_recordings(10)
+    region_id = request.POST.get('region')
+    quiz_species = get_species_by_region(region_id, 10)
+    recordings = get_quiz_recordings(quiz_species)
     audio_field = "audio.url" if settings.SELF_HOST_AUDIO else "xc_audio_url"
     return render(request, 'quiz.html', context={"recordings": recordings, "audio_field": audio_field})
 
