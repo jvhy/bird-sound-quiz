@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from quiz.models import Recording
-from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings
+from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings, get_multiple_choices
 
 
 def index(request):
@@ -15,11 +15,32 @@ def index(request):
 
 @require_http_methods(["POST"])
 def quiz_page(request):
-    region_id = request.POST.get('region')
-    quiz_species = get_species_by_region(region_id, 10)
+    region_id = request.POST.get("region")
+    mode = request.POST.get("mode")
+    region_species = get_species_by_region(region_id)
+    quiz_species = region_species[:10]
     recordings = get_quiz_recordings(quiz_species)
+    options = {}
+    match mode:
+        case "choice":
+            for sp in quiz_species:
+                sp_options = get_multiple_choices(sp, region_species, 3, "random")
+                options[sp.id] = sp_options
+        case "open":
+            pass
+        case _:
+            raise ValueError("Unexpected game mode")
     audio_field = "audio.url" if settings.SELF_HOST_AUDIO else "xc_audio_url"
-    return render(request, 'quiz.html', context={"recordings": recordings, "audio_field": audio_field})
+    return render(
+        request,
+        'quiz.html',
+        context={
+            "recordings": recordings,
+            "audio_field": audio_field,
+            "options": options,
+            "mode": mode
+        }
+    )
 
 
 @require_http_methods(["POST"])
@@ -39,7 +60,11 @@ def check_answer(request):
 @require_http_methods(["POST"])
 def results_page(request):
     recording_ids = request.POST.getlist("ids[]")
-    user_answers = [ans.capitalize() if ans else "<no answer>" for ans in request.POST.getlist("answers[]")]
+    user_answers = []
+    for i in range(10):
+        answer = request.POST.get(f"answer_{i}")
+        answer = answer.capitalize() if answer else "<no answer>"
+        user_answers.append(answer)
     audio_urls = request.POST.getlist("audio_urls[]")
     recordings = Recording.objects.filter(id__in=recording_ids).select_related("species")
     recordings_by_id = {str(r.id): r for r in recordings}

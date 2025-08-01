@@ -44,7 +44,21 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-4">
-                                <input type="text" name="answers[]" class="form-control mb-2" placeholder="Your answer">
+                                {% with forloop.counter0 as rec_counter %}
+                                {% if mode == "open" %}
+                                <input type="text" name="answer_{{rec_counter}}" class="form-control mb-2" placeholder="Your answer">
+                                {% endif %}
+                                {% if mode == "choice" %}
+                                {% for sp in options|dict_get:recording.species.id %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="answer_{{ rec_counter }}" value="{{ sp }}" id="flexRadioDefault{{ rec_counter }}_{{ forloop.counter }}">
+                                    <label class="form-check-label" for="flexRadioDefault{{ rec_counter }}_{{ forloop.counter }}">
+                                        {{ sp }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                                {% endwith %}
                                 <input type="hidden" name="ids[]" value="{{ recording.id }}">
                                 <input type="hidden" name="audio_urls[]" value="{{ recording|get_attr:audio_field }}">
                             </div>
