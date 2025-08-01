@@ -1,3 +1,5 @@
+import random
+
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -18,7 +20,7 @@ def quiz_page(request):
     region_id = request.POST.get("region")
     mode = request.POST.get("mode")
     region_species = get_species_by_region(region_id)
-    quiz_species = region_species[:10]
+    quiz_species = random.sample(list(region_species), 10)
     recordings = get_quiz_recordings(quiz_species)
     options = {}
     match mode:
