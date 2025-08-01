@@ -1,4 +1,5 @@
 from collections import defaultdict
+from enum import Enum
 import random
 
 from django.db.models.query import QuerySet
@@ -6,19 +7,61 @@ from django.db.models.query import QuerySet
 from quiz.models import Species, Recording, Region
 
 
-def get_species_by_region(region_id: int, num_species: int) -> QuerySet[Species]:
+class SelectionMode(str, Enum):
+    RANDOM = "random"
+    TAXONOMIC = "taxonomic"
+
+
+def get_species_by_region(region_id: int, num_species: int | None = None) -> QuerySet[Species]:
     """
-    Select n random species that have been observed in a region and have at least one recording.
+    Select random species that have been observed in a region and have at least one recording.
 
     :param region_id: ID of the region that each selected species has to be observed in.
-    :param num_species: Number of random species to be selected.
-    :returns species_set: Query set of random species.
+    :param num_species: Number of random species to be selected. If None, return all species from region.
+    :returns: Query set of random species.
     """
-    species_set = Species.objects.filter(
+    all_species = Species.objects.filter(
         observation__region_id=region_id,
         recording__isnull=False
-    ).distinct().order_by("?")[:num_species]
-    return species_set
+    ).distinct().order_by("?")
+    if num_species is None:
+        return all_species
+    else:
+        return all_species[:num_species]
+
+
+def get_multiple_choices(
+    target_species: Species,
+    available_species: QuerySet[Species],
+    num_choices: int = 3,
+    mode: SelectionMode = "random"
+) -> list[str]:
+    """
+    Select n species to be used for multiple choice questions for a given species.
+
+    :param target_species: Species for which choices are selected.
+    :param num_choices: How many choices to select.
+    :param mode: How to select choice species: 
+        "random" -> select randomly
+        "taxonomic" -> select from species taxonomically close to the target species
+    :return choice_species_names: List of choice species names in a random order (target species included)
+    """
+    match mode:
+        case "random":
+            choice_species_names = list(
+                available_species
+                    .exclude(id=target_species.id)
+                    .order_by("?")
+                    .values_list("name_en", flat=True)
+                )[:num_choices]
+        case "taxonomic":
+            # TODO: Add taxonomic choice selection
+            raise NotImplementedError("To be added")
+        case _:
+            raise ValueError('Unknown selection mode: mode should be one of {"random", "taxonomic"}')
+    choice_species_names.append(target_species.name_en)
+    random.shuffle(choice_species_names)
+    return choice_species_names
 
 
 def get_quiz_recordings(species_set: QuerySet[Species]) -> QuerySet[Recording]:
