@@ -12,22 +12,18 @@ class SelectionMode(str, Enum):
     TAXONOMIC = "taxonomic"
 
 
-def get_species_by_region(region_id: int, num_species: int | None = None) -> QuerySet[Species]:
+def get_species_by_region(region_id: int) -> QuerySet[Species]:
     """
-    Select random species that have been observed in a region and have at least one recording.
+    Select species that have been observed in a region and have at least one recording.
 
     :param region_id: ID of the region that each selected species has to be observed in.
-    :param num_species: Number of random species to be selected. If None, return all species from region.
-    :returns: Query set of random species.
+    :returns: Query set of species from given region.
     """
-    all_species = Species.objects.filter(
+    region_species = Species.objects.filter(
         observation__region_id=region_id,
         recording__isnull=False
-    ).distinct().order_by("?")
-    if num_species is None:
-        return all_species
-    else:
-        return all_species[:num_species]
+    ).distinct()
+    return region_species
 
 
 def get_multiple_choices(
