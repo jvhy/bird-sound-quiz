@@ -15,3 +15,13 @@
   background-color: transparent;
   text-decoration: underline;
 }
+
+@media only screen and (max-device-width: 425px) {
+  audio.w-100 {
+    max-width: 200px !important;
+  }
+  audio.w-100::-webkit-media-controls-current-time-display,
+  audio.w-100::-webkit-media-controls-time-remaining-display {
+    display: none;
+  }
+}
