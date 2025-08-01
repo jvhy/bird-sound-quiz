@@ -24,4 +24,10 @@
   audio.w-100::-webkit-media-controls-time-remaining-display {
     display: none;
   }
+  #result-card-container {
+    flex-direction: column;
+  }
+  #result-icon-container {
+    margin-top: 10px;
+  }
 }
