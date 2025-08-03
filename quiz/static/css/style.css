@@ -22,18 +22,22 @@
     pointer-events: none;
 }
 
+.mobile-br {
+  display: none;
+}
+
+audio.quiz-audio {
+  width: 90%;
+}
+
 @media only screen and (max-device-width: 425px) {
-  audio.w-100 {
-    max-width: 200px !important;
-  }
-  audio.w-100::-webkit-media-controls-current-time-display,
-  audio.w-100::-webkit-media-controls-time-remaining-display {
-    display: none;
-  }
   #result-card-container {
     flex-direction: column;
   }
   #result-icon-container {
     margin-top: 10px;
+  }
+  .mobile-br {
+    display: inline;
   }
 }
