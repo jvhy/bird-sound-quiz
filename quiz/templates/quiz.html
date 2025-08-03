@@ -110,19 +110,19 @@
                         userAnswerInput.readOnly = true;
                         userAnswerInput.classList.add("readonly-input");
                         if (data.correct) {
-                            answerDiv.innerHTML = `✅ Answer: ${data.answer}`;
+                            answerDiv.innerHTML = `<span class="badge bg-success fs-5">✓</span> ${data.answer}`;
                             answerDiv.style.visibility = "visible";
                         } else {
-                            answerDiv.innerHTML = `❌ Answer: ${data.answer}`;
+                            answerDiv.innerHTML = `<span class="badge bg-danger fs-5">✗</span> ${data.answer}`;
                             answerDiv.style.visibility = "visible";
                         }
                     } else {
-                        answerDiv.innerHTML = "❌ Error fetching answer.";
+                        answerDiv.innerHTML = '<span class="badge bg-danger fs-5">✗</span> Error fetching answer.';
                         answerDiv.style.visibility = "visible";
                     }
                 });
                 if (activeSlide.id == "slide_10") {
-                    checkBtn.innerHTML = "See results";
+                    checkBtn.innerHTML = "Results";
                     checkBtn.setAttribute("type", "submit");
                     readyToSubmit = true;
                 } else {
