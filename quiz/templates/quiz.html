@@ -26,7 +26,6 @@
                                     {{ forloop.counter }}&nbsp;<small>/ {{ recordings|length }}</small>
                                 </div>
                             </div>
-
                             <!-- Centered image -->
                             <div class="d-flex justify-content-center align-items-center h-100">
                                 <img src="{% static 'images/mysterybird.png' %}" alt="Mystery bird" class="rounded" style="width: 250px; height: 250px; object-fit: cover;">
@@ -34,10 +33,41 @@
                         </div>
 
                         <div class="row justify-content-center mb-3">
-                            <div class="col-lg-8 text-center">
-                                <audio class="quiz-audio" controls controlsList="noplaybackrate nodownload">
-                                    <source src="{{ recording|get_attr:audio_field }}" type="audio/mpeg">
-                                </audio>
+                            <div id="audio-player-container" class="container d-grid gap-1 border"
+                                style="grid-template-columns: 1fr 2fr; grid-template-rows: repeat(2, auto); width: 500px;">
+                                <audio src="{{ recording|get_attr:audio_field }}" preload="auto"></audio>
+                            
+                                <!-- Left column spanning 2 rows -->
+                                <div class="text-white p-3 d-flex justify-content-center align-items-center"
+                                    style="grid-row: span 2; margin: 10px; background-color: beige;">
+                                    
+                                    <!-- Circular button with centered icon -->
+                                    <button type="button" id="play-icon" class="d-flex justify-content-center align-items-center rounded-circle shadow border"
+                                            style="width: 100px; height: 100px; background-color: lightgreen;">
+                                        <i class="bi bi-play-fill" style="font-size: 4rem; transform: translateX(2px); color: darkgreen;"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Top right cell -->
+                                <div class="text-white p-3" style="margin: 10px; background-color: beige;">
+                                    <div class="d-flex align-items-center" style="gap: 4px; white-space: nowrap;">
+                                        <button type="button" id="mute-icon" style="background: none; border: none;"><i class="bi bi-volume-up" style="font-size: 2rem; color: darkgreen;"></i></button>
+                                        <output id="volume-output" style="display: none;">100</output>
+                                        <input type="range" id="volume-slider" max="100" value="100" style="background-color: beige; width: 100%;">
+                                    </div>
+                                </div>
+                                <!-- Bottom right cell -->
+                                <div class="bg-secondary text-white p-3 d-flex align-items-center" style="margin: 10px;">
+                                    <div class="d-flex align-items-center text-center" style="gap: 4px; white-space: nowrap;">
+                                        <span id="current-time" class="time">0:00</span>
+                                        <span aria-label="separator">/</span>
+                                        <span id="duration" class="time">0:00</span>
+                                    </div>
+                                </div>
+                                <!-- Thin full-width bottom row -->
+                                <div class="bg-danger" style="grid-column: 1 / span 2; height: 8px; margin: 0;">
+                                    <input type="range" id="seek-slider" max="100" value="0" style="width: 100%; margin: 0; padding: 5px 0 0 0;">
+                                </div>
                             </div>
                         </div>
 
@@ -180,4 +210,5 @@
         });
     });
 </script>
+<script type="module" src="{% static 'js/stuff.js' %}"></script>
 {% endblock %}
