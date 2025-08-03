@@ -13,7 +13,7 @@
             <h2 class="fw-bold text-success">Who's that bird?</h2>
         </div>
 
-        <div id="quizCarousel" class="carousel slide" data-bs-interval="false">
+        <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false">
             <div class="carousel-inner">
                 {% for recording in recordings %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}" id="slide_{{ forloop.counter }}">
