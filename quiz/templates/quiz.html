@@ -101,8 +101,14 @@
 
         checkBtn.addEventListener("click", () => {
             const activeSlide = carouselEl.querySelector(".carousel-item.active");
-            const userAnswerInput = activeSlide.querySelector('input[name="answers[]"]');
             const recordingId = activeSlide.querySelector('input[name="ids[]"]').value;
+            const gameMode = '{{ mode }}';
+            if (gameMode === "open") {
+                userAnswerInput = activeSlide.querySelector('input[name^="answer_"]');
+            } else {
+                userAnswerInput = activeSlide.querySelector('input[type="radio"]:checked');
+            }
+            const userAnswer = userAnswerInput ? userAnswerInput.value.trim() : '';
 
             if (readyToSubmit) {
                 return;
@@ -115,14 +121,22 @@
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: `id=${recordingId}&user_answer=${encodeURIComponent(userAnswerInput.value)}`
+                    body: `id=${recordingId}&user_answer=${encodeURIComponent(userAnswer)}`
                 })
                 .then(response => response.json())
                 .then(data => {
                     const answerDiv = activeSlide.querySelector(".correct-answer");
                     if (data.answer) {
-                        userAnswerInput.readOnly = true;
-                        userAnswerInput.classList.add("readonly-input");
+                        if (gameMode === "open") {
+                            userAnswerInput.readOnly = true;
+                            userAnswerInput.classList.add("readonly-input");
+                        } else {
+                            activeSlide.querySelectorAll('input[type="radio"]').forEach(radio => {
+                                const label = activeSlide.querySelector(`label[for="${radio.id}"]`);
+                                label.classList.add("readonly-input")
+                                radio.classList.add("readonly-input")
+                            });
+                        }
                         if (data.correct) {
                             answerDiv.innerHTML = `<span class="badge bg-success fs-5">✓</span> ${data.answer}`;
                             answerDiv.style.visibility = "visible";
