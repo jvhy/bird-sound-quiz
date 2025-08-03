@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from quiz.models import Recording
@@ -18,6 +20,20 @@ def quiz_page(request):
     recordings = get_quiz_recordings(quiz_species)
     audio_field = "audio.url" if settings.SELF_HOST_AUDIO else "xc_audio_url"
     return render(request, 'quiz.html', context={"recordings": recordings, "audio_field": audio_field})
+
+
+@require_http_methods(["POST"])
+@csrf_exempt  # TODO: handle CSRF token in JS
+def check_answer(request):
+    recording_id = request.POST.get("id")
+    user_answer = request.POST.get("user_answer")
+    try:
+        recording = Recording.objects.get(id=recording_id)
+    except Recording.DoesNotExist:
+        return JsonResponse({"error": "Recording not found"}, status=404)
+    correct_answer = recording.species.name_en
+    correct = user_answer.strip().capitalize() == correct_answer.strip().capitalize() if user_answer else False
+    return JsonResponse({"answer": correct_answer, "correct": correct})
 
 
 @require_http_methods(["POST"])
