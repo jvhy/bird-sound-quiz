@@ -142,8 +142,9 @@
                         } else {
                             activeSlide.querySelectorAll('input[type="radio"]').forEach(radio => {
                                 const label = activeSlide.querySelector(`label[for="${radio.id}"]`);
-                                label.classList.add("readonly-input")
-                                radio.classList.add("readonly-input")
+                                label.classList.add("readonly-input");
+                                label.style.color = "darkgrey";
+                                radio.classList.add("readonly-input");
                             });
                         }
                         if (data.correct) {
