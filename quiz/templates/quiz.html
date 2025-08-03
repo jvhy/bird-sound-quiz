@@ -129,7 +129,14 @@
                     checkBtn.innerHTML = "Next";
                 }
             } else {
-                checkBtn.innerHTML = "Check"
+                checkBtn.innerHTML = "Check";
+                checkBtn.disabled = true;
+                // Wait for the carousel to finish sliding before enabling the button again
+                const onSlideEnd = () => {
+                    checkBtn.disabled = false;
+                    carouselEl.removeEventListener('slid.bs.carousel', onSlideEnd);
+                };
+                carouselEl.addEventListener('slid.bs.carousel', onSlideEnd);
                 goToNextSlide();
             }
         });
