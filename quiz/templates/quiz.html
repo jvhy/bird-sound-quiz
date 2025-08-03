@@ -13,27 +13,36 @@
             <h2 class="fw-bold text-success">Who's that bird?</h2>
         </div>
 
-        <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false">
+        <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false" style="max-width: 800px; margin: 0 auto;">
             <div class="carousel-inner">
                 {% for recording in recordings %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}" id="slide_{{ forloop.counter }}">
                     <div class="card shadow p-4 bg-light rounded-4">
-                        <div class="row justify-content-center mb-3">
-                        <div class="col-md-4 d-flex justify-content-center">
-                            <img src="{% static 'images/mysterybird.png' %}" alt="Mystery bird" class="rounded" style="width: 250px; height: 250px; object-fit: cover;">
-                        </div>
+                        <div class="position-relative mb-3" style="height: 250px;">
+                            <!-- Counter in top-left -->
+                            <div class="position-absolute top-0 start-0 m-2" style="z-index: 2;">
+                                <div class="d-flex align-items-center justify-content-center text-center border bg-light"
+                                    style="width: 60px; height: 60px; border-radius: 50%; font-weight: bold;">
+                                    {{ forloop.counter }}&nbsp;<small>/ {{ recordings|length }}</small>
+                                </div>
+                            </div>
+
+                            <!-- Centered image -->
+                            <div class="d-flex justify-content-center align-items-center h-100">
+                                <img src="{% static 'images/mysterybird.png' %}" alt="Mystery bird" class="rounded" style="width: 250px; height: 250px; object-fit: cover;">
+                            </div>
                         </div>
 
                         <div class="row justify-content-center mb-3">
-                            <div class="col-md-6 text-center">
-                                <audio controls controlsList="noplaybackrate nodownload" class="w-100">
+                            <div class="col-lg-8 text-center">
+                                <audio controls controlsList="noplaybackrate nodownload" style="width: 95%;">
                                     <source src="{{ recording|get_attr:audio_field }}" type="audio/mpeg">
                                 </audio>
                             </div>
                         </div>
 
                         <div class="row justify-content-center mb-3">
-                            <div class="col-md-8 col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="bg-white border rounded-3 p-3" style="height: 180px; overflow-y: scroll;">
                                     <p class="mb-2"><strong>Xeno-Canto:</strong> XC{{ recording.id }}</p>
                                     <p class="mb-2"><strong>Recorded by:</strong> {{ recording.recordist }}</p>
@@ -43,7 +52,7 @@
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-md-4">
+                            <div style="max-width: 300px;">
                                 {% with forloop.counter0 as rec_counter %}
                                 {% if mode == "open" %}
                                 <input type="text" name="answer_{{rec_counter}}" class="form-control mb-2" placeholder="Your answer">
