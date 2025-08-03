@@ -16,6 +16,12 @@
   text-decoration: underline;
 }
 
+.readonly-input {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+    pointer-events: none;
+}
+
 @media only screen and (max-device-width: 425px) {
   audio.w-100 {
     max-width: 200px !important;
