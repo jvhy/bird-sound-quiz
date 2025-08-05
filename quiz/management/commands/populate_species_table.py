@@ -35,7 +35,9 @@ class Command(BaseCommand):
                 raise ValueError("Invalid species info source")
         valid_species_objs = [obj for obj in species_objs if obj is not None]
         if len(species_objs) > len(valid_species_objs):
-            self.style.WARNING(f"Validation failed for {len(species_objs) - len(valid_species_objs)} species. Omitting failed species.")
+            self.stdout.write(
+                self.style.WARNING(f"Validation failed for {len(species_objs) - len(valid_species_objs)} species. Omitting failed species.")
+            )
         for species in tqdm(valid_species_objs):
             Species.objects.update_or_create(
                 name_sci=species.name_sci,
