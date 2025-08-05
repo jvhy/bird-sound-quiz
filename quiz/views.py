@@ -11,7 +11,7 @@ from quiz.services import get_available_regions, get_species_by_region, get_quiz
 
 
 def index(request):
-    regions = get_available_regions()
+    regions = sorted(get_available_regions(), key=lambda r: r.display_name.lower())
     return render(request, 'index.html', context={"regions": regions})
 
 

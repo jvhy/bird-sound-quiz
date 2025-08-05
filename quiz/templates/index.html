@@ -18,7 +18,7 @@
                         <select id="regionSelect" name="region" class="form-select" required style="margin-bottom: 20px;">
                             <option value="" disabled selected>-- No region selected --</option>
                             {% for region in regions %}
-                            <option value="{{ region.id }}">{{ region.name }}</option>
+                            <option value="{{ region.id }}">{{ region.display_name }}</option>
                             {% endfor %}
                         </select>
                         <h5 class="card-title text-center mb-4">Select Game Mode</h5>
