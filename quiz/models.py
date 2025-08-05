@@ -28,6 +28,14 @@ class Recording(models.Model):
 class Region(models.Model):
     code = models.CharField(max_length=9, unique=True)
     name = models.CharField(max_length=100)
+    parent_region = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        default=None,
+        related_name='subregions'
+    )
 
 
 class Observation(models.Model):
