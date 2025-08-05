@@ -1,5 +1,7 @@
 from django.db import models
 
+from quiz.utils import create_region_display_name
+
 
 class Species(models.Model):
     name_en = models.CharField(max_length=50, verbose_name="English name")
@@ -36,6 +38,10 @@ class Region(models.Model):
         default=None,
         related_name='subregions'
     )
+
+    @property
+    def display_name(self):
+        return create_region_display_name(self)
 
 
 class Observation(models.Model):
