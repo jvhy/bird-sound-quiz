@@ -11,8 +11,8 @@ class CustomUserCreationForm(forms.ModelForm):
     """
     A form for creating new users. Includes repeated password validation.
     """
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput, help_text=password_validators_help_text_html())
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput, help_text=password_validators_help_text_html())
+    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput, help_text="Enter the same password as before, for verification.")
     captcha = CaptchaField()
 
     class Meta:
