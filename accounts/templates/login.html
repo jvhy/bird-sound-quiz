@@ -2,14 +2,14 @@
 {% load form_extras %}
 {% block content %}
 <div class="container py-5">
-    {% if form.errors %}
-        <p style="color: red;">Invalid username or password</p>
-    {% endif %}
     <div class="card shadow-sm rounded-4 mx-auto" style="max-width: 600px;">
         <div class="card-body">
             <h2 class="card-title text-center mb-4">Log in to your account</h2>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="col">
+                    {% if form.errors %}
+                    <p class="text-center alert alert-danger" style="color: red;">Invalid username or password</p>
+                    {% endif %}
                     <div class="mx-auto w-50" style="min-width: 250px;">
                         <form method="post">
                             {% csrf_token %}
