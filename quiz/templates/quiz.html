@@ -141,40 +141,44 @@
                     },
                     body: `id=${recordingId}&user_answer=${encodeURIComponent(userAnswer)}`
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error("Failed to check answer from the server.");
+                    }
+                })
                 .then(data => {
                     const answerDiv = activeSlide.querySelector(".correct-answer");
-                    if (data.answer) {
-                        if (gameMode === "open") {
-                            userAnswerInput.readOnly = true;
-                            userAnswerInput.classList.add("readonly-input");
-                        } else {
-                            activeSlide.querySelectorAll('input[type="radio"]').forEach(radio => {
-                                const label = activeSlide.querySelector(`label[for="${radio.id}"]`);
-                                label.classList.add("readonly-input");
-                                label.style.color = "darkgrey";
-                                radio.classList.add("readonly-input");
-                            });
-                        }
-                        if (data.correct) {
-                            answerDiv.innerHTML = `<span class="badge bg-success fs-5">✓</span> ${data.answer}`;
-                            answerDiv.style.visibility = "visible";
-                        } else {
-                            answerDiv.innerHTML = `<span class="badge bg-danger fs-5">✗</span> ${data.answer}`;
-                            answerDiv.style.visibility = "visible";
-                        }
+                    if (gameMode === "open") {
+                        userAnswerInput.readOnly = true;
+                        userAnswerInput.classList.add("readonly-input");
                     } else {
-                        answerDiv.innerHTML = '<span class="badge bg-danger fs-5">✗</span> Error fetching answer.';
+                        activeSlide.querySelectorAll('input[type="radio"]').forEach(radio => {
+                            const label = activeSlide.querySelector(`label[for="${radio.id}"]`);
+                            label.classList.add("readonly-input");
+                            label.style.color = "darkgrey";
+                            radio.classList.add("readonly-input");
+                        });
+                    }
+                    if (data.correct) {
+                        answerDiv.innerHTML = `<span class="badge bg-success fs-5">✓</span> ${data.answer}`;
+                        answerDiv.style.visibility = "visible";
+                    } else {
+                        answerDiv.innerHTML = `<span class="badge bg-danger fs-5">✗</span> ${data.answer}`;
                         answerDiv.style.visibility = "visible";
                     }
+                    if (activeSlide.id == "slide_{{ recordings|length }}") {
+                        checkBtn.innerHTML = "Results";
+                        checkBtn.setAttribute("type", "submit");
+                        readyToSubmit = true;
+                    } else {
+                        checkBtn.innerHTML = "Next";
+                    }
+                })
+                .catch(error => {
+                    alert("There was an error when checking the answer.\nPlease try again.")
                 });
-                if (activeSlide.id == "slide_10") {
-                    checkBtn.innerHTML = "Results";
-                    checkBtn.setAttribute("type", "submit");
-                    readyToSubmit = true;
-                } else {
-                    checkBtn.innerHTML = "Next";
-                }
             } else {
                 checkBtn.innerHTML = "Check";
                 checkBtn.disabled = true;
