@@ -7,7 +7,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ["id"]
     list_display = ["username", "is_contributor", "is_staff"]
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
+        (None, {"fields": ("username", "password", "security_answer")}),
         ("Permissions", {"fields": ("is_active", "is_contributor", "is_staff", "is_superuser", "groups", "user_permissions")}),
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
