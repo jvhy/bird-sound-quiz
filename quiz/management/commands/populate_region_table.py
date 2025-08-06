@@ -25,7 +25,7 @@ class Command(BaseCommand):
             parent_region = Region.objects.filter(code=kwargs["parent_region"]).first()
             if not parent_region:
                 self.stderr.write(
-                    f'Parent region not found in region table. Please run this command with higher level parent region first.'
+                    'Parent region not found in region table. Please run this command with higher level parent region first.'
                 )
                 return
         regions = get_regions(session, settings.EBIRD_API_KEY, kwargs["parent_region"])
