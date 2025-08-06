@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
+from django.core.exceptions import ValidationError
 
 
 User = get_user_model()
@@ -23,7 +24,10 @@ class CustomUserCreationForm(forms.ModelForm):
         username = cleaned_data.get("username")
         if password1 and username:
             self.instance.username = username  # set instance username so similarity validation works
-            validate_password(password1, self.instance)
+            try:
+                validate_password(password1, self.instance)
+            except ValidationError as exc:
+                self.add_error("password1", exc)
         return cleaned_data
 
     def clean_password2(self):
