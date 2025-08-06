@@ -17,7 +17,7 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("username",)
+        fields = ("username", "security_answer")
 
     def clean(self):
         """Validate password."""
