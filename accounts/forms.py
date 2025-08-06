@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
@@ -12,6 +13,7 @@ class CustomUserCreationForm(forms.ModelForm):
     """
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput, help_text=password_validators_help_text_html())
+    captcha = CaptchaField()
 
     class Meta:
         model = User
