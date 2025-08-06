@@ -46,7 +46,6 @@ def quiz_page(request):
 
 
 @require_http_methods(["POST"])
-@csrf_exempt  # TODO: handle CSRF token in JS
 def check_answer(request):
     recording_id = request.POST.get("id")
     user_answer = request.POST.get("user_answer")
