@@ -19,7 +19,23 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light text-dark">
-
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success position-relative py-3">
+        <div class="container-fluid position-relative">
+            <a class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
+                Bird Sound Quiz
+            </a>
+            <div class="ms-auto d-flex align-items-center">
+                {% if user.is_authenticated %}
+                    <span class="text-white me-3">Logged in as {{ user.username }}</span>
+                    <a class="btn btn-outline-light btn-sm me-2">Logout</a>
+                {% else %}
+                    <a class="btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-light btn-sm">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
     <!-- Main Content -->
     <main class="container py-4">
         {% if messages %}
