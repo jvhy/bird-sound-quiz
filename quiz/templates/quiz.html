@@ -8,6 +8,12 @@
 {% block content %}
 <form method="post" action="{% url 'results' %}">
     {% csrf_token %}
+
+    <!-- Hidden fields to preserve mode, region, and timestamp -->
+    <input type="hidden" name="mode" value="{{ mode }}">
+    <input type="hidden" name="region_id" value="{{ region_id }}">
+    <input type="hidden" name="started_at" value="{{ started_at }}">
+
     <div class="container my-5">
         <div class="text-center mb-4">
             <h2 class="fw-bold text-success">Who's that bird?</h2>
@@ -54,10 +60,10 @@
                         <div class="row justify-content-center">
                             <div style="max-width: 300px;">
                                 {% with forloop.counter0 as rec_counter %}
-                                {% if mode == "open" %}
+                                {% if mode == "OPEN" %}
                                 <input type="text" name="answer_{{rec_counter}}" class="form-control mb-2" placeholder="Your answer">
                                 {% endif %}
-                                {% if mode == "choice" %}
+                                {% if mode == "MULTI" %}
                                 {% for sp in options|dict_get:recording.species.id %}
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="answer_{{ rec_counter }}" value="{{ sp }}" id="flexRadioDefault{{ rec_counter }}_{{ forloop.counter }}">
@@ -118,7 +124,7 @@
             const activeSlide = carouselEl.querySelector(".carousel-item.active");
             const recordingId = activeSlide.querySelector('input[name="ids[]"]').value;
             const gameMode = '{{ mode }}';
-            if (gameMode === "open") {
+            if (gameMode === "OPEN") {
                 userAnswerInput = activeSlide.querySelector('input[name^="answer_"]');
             } else {
                 userAnswerInput = activeSlide.querySelector('input[type="radio"]:checked');
@@ -150,7 +156,7 @@
                 })
                 .then(data => {
                     const answerDiv = activeSlide.querySelector(".correct-answer");
-                    if (gameMode === "open") {
+                    if (gameMode === "OPEN") {
                         userAnswerInput.readOnly = true;
                         userAnswerInput.classList.add("readonly-input");
                     } else {
