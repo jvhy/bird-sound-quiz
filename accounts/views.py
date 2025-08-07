@@ -20,4 +20,20 @@ def register(request):
 @login_required
 def user_stats(request):
     user_quizzes = request.user.quiz_set.all()
-    return render(request, "my_stats.html")
+    total_quizzes = user_quizzes.count()
+    if not user_quizzes:
+        accuracy = 0
+        best_score = "N/A"
+    else:
+        accuracy = round(sum(quiz.score / quiz.length for quiz in user_quizzes) / total_quizzes * 100, 1)
+        best_quiz = max(user_quizzes, key=lambda quiz: (quiz.score / quiz.length))
+        best_score = f"{best_quiz.score} / {best_quiz.length}"
+    return render(
+        request,
+        "my_stats.html",
+        context = {
+            "total_quizzes": total_quizzes,
+            "accuracy": accuracy,
+            "best_score": best_score
+        }
+    )

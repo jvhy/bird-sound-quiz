@@ -1,4 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-<p>Statistics!</p>
+<div class="container my-5">
+    <h1 class="mb-4 text-center">Your Quiz Stats</h1>
+    <div class="row g-4 p-5 justify-content-center">
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Quizzes taken</h5>
+                    <p class="display-6">{{ total_quizzes }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Accuracy</h5>
+                    <p class="display-6">{{ accuracy|floatformat:1 }}%</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Best score</h5>
+                    <p class="display-6">{{ best_score }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <a href="{% url 'index' %}" class="btn btn-success btn-lg">Home</a>
+</div>
 {% endblock %}
