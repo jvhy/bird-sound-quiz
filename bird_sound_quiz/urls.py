@@ -17,20 +17,12 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 from django.urls import include, path
-
-from accounts.views import register
 
 
 urlpatterns = [
     path("", include("quiz.urls")),
-    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("register/", register, name="register"),
-    path("captcha/", include("captcha.urls")),
-    path("change_password/", auth_views.PasswordChangeView.as_view(template_name="change_password.html"), name="password_change"),
-    path("password_change_done/", auth_views.PasswordChangeDoneView.as_view(template_name="password_change_done.html"), name="password_change_done"),
+    path("", include("accounts.urls")),
     path('admin/', admin.site.urls),
 ]
 
