@@ -64,10 +64,10 @@ def check_answer(request):
 @require_http_methods(["POST"])
 def results_page(request):
     quiz = Quiz(
-        user=request.user,
         mode=request.POST.get("mode"),
         started_at=request.POST.get("started_at")
     )
+    quiz.user_id = request.user.id
     quiz.region_id = request.POST.get("region_id")
     quiz.save()
 
