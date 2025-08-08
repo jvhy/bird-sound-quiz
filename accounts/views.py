@@ -37,3 +37,8 @@ def user_stats(request):
             "best_score": best_score
         }
     )
+
+
+@login_required
+def user_profile(request):
+    return render(request, "my_profile.html")

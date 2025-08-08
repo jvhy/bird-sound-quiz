@@ -10,5 +10,6 @@ urlpatterns = [
     path("captcha/", include("captcha.urls")),
     path("change_password/", auth_views.PasswordChangeView.as_view(template_name="change_password.html"), name="password_change"),
     path("change_password/success", auth_views.PasswordChangeDoneView.as_view(template_name="password_change_done.html"), name="password_change_done"),
-    path("my_stats/", views.user_stats, name="user_stats")
+    path("my_stats/", views.user_stats, name="user_stats"),
+    path("my_profile/", views.user_profile, name="user_profile")
 ]
