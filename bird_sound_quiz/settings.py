@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bird_sound_quiz.context_processors.settings_context'
             ],
         },
     },
@@ -116,10 +117,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Login/logout redirect pages
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Enable/disable login/register
+LOGIN_ENABLED = env("LOGIN_ENABLED", default=True)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

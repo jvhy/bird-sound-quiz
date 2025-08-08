@@ -25,6 +25,7 @@
             <a class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
                 Bird Sound Quiz
             </a>
+            {% if LOGIN_ENABLED %}
             <div class="ms-auto d-flex align-items-center">
                 {% if user.is_authenticated %}
                     <span class="text-white me-3">Logged in as {{ user.username }}</span>
@@ -37,6 +38,7 @@
                     <a class="btn btn-light btn-sm" href="{% url 'register' %}">Register</a>
                 {% endif %}
             </div>
+            {% endif %}
         </div>
     </nav>
     <!-- Main Content -->

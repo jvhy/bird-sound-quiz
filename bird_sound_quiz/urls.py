@@ -22,9 +22,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("quiz.urls")),
-    path("", include("accounts.urls")),
     path('admin/', admin.site.urls),
 ]
+
+if settings.LOGIN_ENABLED:
+    urlpatterns.append(path("", include("accounts.urls")))
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
