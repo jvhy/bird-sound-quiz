@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 
 from accounts.forms import CustomUserCreationForm
 
@@ -15,6 +16,19 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', context={'form': form})
+
+
+@require_http_methods(["POST"])
+@login_required
+def delete_account(request):
+    user = request.user
+    logout(request)
+    user.delete()
+    return redirect("account_deleted")
+
+
+def account_deleted(request):
+    return render(request, "account_deleted.html")
 
 
 @login_required
