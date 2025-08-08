@@ -30,6 +30,8 @@ audio.quiz-audio {
   width: 90%;
 }
 
+#navbarTitleMobile { display: none }
+
 @media only screen and (max-device-width: 425px) {
   #result-card-container {
     flex-direction: column;
@@ -40,4 +42,10 @@ audio.quiz-audio {
   .mobile-br {
     display: inline;
   }
+  #navbarTitleMobile  { display: block }
+  #navbarTitleDesktop  { display: none }
+}
+
+@media only screen and (max-device-width: 768px) {
+  #loggedInText { display: none }
 }

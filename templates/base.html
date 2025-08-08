@@ -22,13 +22,16 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success position-relative py-3">
         <div class="container-fluid position-relative">
-            <a class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
+            <a id="navbarTitleMobile" class="navbar-brand ms-2" href="{% url 'index' %}">
+                BSQ
+            </a>
+            <a id="navbarTitleDesktop" class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
                 Bird Sound Quiz
             </a>
             {% if LOGIN_ENABLED %}
             <div class="ms-auto d-flex align-items-center">
                 {% if user.is_authenticated %}
-                    <span class="text-white me-3">Logged in as {{ user.username }}</span>
+                    <span id="loggedInText" class="text-white me-3">Logged in as {{ user.username }}</span>
                     <a class="btn btn-outline-light btn-sm me-2" title="Profile" href="{% url 'user_profile' %}"><i class="bi bi-person-fill"></i></a>
                     <a class="btn btn-outline-light btn-sm me-2" title="My stats" href="{% url 'user_stats' %}"><i class="bi bi-bar-chart-line"></i></a>
                     <form method="post" action="{% url 'logout' %}">
