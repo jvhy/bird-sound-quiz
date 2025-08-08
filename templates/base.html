@@ -29,6 +29,7 @@
             <div class="ms-auto d-flex align-items-center">
                 {% if user.is_authenticated %}
                     <span class="text-white me-3">Logged in as {{ user.username }}</span>
+                    <a class="btn btn-outline-light btn-sm me-2" title="My stats" href="{% url 'user_stats' %}"><i class="bi bi-bar-chart-line"></i></a>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button class="btn btn-outline-light btn-sm me-2">Logout</button>
