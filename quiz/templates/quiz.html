@@ -5,6 +5,10 @@
 
 {% block title %}Quiz | Bird Sound Quiz{% endblock %}
 
+{% block extra_head %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <form method="post" action="{% url 'results' %}">
     {% csrf_token %}

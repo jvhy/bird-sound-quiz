@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Results | Bird Sound Quiz{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
 <div class="container my-5">
