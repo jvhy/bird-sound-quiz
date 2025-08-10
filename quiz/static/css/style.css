@@ -1,21 +1,3 @@
-.footer-url:link {
-  color: lightgreen;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-.footer-url:visited {
-  color: greenyellow;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-.footer-url:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
-
 .readonly-input {
     background-color: #f8f9fa;
     border-color: #ccc;
@@ -30,38 +12,15 @@ audio.quiz-audio {
   width: 90%;
 }
 
-.messages {
-  position: fixed;
-  bottom: 4.5rem; /* push up above footer */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1050;
-  width: auto;
-  min-width: 250px;
-}
-
-#navbarTitleMobile { display: none }
-
 @media only screen and (max-device-width: 425px) {
+  .mobile-br {
+    display: inline;
+  }
+
   #result-card-container {
     flex-direction: column;
   }
   #result-icon-container {
     margin-top: 10px;
-  }
-  .mobile-br {
-    display: inline;
-  }
-  #navbarTitleMobile  { display: block }
-  #navbarTitleDesktop  { display: none }
-}
-
-@media only screen and (max-device-width: 768px) {
-  #loggedInText { display: none }
-}
-
-@media only screen and (max-device-height: 667px) {
-  .messages {
-    bottom: 0rem;
   }
 }
