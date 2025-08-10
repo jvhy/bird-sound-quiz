@@ -1,9 +1,24 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.decorators.http import require_http_methods
 
 from accounts.forms import CustomUserCreationForm
+
+
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        messages.success(self.request, 'Logged in successfully.')
+        return super().form_valid(form)
+
+
+class CustomLogoutView(LogoutView):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            messages.success(request, "Logged out successfully.")
+        return super().dispatch(request, *args, **kwargs)
 
 
 def register(request):
@@ -12,6 +27,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, "Registered successfully.")
             return redirect('index')
     else:
         form = CustomUserCreationForm()

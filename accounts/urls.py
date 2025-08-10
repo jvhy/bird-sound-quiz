@@ -1,11 +1,13 @@
+from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
 from . import views
 
+
 urlpatterns = [
-    path("login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("login/", views.CustomLoginView.as_view(template_name="login.html"), name="login"),
+    path("logout/", views.CustomLogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name="logout"),
     path("register/", views.register, name="register"),
     path("captcha/", include("captcha.urls")),
     path("change_password/", auth_views.PasswordChangeView.as_view(template_name="change_password.html"), name="password_change"),

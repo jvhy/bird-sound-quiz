@@ -30,6 +30,16 @@ audio.quiz-audio {
   width: 90%;
 }
 
+.messages {
+  position: fixed;
+  bottom: 4.5rem; /* push up above footer */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  width: auto;
+  min-width: 250px;
+}
+
 #navbarTitleMobile { display: none }
 
 @media only screen and (max-device-width: 425px) {
@@ -48,4 +58,10 @@ audio.quiz-audio {
 
 @media only screen and (max-device-width: 768px) {
   #loggedInText { display: none }
+}
+
+@media only screen and (max-device-height: 667px) {
+  .messages {
+    bottom: 0rem;
+  }
 }
