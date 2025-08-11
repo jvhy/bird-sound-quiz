@@ -25,6 +25,16 @@ audio.quiz-audio {
   }
 }
 
+#quiz-title {
+  display: none;
+}
+
+@media only screen and (min-device-height: 1000px) {
+  #quiz-title {
+    display: block;
+  }
+}
+
 .option-card {
     border: 1px solid #ccc;
     border-radius: 8px;

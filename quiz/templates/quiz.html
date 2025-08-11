@@ -18,8 +18,8 @@
     <input type="hidden" name="region_id" value="{{ region_id }}">
     <input type="hidden" name="started_at" value="{{ started_at }}">
 
-    <div class="container my-5">
-        <div class="text-center mb-4">
+    <div class="container py-3">
+        <div id="quiz-title" class="text-center my-4">
             <h2 class="fw-bold text-success">Who's that bird?</h2>
         </div>
 
@@ -43,7 +43,7 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-center mb-3">
+                        <div class="row justify-content-center mb-2">
                             <div class="col-lg-8 text-center">
                                 <audio class="quiz-audio" controls controlsList="noplaybackrate nodownload">
                                     <source src="{{ recording|get_attr:audio_field }}" type="audio/mpeg">

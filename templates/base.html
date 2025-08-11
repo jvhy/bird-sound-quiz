@@ -20,7 +20,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light text-dark">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success position-relative py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success position-relative">
         <div class="container-fluid position-relative">
             <a id="navbarTitleMobile" class="navbar-brand ms-2" href="{% url 'index' %}">
                 <img src="{% static 'images/bsq-logo.svg' %}" 
@@ -52,7 +52,7 @@
         </div>
     </nav>
     <!-- Main Content -->
-    <main class="container py-4">
+    <main class="container">
         {% block content %}
         <!-- Page-specific content -->
         {% endblock %}

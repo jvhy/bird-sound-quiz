@@ -28,9 +28,16 @@
 
 #navbarTitleMobile { display: none }
 
-@media only screen and (max-device-width: 425px) {
-  #navbarTitleMobile  { display: block }
-  #navbarTitleDesktop  { display: none }
+@media only screen and (max-device-width: 450px) {
+  #navbarTitleMobile { display: block }
+  #navbarTitleDesktop { display: none }
+}
+
+@media only screen and (min-device-height: 1024px) {
+  .navbar {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
 }
 
 @media only screen and (max-device-width: 768px) {
@@ -42,4 +49,3 @@
     bottom: 0rem;
   }
 }
-
