@@ -25,14 +25,13 @@ audio.quiz-audio {
   }
 }
 
-
 .option-card {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
     text-align: center;
     background-color: #fff;
 }
@@ -45,5 +44,25 @@ audio.quiz-audio {
 .option-card.selected {
     border-color: #007bff;
     background-color: #e7f1ff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 5px gray;
+}
+
+.option-card.correct {
+  border-color: #28a745;
+  background-color: #d4edda;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.option-card.wrong {
+  border-color: #dc3545;
+  background-color: #f8d7da;
+}
+
+.option-card.readonly {
+  pointer-events: none;
+}
+
+.option-card.dim {
+  opacity: 0.8;
 }
