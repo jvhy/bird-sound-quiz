@@ -68,14 +68,20 @@
                                 <input type="text" name="answer_{{rec_counter}}" class="form-control mb-2" placeholder="Your answer">
                                 {% endif %}
                                 {% if mode == "MULTI" %}
-                                {% for sp in options|dict_get:recording.species.id %}
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="answer_{{ rec_counter }}" value="{{ sp }}" id="flexRadioDefault{{ rec_counter }}_{{ forloop.counter }}">
-                                    <label class="form-check-label" for="flexRadioDefault{{ rec_counter }}_{{ forloop.counter }}">
+                                <div class="card-option-container">
+                                    {% for sp in options|dict_get:recording.species.id %}
+                                    <input
+                                        type="radio"
+                                        class="d-none"
+                                        name="answer_{{ rec_counter }}"
+                                        value="{{ sp }}"
+                                        id="option{{ rec_counter }}_{{ forloop.counter }}"
+                                    >
+                                    <div class="option-card" data-radio-id="option{{ rec_counter }}_{{ forloop.counter }}">
                                         {{ sp }}
-                                    </label>
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
                                 {% endif %}
                                 {% endwith %}
                                 <input type="hidden" name="ids[]" value="{{ recording.id }}">
@@ -108,6 +114,24 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function () {
+                const radioId = this.getAttribute('data-radio-id');
+                const radio = document.getElementById(radioId);
+
+                // Unselect other cards in the same group
+                const name = radio.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                    r.checked = false;
+                    document.querySelector(`[data-radio-id="${r.id}"]`).classList.remove('selected');
+                });
+
+                // Select this one
+                radio.checked = true;
+                this.classList.add('selected');
+            });
+        });
+
         const carouselEl = document.querySelector("#quizCarousel");
         const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
 
@@ -165,9 +189,6 @@
                         userAnswerInput.classList.add("readonly-input");
                     } else {
                         activeSlide.querySelectorAll('input[type="radio"]').forEach(radio => {
-                            const label = activeSlide.querySelector(`label[for="${radio.id}"]`);
-                            label.classList.add("readonly-input");
-                            label.style.color = "darkgrey";
                             radio.classList.add("readonly-input");
                         });
                     }
@@ -186,9 +207,7 @@
                         checkBtn.innerHTML = "Next";
                     }
                 })
-                .catch(error => {
-                    alert("There was an error when checking the answer.\nPlease try again.")
-                });
+
             } else {
                 checkBtn.innerHTML = "Check";
                 checkBtn.disabled = true;
