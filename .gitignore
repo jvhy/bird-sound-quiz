@@ -19,3 +19,6 @@ media/
 dump.sql
 dev_start.sh
 dev_stop.sh
+
+# Compiled localization files
+*.mo
