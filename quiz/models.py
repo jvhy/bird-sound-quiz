@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from accounts.models import User
@@ -95,7 +96,10 @@ class Answer(models.Model):
     def is_correct(self) -> bool:
         if not self.recording:
             return False
-        return self.recording.species.name_en.capitalize() == self.user_answer.strip().capitalize()
+        # TODO: This should NOT rely on current locale
+        lang = get_language()
+        name_field = f"name_{lang}"
+        return getattr(self.recording.species, name_field).capitalize() == self.user_answer.strip().capitalize()
 
     def __str__(self):
         return f"Answer {self.id} in Quiz {self.quiz_id}"

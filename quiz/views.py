@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
+from django.utils.translation import get_language
 
 from quiz.models import Recording, Quiz, Answer
 from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings, get_multiple_choices
@@ -19,6 +20,7 @@ def index(request):
 def quiz_page(request):
     region_id = request.POST.get("region")
     mode = request.POST.get("mode")
+    locale = get_language()
     started_at = timezone.now().astimezone(timezone.get_default_timezone()).isoformat()
     region_species = get_species_by_region(region_id)
     quiz_species = random.sample(list(region_species), 10)
@@ -27,7 +29,13 @@ def quiz_page(request):
     match mode:
         case "MULTI":
             for sp in quiz_species:
-                sp_options = get_multiple_choices(sp, region_species, 3, "random")
+                sp_options = get_multiple_choices(
+                    target_species=sp,
+                    available_species=region_species,
+                    locale=locale,
+                    num_choices=3,
+                    mode="random"
+                )
                 options[sp.id] = sp_options
         case "OPEN":
             pass
@@ -52,11 +60,13 @@ def quiz_page(request):
 def check_answer(request):
     recording_id = request.POST.get("id")
     user_answer = request.POST.get("user_answer")
+    locale = get_language()
     try:
         recording = Recording.objects.get(id=recording_id)
     except Recording.DoesNotExist:
         return JsonResponse({"error": "Recording not found"}, status=404)
-    correct_answer = recording.species.name_en
+    correct_answer_field = f"name_{locale}"
+    correct_answer = getattr(recording.species, correct_answer_field).capitalize()
     correct = user_answer.strip().capitalize() == correct_answer.strip().capitalize() if user_answer else False
     return JsonResponse({"answer": correct_answer, "correct": correct})
 
@@ -90,10 +100,12 @@ def results_page(request):
 def results_page_get(request, quiz_id):
     quiz = Quiz.objects.select_related("user").get(id=quiz_id)
     answers = Answer.objects.filter(quiz=quiz).order_by("id").select_related("recording__species")
+    locale = get_language()
+    name_field = f"name_{locale}"
     results = [
         (
             ans.user_answer.capitalize() or "<no answer>",
-            ans.recording.species.name_en.capitalize(),
+            getattr(ans.recording.species, name_field).capitalize(),
             ans.recording.audio.url if settings.SELF_HOST_AUDIO else ans.recording.xc_audio_url
         )
         for ans in answers

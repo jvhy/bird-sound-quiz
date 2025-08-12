@@ -29,6 +29,7 @@ def get_species_by_region(region_id: int) -> QuerySet[Species]:
 def get_multiple_choices(
     target_species: Species,
     available_species: QuerySet[Species],
+    locale: str,
     num_choices: int = 3,
     mode: SelectionMode = "random"
 ) -> list[str]:
@@ -36,6 +37,8 @@ def get_multiple_choices(
     Select n species to be used for multiple choice questions for a given species.
 
     :param target_species: Species for which choices are selected.
+    :param available_species: Query set of species from which choices are selected.
+    :param locale: Which locale to use for common names.
     :param num_choices: How many choices to select.
     :param mode: How to select choice species: 
         "random" -> select randomly
@@ -48,14 +51,16 @@ def get_multiple_choices(
                 available_species
                     .exclude(id=target_species.id)
                     .order_by("?")
-                    .values_list("name_en", flat=True)
+                    .values_list(f"name_{locale}", flat=True)
                 )[:num_choices]
         case "taxonomic":
             # TODO: Add taxonomic choice selection
             raise NotImplementedError("To be added")
         case _:
             raise ValueError('Unknown selection mode: mode should be one of {"random", "taxonomic"}')
-    choice_species_names.append(target_species.name_en)
+    name_field = f"name_{locale}"
+    choice_species_names.append(getattr(target_species, name_field))
+    choice_species_names = [name.capitalize() for name in choice_species_names]
     random.shuffle(choice_species_names)
     return choice_species_names
 
