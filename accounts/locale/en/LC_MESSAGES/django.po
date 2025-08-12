@@ -1,0 +1,19 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-08-12 11:46+0300\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/account_deleted.html:5
+msgid "AccountDeleted"
+msgstr "Account Deleted"
+
+#: templates/account_deleted.html:11
+msgid "AccountDeletedSuccessText"
+msgstr "Account deleted succesfully."
+
+#: templates/account_deleted.html:13
+msgid "HomeButtonLabel"
+msgstr "Home"

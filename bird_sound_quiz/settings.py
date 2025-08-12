@@ -140,7 +140,8 @@ USE_TZ = True
 
 LOCALE_PATHS = [
     BASE_DIR / "locale",
-    BASE_DIR / "quiz/locale"
+    BASE_DIR / "quiz/locale",
+    BASE_DIR / "accounts/locale"
 ]
 
 # Static files (CSS, JavaScript, Images)
