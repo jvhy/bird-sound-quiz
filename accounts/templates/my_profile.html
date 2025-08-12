@@ -1,34 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}My Profile | Bird Sound Quiz{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "MyProfile" %} | Bird Sound Quiz{% endblock %}
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="mb-4 text-center">My Account</h1>
+    <h1 class="mb-4 text-center">{% trans "MyAccount" %}</h1>
     <div class="card shadow-sm border-0 rounded-4 mx-auto" style="max-width: 600px;">
         <div class="card-body p-4">
             <ul class="list-group list-group-flush mb-3">
                 <li class="list-group-item d-flex justify-content-between">
-                    <span class="fw-bold text-muted"><i class="bi bi-person-fill"></i> Username:</span>
+                    <span class="fw-bold text-muted"><i class="bi bi-person-fill"></i> {% trans "UsernameLabel" %}:</span>
                     <span> {{ request.user.username }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                    <span class="fw-bold text-muted"><i class="bi bi-calendar-plus-fill"></i> Joined:</span>
+                    <span class="fw-bold text-muted"><i class="bi bi-calendar-plus-fill"></i> {% trans "JoinedLabel" %}:</span>
                     <span>{{ request.user.date_joined|date:"F j, Y" }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                    <span class="fw-bold text-muted"><i class="bi bi-feather"></i> Favorite bird:</span>
+                    <span class="fw-bold text-muted"><i class="bi bi-feather"></i> {% trans "FavoriteBirdLabel" %}:</span>
                     <span>{{ request.user.security_answer|capfirst }}</span>
                 </li>
             </ul>
             <div class="text-center mt-4">
                 <a href="{% url 'password_change' %}" class="btn btn-success px-4">
-                    <i class="bi bi-key me-2"></i> Change Password
+                    <i class="bi bi-key me-2"></i> {% trans "ChangePasswordButtonLabel" %}
                 </a>
             </div>
             <div class="text-center mt-4">
                 <button class="btn btn-danger px-4" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                    <i class="bi bi-trash me-2"></i> Delete Account
+                    <i class="bi bi-trash me-2"></i> {% trans "DeleteAccountButtonLabel" %}
                 </button>
             </div>
         </div>
@@ -40,17 +42,19 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="confirmDeleteLabel">Confirm Account Deletion</h5>
+                <h5 class="modal-title" id="confirmDeleteLabel">{% trans "ConfirmDeleteAccountTitle" %}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                {% blocktrans trimmed %}
                 Are you sure you want to delete your account? This action <strong>cannot</strong> be undone.
+                {% endblocktrans %}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "CancelButtonLabel" %}</button>
                 <form method="post" action="{% url 'delete_account' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                    <button type="submit" class="btn btn-danger">{% trans "ConfirmDeleteAccountButtonLabel" %}</button>
                 </form>
             </div>
         </div>

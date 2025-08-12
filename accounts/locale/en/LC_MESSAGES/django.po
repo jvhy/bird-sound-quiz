@@ -1,7 +1,6 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-12 12:22+0300\n"
+"POT-Creation-Date: 2025-08-12 12:40+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +30,7 @@ msgstr "Change password"
 msgid "InvalidPasswordErrorText"
 msgstr "Invalid password"
 
-#: templates/change_password.html:35
+#: templates/change_password.html:35 templates/my_profile.html:28
 msgid "ChangePasswordButtonLabel"
 msgstr "Change password"
 
@@ -50,3 +49,47 @@ msgstr "Invalid username or password"
 #: templates/login.html:35
 msgid "LoginButtonLabel"
 msgstr "Login"
+
+#: templates/my_profile.html:5
+msgid "MyProfile"
+msgstr "My Profile"
+
+#: templates/my_profile.html:9
+msgid "MyAccount"
+msgstr "My Account"
+
+#: templates/my_profile.html:14
+msgid "UsernameLabel"
+msgstr "Username"
+
+#: templates/my_profile.html:18
+msgid "JoinedLabel"
+msgstr "Joined"
+
+#: templates/my_profile.html:22
+msgid "FavoriteBirdLabel"
+msgstr "Favorite bird"
+
+#: templates/my_profile.html:33
+msgid "DeleteAccountButtonLabel"
+msgstr "Delete account"
+
+#: templates/my_profile.html:45
+msgid "ConfirmDeleteAccountTitle"
+msgstr "Confirm account deletion"
+
+#: templates/my_profile.html:49
+msgid ""
+"Are you sure you want to delete your account? This action <strong>cannot</"
+"strong> be undone."
+msgstr ""
+"Are you sure you want to delete your account? This action <strong>cannot</"
+"strong> be undone."
+
+#: templates/my_profile.html:54
+msgid "CancelButtonLabel"
+msgstr "Cancel"
+
+#: templates/my_profile.html:57
+msgid "ConfirmDeleteAccountButtonLabel"
+msgstr "Yes, delete"
