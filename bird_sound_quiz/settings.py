@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import environ
 import os
 from pathlib import Path
+
+from django.utils.translation import gettext_lazy as _
+import environ
 
 
 env = environ.Env(
@@ -131,6 +133,11 @@ LOGIN_ENABLED = env("LOGIN_ENABLED", default=True)
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ("en", _("English")),
+    ("fi", _("Finnish"))
+]
 
 TIME_ZONE = 'UTC'
 

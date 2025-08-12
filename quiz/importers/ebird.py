@@ -4,7 +4,18 @@ import requests
 from quiz.models import Species, Region
 
 
-def get_species_info(session: requests.Session, api_key: str) -> list[dict]:
+def is_finnish_locale(species_name: str) -> bool:
+    """
+    Checks if species name is in Finnish locale. eBird API falls back to English names if other locales are not available.
+    English names are capitalized, Finnish names are in lower case.
+
+    :param species_name: Common name of a bird species.
+    :return: Boolean that indicates whether name is in Finnish locale.
+    """
+    return species_name.islower()
+
+
+def get_species_info(session: requests.Session, api_key: str, locale: str = "en") -> list[dict]:
     """
     Fetches taxonomic information of bird species from the eBird API.
 
@@ -12,19 +23,21 @@ def get_species_info(session: requests.Session, api_key: str) -> list[dict]:
 
     :param session:    Request session.
     :param api_token:  Valid eBird API access token.
+    :param locale:     Locale to get for common names of species.
     :return result:    List of species objects from eBird API response.
     """
     url = "https://api.ebird.org/v2/ref/taxonomy/ebird"
     params = {
         "cat": "species",
-        "fmt": "json"
+        "fmt": "json",
+        "locale": locale
     }
     headers = {"X-eBirdApiToken": api_key}
     response = session.get(url, params=params, headers=headers)
     return response.json()
 
 
-def convert_to_species(species_obj: dict) -> Species | None:
+def convert_to_species(species_obj: dict, locale: str = "en") -> Species | None:
     """
     Converts eBird species object to Species database object and validates the fields.
     If field validation fails, returns None.
@@ -34,12 +47,17 @@ def convert_to_species(species_obj: dict) -> Species | None:
     """
     species = Species(
         code=species_obj["speciesCode"],
-        name_en=species_obj["comName"],
         name_sci=species_obj["sciName"],
         order=species_obj["order"],
         family=species_obj["familySciName"],
         genus=species_obj["sciName"].split()[0]
     )
+
+    if locale == "fi" and not is_finnish_locale(species_obj["comName"]):
+        pass  # Leave non-Finnish names as blank
+    else:
+        setattr(species, f"name_{locale}", species_obj["comName"])
+
     try:
         species.clean_fields()
     except ValidationError:
