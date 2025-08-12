@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 12:40+0300\n"
+"POT-Creation-Date: 2025-08-12 12:43+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,7 +14,7 @@ msgstr "Account Deleted"
 msgid "AccountDeletedSuccessText"
 msgstr "Account deleted succesfully."
 
-#: templates/account_deleted.html:13
+#: templates/account_deleted.html:13 templates/my_stats.html:41
 msgid "HomeButtonLabel"
 msgstr "Home"
 
@@ -93,3 +93,27 @@ msgstr "Cancel"
 #: templates/my_profile.html:57
 msgid "ConfirmDeleteAccountButtonLabel"
 msgstr "Yes, delete"
+
+#: templates/my_stats.html:5
+msgid "MyStats"
+msgstr "My Stats"
+
+#: templates/my_stats.html:9
+msgid "MyStatsPageTitle"
+msgstr "My Quiz Stats"
+
+#: templates/my_stats.html:14
+msgid "QuizzesTakenCardLabel"
+msgstr "Quizzes taken"
+
+#: templates/my_stats.html:22
+msgid "AccuracyCardLabel"
+msgstr "Accuracy"
+
+#: templates/my_stats.html:30
+msgid "BestScoreCardLabel"
+msgstr "Best score"
+
+#: templates/my_stats.html:37
+msgid "StatsTBAText"
+msgstr "More stats to be added!"

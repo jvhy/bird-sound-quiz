@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}My Stats | Bird Sound Quiz{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "MyStats" %} | Bird Sound Quiz{% endblock %}
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="mb-4 text-center">My Quiz Stats</h1>
+    <h1 class="mb-4 text-center">{% trans "MyStatsPageTitle" %}</h1>
     <div class="row g-4 p-5 justify-content-center">
         <div class="col-md-4">
             <div class="card text-center shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Quizzes taken</h5>
+                    <h5 class="card-title">{% trans "QuizzesTakenCardLabel" %}</h5>
                     <p class="display-6">{{ total_quizzes }}</p>
                 </div>
             </div>
@@ -17,7 +19,7 @@
         <div class="col-md-4">
             <div class="card text-center shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Accuracy</h5>
+                    <h5 class="card-title">{% trans "AccuracyCardLabel" %}</h5>
                     <p class="display-6">{{ accuracy|floatformat:1 }}%</p>
                 </div>
             </div>
@@ -25,17 +27,17 @@
         <div class="col-md-4">
             <div class="card text-center shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">Best score</h5>
+                    <h5 class="card-title">{% trans "BestScoreCardLabel" %}</h5>
                     <p class="display-6">{{ best_score }}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="text-center">
-        <h3 class="mb-4">More stats to be added!</h3>
+        <h3 class="mb-4">{% trans "StatsTBAText" %}</h3>
     </div>
 </div>
 <div class="text-center">
-    <a href="{% url 'index' %}" class="btn btn-success btn-lg">Home</a>
+    <a href="{% url 'index' %}" class="btn btn-success btn-lg">{% trans "HomeButtonLabel" %}</a>
 </div>
 {% endblock %}
