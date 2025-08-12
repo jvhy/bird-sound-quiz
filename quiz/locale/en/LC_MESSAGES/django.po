@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-08-12 10:57+0300\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:66
+msgid "Multiple choice"
+msgstr "Multiple choice"
+
+#: models.py:67
+msgid "Open answer"
+msgstr "Open answer"
+
+#: templates/index.html:7
+msgid "Home"
+msgstr "Home"
+
+#: templates/index.html:18
+#, python-format
+msgid "Welcome to %(br)sBird Sound Quiz!🐦"
+msgstr "Welcome to %(br)sBird Sound Quiz!🐦"
+
+#: templates/index.html:22
+msgid "HomePageSubtitle"
+msgstr "Test your bird call identification skills."
+
+#: templates/index.html:29
+msgid "RegionSelectorLabel"
+msgstr "Select Region"
+
+#: templates/index.html:31
+msgid "NoRegionSelectedOption"
+msgstr "No region selected"
+
+#: templates/index.html:36
+msgid "GameModeSelectorLabel"
+msgstr "Select Game Mode"
+
+#: templates/index.html:38
+msgid "MultipleChoiceOption"
+msgstr "Multiple choice"
+
+#: templates/index.html:39
+msgid "OpenAnswerOption"
+msgstr "Open answer"
+
+#: templates/index.html:42
+msgid "QuizStartButtonLabel"
+msgstr "Start Quiz"
