@@ -1,6 +1,7 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 11:46+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-12 12:20+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,3 +18,19 @@ msgstr "Account deleted succesfully."
 #: templates/account_deleted.html:13
 msgid "HomeButtonLabel"
 msgstr "Home"
+
+#: templates/change_password.html:7
+msgid "ChangePassword"
+msgstr "Change Password"
+
+#: templates/change_password.html:13
+msgid "ChangePasswordPageTitle"
+msgstr "Change password"
+
+#: templates/change_password.html:17
+msgid "InvalidPasswordErrorText"
+msgstr "Invalid password"
+
+#: templates/change_password.html:35
+msgid "ChangePasswordButtonLabel"
+msgstr "Change password"
