@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,16 +37,16 @@
             {% if LOGIN_ENABLED %}
             <div class="ms-auto d-flex align-items-center">
                 {% if user.is_authenticated %}
-                    <span id="loggedInText" class="text-white me-3">Logged in as {{ user.username }}</span>
+                    <span id="loggedInText" class="text-white me-3">{% blocktrans trimmed with username=user.username%}Logged in as {{ username }}{% endblocktrans %}</span>
                     <a class="btn btn-outline-light btn-sm me-2" title="Profile" href="{% url 'user_profile' %}"><i class="bi bi-person-fill"></i></a>
                     <a class="btn btn-outline-light btn-sm me-2" title="My stats" href="{% url 'user_stats' %}"><i class="bi bi-bar-chart-line"></i></a>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button class="btn btn-outline-light btn-sm me-2">Logout</button>
+                        <button class="btn btn-outline-light btn-sm me-2">{% trans "LogoutButtonLabel" %}</button>
                     </form>
                 {% else %}
-                    <a class="btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">Login</a>
-                    <a class="btn btn-light btn-sm" href="{% url 'register' %}">Register</a>
+                    <a class="btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">{% trans "LoginButtonLabel" %}</a>
+                    <a class="btn btn-light btn-sm" href="{% url 'register' %}">{% trans "RegisterButtonLabel" %}</a>
                 {% endif %}
             </div>
             {% endif %}
@@ -72,7 +73,20 @@
     <!-- Footer -->
     <footer class="bg-success text-white text-center py-3 mt-auto">
         <small>
-            <a class="footer-url" href="https://github.com/jvhy/bird-sound-quiz" target="_blank"><i class="bi bi-github"></i></a> Bird Sound Quiz by jvhy | Audio from <a class="footer-url" href="https://xeno-canto.org" target="_blank">xeno-canto.org</a> | Taxonomic and observation data from <a class="footer-url" href="https://ebird.org" target="_blank">ebird.org</a>
+            <a class="footer-url" href="https://github.com/jvhy/bird-sound-quiz" target="_blank">
+                <i class="bi bi-github"></i>
+            </a>
+            {% blocktrans trimmed with project="Bird Sound Quiz" author="jvhy" %}
+            {{ project }} by {{ author }}
+            {% endblocktrans %}
+             | 
+            {% blocktrans trimmed with source='<a class="footer-url" href="https://xeno-canto.org" target="_blank">xeno-canto.org</a>' %}
+            Audio from {{ source }}
+            {% endblocktrans %}
+             | 
+            {% blocktrans trimmed with source='<a class="footer-url" href="https://ebird.org" target="_blank">ebird.org</a>' %}
+            Taxonomic and observation data from {{ source }}
+            {% endblocktrans %}
         </small>
     </footer>
 
