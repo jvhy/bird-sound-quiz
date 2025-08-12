@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 12:43+0300\n"
+"POT-Creation-Date: 2025-08-12 12:47+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,10 +15,11 @@ msgid "AccountDeletedSuccessText"
 msgstr "Account deleted succesfully."
 
 #: templates/account_deleted.html:13 templates/my_stats.html:41
+#: templates/password_change_done.html:13
 msgid "HomeButtonLabel"
 msgstr "Home"
 
-#: templates/change_password.html:7
+#: templates/change_password.html:7 templates/password_change_done.html:5
 msgid "ChangePassword"
 msgstr "Change Password"
 
@@ -117,3 +118,7 @@ msgstr "Best score"
 #: templates/my_stats.html:37
 msgid "StatsTBAText"
 msgstr "More stats to be added!"
+
+#: templates/password_change_done.html:11
+msgid "PasswordChangedText"
+msgstr "Password changed successfully!"
