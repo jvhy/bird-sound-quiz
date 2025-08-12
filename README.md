@@ -132,7 +132,13 @@ SELF_HOST_AUDIO=true
 
 ### Development
 
-To launch a development server, use `manage.py`:
+Compile localization files:
+
+```bash
+$ uv run manage.py compilemessages
+```
+
+Launch a development server:
 
 ```bash
 $ uv run manage.py runserver
