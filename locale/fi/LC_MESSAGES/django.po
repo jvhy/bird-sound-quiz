@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-08-12 15:22+0300\n"
+"Language: fi\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/base.html:40
+#, python-format
+msgid "Logged in as %(username)s"
+msgstr "Kirjautunut käyttäjänä %(username)s"
+
+#: templates/base.html:45
+msgid "LogoutButtonLabel"
+msgstr "Kirjaudu ulos"
+
+#: templates/base.html:48
+msgid "LoginButtonLabel"
+msgstr "Kirjaudu sisään"
+
+#: templates/base.html:49
+msgid "RegisterButtonLabel"
+msgstr "Rekisteröidy"
+
+#: templates/base.html:79
+#, python-format
+msgid "%(project)s by %(author)s"
+msgstr "%(project)s - %(author)s"
+
+#: templates/base.html:83
+#, python-format
+msgid "Audio from %(source)s"
+msgstr "Äänitteet: %(source)s"
+
+#: templates/base.html:87
+#, python-format
+msgid "Taxonomic and observation data from %(source)s"
+msgstr "Taksonomia ja havaintoaineisto: %(source)s"

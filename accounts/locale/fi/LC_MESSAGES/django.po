@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-08-12 15:29+0300\n"
+"Language: fi\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/account_deleted.html:5
+msgid "AccountDeleted"
+msgstr "Tili poistettu"
+
+#: templates/account_deleted.html:11
+msgid "AccountDeletedSuccessText"
+msgstr "Tilisi on poistettu onnistuneesti."
+
+#: templates/account_deleted.html:13 templates/my_stats.html:41
+#: templates/password_change_done.html:13
+msgid "HomeButtonLabel"
+msgstr "Etusivu"
+
+#: templates/change_password.html:7 templates/password_change_done.html:5
+msgid "ChangePassword"
+msgstr "Vaihda salasana"
+
+#: templates/change_password.html:13
+msgid "ChangePasswordPageTitle"
+msgstr "Vaihda salasana"
+
+#: templates/change_password.html:17
+msgid "InvalidPasswordErrorText"
+msgstr "Virheellinen salasana"
+
+#: templates/change_password.html:35 templates/my_profile.html:28
+msgid "ChangePasswordButtonLabel"
+msgstr "Vaihda salasana"
+
+#: templates/login.html:7
+msgid "Login"
+msgstr "Kirjautuminen"
+
+#: templates/login.html:13
+msgid "LoginPageTitle"
+msgstr "Kirjaudu sisään"
+
+#: templates/login.html:17
+msgid "InvalidUserPasswordErrorText"
+msgstr "Virheellinen käyttäjänimi tai salasana"
+
+#: templates/login.html:35
+msgid "LoginButtonLabel"
+msgstr "Kirjaudu"
+
+#: templates/my_profile.html:5
+msgid "MyProfile"
+msgstr "Profiili"
+
+#: templates/my_profile.html:9
+msgid "MyAccount"
+msgstr "Oma tilini"
+
+#: templates/my_profile.html:14
+msgid "UsernameLabel"
+msgstr "Käyttäjänimi"
+
+#: templates/my_profile.html:18
+msgid "JoinedLabel"
+msgstr "Liittynyt"
+
+#: templates/my_profile.html:22
+msgid "FavoriteBirdLabel"
+msgstr "Suosikkilintu"
+
+#: templates/my_profile.html:33
+msgid "DeleteAccountButtonLabel"
+msgstr "Poista tili"
+
+#: templates/my_profile.html:45
+msgid "ConfirmDeleteAccountTitle"
+msgstr "Vahvista tilin poisto"
+
+#: templates/my_profile.html:49
+msgid ""
+"Are you sure you want to delete your account? This action <strong>cannot</"
+"strong> be undone."
+msgstr ""
+"Oletko varma, että haluat poistaa tilisi? Poistettua tiliä ei voi palauttaa."
+
+#: templates/my_profile.html:54
+msgid "CancelButtonLabel"
+msgstr "Peruuta"
+
+#: templates/my_profile.html:57
+msgid "ConfirmDeleteAccountButtonLabel"
+msgstr "Kyllä, poista"
+
+#: templates/my_stats.html:5
+msgid "MyStats"
+msgstr "Tilastot"
+
+#: templates/my_stats.html:9
+msgid "MyStatsPageTitle"
+msgstr "Omat tilastoni"
+
+#: templates/my_stats.html:14
+msgid "QuizzesTakenCardLabel"
+msgstr "Visoja pelattu"
+
+#: templates/my_stats.html:22
+msgid "AccuracyCardLabel"
+msgstr "Tarkkuus"
+
+#: templates/my_stats.html:30
+msgid "BestScoreCardLabel"
+msgstr "Paras tulos"
+
+#: templates/my_stats.html:37
+msgid "StatsTBAText"
+msgstr "Lisää tilastoja tulossa!"
+
+#: templates/password_change_done.html:11
+msgid "PasswordChangedText"
+msgstr "Salasana vaihdettu onnistuneesti."
+
+#: templates/register.html:11
+msgid "Register"
+msgstr "Rekisteröidy"
+
+#: templates/register.html:17
+msgid "RegistrationPageTitle"
+msgstr "Rekisteröi uusi käyttäjä"
+
+#: templates/register.html:29
+msgid "FavoriteBirdQuestionText"
+msgstr "Mikä on suosikkilintusi?"
+
+#: templates/register.html:29
+msgid "FavoriteBirdQuestionTooltipText"
+msgstr "Tätä vastausta voidaan käyttää salasanasi palauttamiseen."
+
+#: templates/register.html:43
+msgid "RegisterButtonLabel"
+msgstr "Rekisteröidy"
+
+#: views.py:16
+msgid "LoginSuccessMessage"
+msgstr "Kirjautuminen onnistui."
+
+#: views.py:23
+msgid "LogoutSuccessMessage"
+msgstr "Uloskirjautuminen onnistui."
+
+#: views.py:33
+msgid "RegistrationSuccessMessage"
+msgstr "Rekisteröityminen onnistui."
