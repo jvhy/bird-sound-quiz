@@ -1,6 +1,7 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 10:57+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-12 11:34+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,3 +51,38 @@ msgstr "Open answer"
 #: templates/index.html:42
 msgid "QuizStartButtonLabel"
 msgstr "Start Quiz"
+
+#: templates/quiz.html:7
+msgid "Quiz"
+msgstr "Quiz"
+
+#: templates/quiz.html:24
+msgid "QuizTitle"
+msgstr "Who's that bird?"
+
+#: templates/quiz.html:60
+#, python-format
+msgid "<strong>Recorded by:</strong> %(name)s"
+msgstr "<strong>Recorded by:</strong> %(name)s"
+
+#: templates/quiz.html:65
+#, python-format
+msgid "<strong>Location:</strong> %(location)s, %(country)s"
+msgstr "<strong>Location:</strong> %(location)s, %(country)s"
+
+#: templates/quiz.html:70
+#, python-format
+msgid "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
+msgstr "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
+
+#: templates/quiz.html:118 templates/quiz.html:184 templates/quiz.html:249
+msgid "CheckButtonLabel"
+msgstr "Check"
+
+#: templates/quiz.html:240
+msgid "ResultsButtonLabel"
+msgstr "Results"
+
+#: templates/quiz.html:244
+msgid "NextButtonLabel"
+msgstr "Next"

@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 {% load quiz_extras %}
 
-{% block title %}Quiz | Bird Sound Quiz{% endblock %}
+{% block title %}{% trans "Quiz" %} | Bird Sound Quiz{% endblock %}
 
 {% block extra_head %}
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -20,7 +21,7 @@
 
     <div class="container py-3">
         <div id="quiz-title" class="text-center my-4">
-            <h2 class="fw-bold text-success">Who's that bird?</h2>
+            <h2 class="fw-bold text-success">{% trans "QuizTitle" %}</h2>
         </div>
 
         <div id="quizCarousel" class="carousel slide" data-bs-interval="false" data-bs-touch="false" style="max-width: 800px; margin: 0 auto;">
@@ -55,9 +56,21 @@
                             <div class="col-lg-8">
                                 <div class="bg-white border rounded-3 p-3" style="height: 180px; overflow-y: scroll;">
                                     <p class="mb-2"><strong>Xeno-Canto:</strong> XC{{ recording.id }}</p>
-                                    <p class="mb-2"><strong>Recorded by:</strong> {{ recording.recordist }}</p>
-                                    <p class="mb-2"><strong>Location:</strong> {{ recording.location }}, {{ recording.country }}</p>
-                                    <p class="mb-0"><strong>License:</strong> <a href="{{ recording.license_url }}" target="_blank">{{ recording.license }}</a></p>
+                                    <p class="mb-2">
+                                        {% blocktrans trimmed with name=recording.recordist%}
+                                        <strong>Recorded by:</strong> {{ name }}
+                                        {% endblocktrans %}
+                                    </p>
+                                    <p class="mb-2">
+                                        {% blocktrans trimmed with location=recording.location country=recording.country|safe %}
+                                        <strong>Location:</strong> {{ location }}, {{ country }}
+                                        {% endblocktrans %}
+                                    </p>
+                                    <p class="mb-0">
+                                        {% blocktrans trimmed with license=recording.license a_open='<a href="'|add:recording.license_url|add:'" target="_blank">'|safe a_close='</a>'|safe %}
+                                        <strong>License:</strong> {{ a_open }}{{ license }}{{ a_close }}
+                                        {% endblocktrans %}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +115,7 @@
         </div>
         <div class="row justify-content-center mt-3">
             <div class="row col-md-2 text-center">
-                <button type="button" class="btn btn-outline-success me-2 check-btn">Check</button>
+                <button type="button" class="btn btn-outline-success me-2 check-btn">{% trans "CheckButtonLabel" %}</button>
             </div>
         </div>
     </div>
@@ -168,7 +181,7 @@
 
             const csrftoken = getCookie('csrftoken');
 
-            if (checkBtn.innerHTML === "Check") {
+            if (checkBtn.innerHTML === "{% trans 'CheckButtonLabel' %}") {
                 fetch('/check_answer/', {
                     method: 'POST',
                     headers: {
@@ -224,16 +237,16 @@
                         }
                     }
                     if (activeSlide.id == "slide_{{ recordings|length }}") {
-                        checkBtn.innerHTML = "Results";
+                        checkBtn.innerHTML = "{% trans 'ResultsButtonLabel' %}";
                         checkBtn.setAttribute("type", "submit");
                         readyToSubmit = true;
                     } else {
-                        checkBtn.innerHTML = "Next";
+                        checkBtn.innerHTML = "{% trans 'NextButtonLabel' %}";
                     }
                 })
 
             } else {
-                checkBtn.innerHTML = "Check";
+                checkBtn.innerHTML = "{% trans 'CheckButtonLabel' %}";
                 checkBtn.disabled = true;
                 // Wait for the carousel to finish sliding before enabling the button again
                 const onSlideEnd = () => {
