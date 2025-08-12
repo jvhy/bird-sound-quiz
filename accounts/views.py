@@ -6,10 +6,12 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import gettext_lazy as _
 
-from accounts.forms import CustomUserCreationForm
+from accounts.forms import CustomAuthenticationForm, CustomUserCreationForm
 
 
 class CustomLoginView(LoginView):
+    form_class = CustomAuthenticationForm
+
     def form_valid(self, form):
         messages.success(self.request, _("LoginSuccessMessage"))
         return super().form_valid(form)

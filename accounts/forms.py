@@ -1,6 +1,7 @@
 from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -51,3 +52,9 @@ class CustomUserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = _("username").capitalize()
