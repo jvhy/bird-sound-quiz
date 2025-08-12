@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 12:47+0300\n"
+"POT-Creation-Date: 2025-08-12 13:26+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -122,3 +122,23 @@ msgstr "More stats to be added!"
 #: templates/password_change_done.html:11
 msgid "PasswordChangedText"
 msgstr "Password changed successfully!"
+
+#: templates/register.html:11
+msgid "Register"
+msgstr "Register"
+
+#: templates/register.html:17
+msgid "RegistrationPageTitle"
+msgstr "Register a new account"
+
+#: templates/register.html:29
+msgid "FavoriteBirdQuestionText"
+msgstr "What is your favorite bird?"
+
+#: templates/register.html:29
+msgid "FavoriteBirdQuestionTooltipText"
+msgstr "This answer can be used to reset your password."
+
+#: templates/register.html:43
+msgid "RegisterButtonLabel"
+msgstr "Register"
