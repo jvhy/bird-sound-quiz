@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-12 11:34+0300\n"
+"POT-Creation-Date: 2025-08-12 11:43+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -86,3 +86,28 @@ msgstr "Results"
 #: templates/quiz.html:244
 msgid "NextButtonLabel"
 msgstr "Next"
+
+#: templates/results.html:6
+msgid "Results"
+msgstr "Results"
+
+#: templates/results.html:16
+#, python-format
+msgid "Your Score: %(score)s/%(length)s"
+msgstr "Your Score: %(score)s/%(length)s"
+
+#: templates/results.html:20
+msgid "ResultsPageSubtitle"
+msgstr "Here's how you did:"
+
+#: templates/results.html:29
+msgid "YourAnswer"
+msgstr "Your answer"
+
+#: templates/results.html:30
+msgid "CorrectAnswer"
+msgstr "Correct answer"
+
+#: templates/results.html:48
+msgid "HomeButtonLabel"
+msgstr "Home"
