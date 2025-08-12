@@ -8,7 +8,8 @@ from quiz.utils import create_region_display_name
 
 
 class Species(models.Model):
-    name_en = models.CharField(max_length=50, verbose_name="English name")
+    name_en = models.CharField(max_length=50, verbose_name="English name", blank=True, null=True)
+    name_fi = models.CharField(max_length=50, verbose_name="Finnish name", blank=True, null=True)
     name_sci = models.CharField(max_length=50, unique=True, verbose_name="Scientific (latin) name")
     order = models.CharField(max_length=50, verbose_name="Taxonomic order", null=True, default=None)
     family = models.CharField(max_length=50, verbose_name="Taxonomic family", null=True, default=None)
