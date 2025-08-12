@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 13:26+0300\n"
+"POT-Creation-Date: 2025-08-12 14:23+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -142,3 +142,15 @@ msgstr "This answer can be used to reset your password."
 #: templates/register.html:43
 msgid "RegisterButtonLabel"
 msgstr "Register"
+
+#: views.py:14
+msgid "LoginSuccessMessage"
+msgstr "Logged in succesfully."
+
+#: views.py:21
+msgid "LogoutSuccessMessage"
+msgstr "Logged out succesfully."
+
+#: views.py:31
+msgid "RegistrationSuccessMessage"
+msgstr "Registered succesfully."
