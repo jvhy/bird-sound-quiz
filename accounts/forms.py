@@ -12,13 +12,17 @@ class CustomUserCreationForm(forms.ModelForm):
     """
     A form for creating new users. Includes repeated password validation.
     """
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput, help_text=password_validators_help_text_html())
-    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput, help_text=_("Enter the same password as before, for verification."))
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput, help_text=password_validators_help_text_html())
+    password2 = forms.CharField(label=_("Password confirmation"), widget=forms.PasswordInput, help_text=_("Enter the same password as before, for verification."))
     captcha = CaptchaField()
 
     class Meta:
         model = User
         fields = ("username", "security_answer")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = _("username").capitalize()
 
     def clean(self):
         """Validate password."""
