@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 15:23+0300\n"
+"POT-Creation-Date: 2025-08-12 20:28+0300\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +25,7 @@ msgstr "Tervetuloa %(br)sBird Sound Quiz:iin!🐦"
 
 #: templates/index.html:22
 msgid "HomePageSubtitle"
-msgstr "Testaa tietämystäsi lintujen äänistä."
+msgstr "Testaa kuinka hyvin tunnet lintujen äänet."
 
 #: templates/index.html:29
 msgid "RegionSelectorLabel"
