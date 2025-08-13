@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 20:28+0300\n"
+"POT-Creation-Date: 2025-08-13 19:58+0300\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:66
+#: models.py:68
 msgid "Multiple choice"
 msgstr "Monivalinta"
 
-#: models.py:67
+#: models.py:69
 msgid "Open answer"
 msgstr "Avoin vastaus"
 
@@ -74,15 +74,19 @@ msgstr "<strong>Sijainti:</strong> %(location)s, %(country)s"
 msgid "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
 msgstr "<strong>Lisenssi:</strong> %(a_open)s%(license)s%(a_close)s"
 
-#: templates/quiz.html:118 templates/quiz.html:184 templates/quiz.html:249
+#: templates/quiz.html:118 templates/quiz.html:193 templates/quiz.html:258
 msgid "CheckButtonLabel"
 msgstr "Tarkista"
 
-#: templates/quiz.html:240
+#: templates/quiz.html:137
+msgid "LanguageCannotChangeDuringQuizText"
+msgstr "Kieltä ei voi vaihtaa kesken visan"
+
+#: templates/quiz.html:249
 msgid "ResultsButtonLabel"
 msgstr "Tulokset"
 
-#: templates/quiz.html:244
+#: templates/quiz.html:253
 msgid "NextButtonLabel"
 msgstr "Seuraava"
 
