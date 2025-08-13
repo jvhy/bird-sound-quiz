@@ -1,10 +1,14 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 14:23+0300\n"
+"POT-Creation-Date: 2025-08-13 09:39+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:18
+msgid "Invalid CAPTCHA"
+msgstr "Invalid CAPTCHA"
 
 #: templates/account_deleted.html:5
 msgid "AccountDeleted"
@@ -43,7 +47,7 @@ msgstr "Login"
 msgid "LoginPageTitle"
 msgstr "Log in to your account"
 
-#: templates/login.html:17
+#: templates/login.html:17 templates/register.html:21
 msgid "InvalidUserPasswordErrorText"
 msgstr "Invalid username or password"
 
@@ -143,14 +147,14 @@ msgstr "This answer can be used to reset your password."
 msgid "RegisterButtonLabel"
 msgstr "Register"
 
-#: views.py:14
+#: views.py:16
 msgid "LoginSuccessMessage"
 msgstr "Logged in succesfully."
 
-#: views.py:21
+#: views.py:23
 msgid "LogoutSuccessMessage"
 msgstr "Logged out succesfully."
 
-#: views.py:31
+#: views.py:33
 msgid "RegistrationSuccessMessage"
 msgstr "Registered succesfully."

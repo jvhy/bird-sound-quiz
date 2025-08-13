@@ -1,10 +1,14 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-12 15:29+0300\n"
+"POT-Creation-Date: 2025-08-13 09:39+0300\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:18
+msgid "Invalid CAPTCHA"
+msgstr "Virheellinen CAPTCHA"
 
 #: templates/account_deleted.html:5
 msgid "AccountDeleted"
@@ -43,7 +47,7 @@ msgstr "Kirjautuminen"
 msgid "LoginPageTitle"
 msgstr "Kirjaudu sisään"
 
-#: templates/login.html:17
+#: templates/login.html:17 templates/register.html:21
 msgid "InvalidUserPasswordErrorText"
 msgstr "Virheellinen käyttäjänimi tai salasana"
 
