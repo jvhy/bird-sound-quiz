@@ -23,6 +23,7 @@ from django.urls import include, path
 urlpatterns = [
     path("", include("quiz.urls")),
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 if settings.LOGIN_ENABLED:

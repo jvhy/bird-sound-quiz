@@ -23,7 +23,21 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success position-relative">
         <div class="container-fluid position-relative">
-            <a id="navbarTitleMobile" class="navbar-brand ms-2" href="{% url 'index' %}">
+            <div class="dropdown">
+                <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center p-0">
+                    {% csrf_token %}
+                    <select id="language-select" name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                                {{ lang_code }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+            <a id="navbarTitleMobile" class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
                 <img src="{% static 'images/bsq-logo.svg' %}" 
                     alt="Logo" 
                     width="24" 
@@ -37,16 +51,19 @@
             {% if LOGIN_ENABLED %}
             <div class="ms-auto d-flex align-items-center">
                 {% if user.is_authenticated %}
-                    <span id="loggedInText" class="text-white me-3">{% blocktrans trimmed with username=user.username%}Logged in as {{ username }}{% endblocktrans %}</span>
+                    <span id="loggedInText" class="text-white me-2">{% blocktrans trimmed with username=user.username%}Logged in as {{ username }}{% endblocktrans %}</span>
                     <a class="btn btn-outline-light btn-sm me-2" title="Profile" href="{% url 'user_profile' %}"><i class="bi bi-person-fill"></i></a>
                     <a class="btn btn-outline-light btn-sm me-2" title="My stats" href="{% url 'user_stats' %}"><i class="bi bi-bar-chart-line"></i></a>
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button class="btn btn-outline-light btn-sm me-2">{% trans "LogoutButtonLabel" %}</button>
+                        <button class="mobile-element btn btn-outline-light btn-sm" title='{% trans "LogoutButtonLabel" %}' href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i></button>
+                        <button class="desktop-element btn btn-outline-light btn-sm">{% trans "LogoutButtonLabel" %}</button>
                     </form>
                 {% else %}
-                    <a class="btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">{% trans "LoginButtonLabel" %}</a>
-                    <a class="btn btn-light btn-sm" href="{% url 'register' %}">{% trans "RegisterButtonLabel" %}</a>
+                    <a class="mobile-element btn btn-outline-light btn-sm me-2" title='{% trans "LoginButtonLabel" %}' href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i></a>
+                    <a class="desktop-element btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">{% trans "LoginButtonLabel" %}</a>
+                    <a class="mobile-element btn btn-light btn-sm" title='{% trans "RegisterButtonLabel" %}' href="{% url 'register' %}"><i class="bi bi-person-plus"></i></a>
+                    <a class="desktop-element btn btn-light btn-sm" href="{% url 'register' %}">{% trans "RegisterButtonLabel" %}</a>
                 {% endif %}
             </div>
             {% endif %}

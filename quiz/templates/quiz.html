@@ -129,6 +129,15 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        const langSelect = document.getElementById('language-select');
+        if (langSelect) {
+            langSelect.disabled = true;
+            langSelect.setAttribute('data-bs-toggle', 'tooltip');
+            langSelect.setAttribute('data-bs-placement', 'top');
+            langSelect.setAttribute('title', '{% trans "LanguageCannotChangeDuringQuizText" %}');
+            new bootstrap.Tooltip(langSelect);
+        }
+
         document.querySelectorAll('.option-card').forEach(card => {
             card.addEventListener('click', function () {
                 const radioId = this.getAttribute('data-radio-id');

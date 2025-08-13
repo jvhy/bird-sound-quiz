@@ -26,11 +26,28 @@
   min-width: 250px;
 }
 
+#language-select {
+  background-color: transparent;
+  border-color: white;
+  height: auto;
+}
+
+#language-select:focus {
+  box-shadow: 0 0 0 0.1rem darkgreen;
+}
+
+#language-select:disabled {
+  opacity: 50%;
+}
+
 #navbarTitleMobile { display: none }
+.mobile-element { display: none; }
 
 @media only screen and (max-device-width: 450px) {
   #navbarTitleMobile { display: block }
   #navbarTitleDesktop { display: none }
+  .mobile-element { display: block; }
+  .desktop-element { display: none; }
 }
 
 @media only screen and (min-device-height: 1024px) {
