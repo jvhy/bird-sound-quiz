@@ -9,6 +9,7 @@ from django.utils.translation import get_language
 
 from quiz.models import Recording, Quiz, Answer
 from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings, get_multiple_choices
+from quiz.utils import check_answer
 
 
 def index(request):
@@ -58,7 +59,7 @@ def quiz_page(request):
 
 
 @require_http_methods(["POST"])
-def check_answer(request):
+def check_answer_view(request):
     recording_id = request.POST.get("id")
     user_answer = request.POST.get("user_answer")
     locale = get_language()
@@ -68,9 +69,8 @@ def check_answer(request):
         return JsonResponse({"error": "Recording not found"}, status=404)
     correct_answer_field = f"name_{locale}"
     fallback_field = "name_en"
-    correct_answer = getattr(recording.species, correct_answer_field) or getattr(recording.species, fallback_field)
-    correct_answer = correct_answer.capitalize()
-    correct = user_answer.strip().capitalize() == correct_answer.strip().capitalize() if user_answer else False
+    correct_answer = (getattr(recording.species, correct_answer_field) or getattr(recording.species, fallback_field)).capitalize()
+    correct = check_answer(user_answer, recording.species)
     return JsonResponse({"answer": correct_answer, "correct": correct})
 
 
@@ -108,8 +108,9 @@ def results_page_get(request, quiz_id):
     fallback_field = "name_en"
     results = [
         (
-            ans.user_answer.capitalize() or "<no answer>",
-            (getattr(ans.recording.species, name_field) or getattr(ans.recording.species, fallback_field)).capitalize(),
+            ans.user_answer or "<no answer>",
+            (getattr(ans.recording.species, name_field) or getattr(ans.recording.species, fallback_field)),
+            ans.is_correct,
             ans.recording.audio.url if settings.SELF_HOST_AUDIO else ans.recording.xc_audio_url
         )
         for ans in answers

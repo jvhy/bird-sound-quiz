@@ -5,7 +5,7 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from accounts.models import User
-from quiz.utils import create_region_display_name
+from quiz.utils import create_region_display_name, check_answer
 
 
 class Species(models.Model):
@@ -101,11 +101,7 @@ class Answer(models.Model):
     def is_correct(self) -> bool:
         if not self.recording:
             return False
-        # TODO: This should NOT rely on current locale
-        lang = get_language()
-        name_field = f"name_{lang}"
-        fallback_field = "name_en"
-        return (getattr(self.recording.species, name_field) or getattr(self.recording.species, fallback_field)).capitalize() == self.user_answer.strip().capitalize()
+        return check_answer(self.user_answer, self.recording.species)
 
     def __str__(self):
         return f"Answer {self.id} in Quiz {self.quiz_id}"

@@ -22,15 +22,15 @@
 
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
-            {% for user_answer, correct_answer, audio_url in results %}
+            {% for user_answer, correct_answer, is_correct, audio_url in results %}
             <div class="card mb-3 shadow-sm border {% if user_answer == correct_answer %}border-success{% else %}border-danger{% endif %}">
                 <div class="card-body d-flex justify-content-between align-items-center flex-wrap" id="result-card-container">
                     <div class="flex-grow-1 me-3">
-                        <p class="mb-1"><strong>{% trans "YourAnswer" %}:</strong> {{ user_answer }}</p>
-                        <p class="mb-0"><strong>{% trans "CorrectAnswer" %}:</strong> {{ correct_answer }}</p>
+                        <p class="mb-1"><strong>{% trans "YourAnswer" %}:</strong> {{ user_answer|capfirst }}</p>
+                        <p class="mb-0"><strong>{% trans "CorrectAnswer" %}:</strong> {{ correct_answer|capfirst }}</p>
                     </div>
                     <div class="d-flex align-items-center gap-2" id="result-icon-container">
-                    {% if user_answer == correct_answer %}
+                    {% if is_correct %}
                         <span class="badge bg-success fs-5">✓</span>
                     {% else %}
                         <span class="badge bg-danger fs-5">✗</span>
