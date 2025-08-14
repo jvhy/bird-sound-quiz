@@ -104,7 +104,8 @@ def convert_to_region(region_obj: dict, parent_region: Region | None) -> Region 
     :return region: Converted Region db object or None if validation fails.
     """
     region = Region(
-        **region_obj,
+        code=region_obj["code"],
+        name_en=region_obj["name"],
         parent_region=parent_region
     )
     try:

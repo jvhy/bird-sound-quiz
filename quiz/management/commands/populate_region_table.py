@@ -39,7 +39,8 @@ class Command(BaseCommand):
             Region.objects.update_or_create(
                 code=region.code,
                 defaults={
-                    "name": region.name,
+                    "name_en": region.name_en,
+                    "name_fi": region.name_fi,
                     "parent_region": region.parent_region
                 }
             )

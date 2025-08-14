@@ -87,7 +87,8 @@ def get_quiz_recordings(species_set: QuerySet[Species]) -> QuerySet[Recording]:
     return selected_recordings
 
 
-def get_available_regions() -> QuerySet[Region]:
+def get_available_regions(locale: str) -> QuerySet[Region]:
     """List all regions in the database that appear in at least one observation."""
-    regions = Region.objects.filter(observation__isnull=False).distinct().order_by("name")
+    name_field = f"name_{locale}"
+    regions = Region.objects.filter(observation__isnull=False).distinct().order_by(name_field)
     return regions
