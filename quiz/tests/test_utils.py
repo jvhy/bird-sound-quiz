@@ -1,12 +1,9 @@
 """Unit tests for utility functions"""
 
-import pytest
-
 from quiz.models import Species, Region
 from quiz import utils
 
 
-@pytest.mark.django_db
 def test_check_answer():
     sp = Species(
         name_en="Great Black-backed Gull",
@@ -36,7 +33,6 @@ def test_check_answer():
     assert not any(utils.check_answer(answer, sp) for answer in (answer_6, answer_7, answer_8))
 
 
-@pytest.mark.django_db
 def test_create_region_display_name_1():
     region_1 = Region(
         code="US",
@@ -74,7 +70,6 @@ def test_create_region_display_name_1():
     assert display_name_fi_3 == "Yhdysvallat - Texas - Austin"
 
 
-@pytest.mark.django_db
 def test_create_region_display_name_2():
     """Region display name should fall back to English if selected locale is empty."""
     region = Region(
