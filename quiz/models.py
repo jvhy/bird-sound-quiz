@@ -35,7 +35,8 @@ class Recording(models.Model):
 
 class Region(models.Model):
     code = models.CharField(max_length=9, unique=True)
-    name = models.CharField(max_length=100)
+    name_en = models.CharField(max_length=100)
+    name_fi = models.CharField(max_length=100, null=True, blank=True, default=None)
     parent_region = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
@@ -47,7 +48,11 @@ class Region(models.Model):
 
     @property
     def display_name(self):
-        return create_region_display_name(self)
+        locale = get_language()
+        return create_region_display_name(self, locale)
+
+    def __str__(self):
+        return self.display_name
 
 
 class Observation(models.Model):
