@@ -161,3 +161,29 @@ def test_get_species_by_region_4():
     region_species = services.get_species_by_region(target_region.id)
 
     assert {species.name_en for species in region_species} == {"Tufted Titmouse", "Andean Cock-of-the-rock"}
+
+
+@pytest.mark.django_db
+def test_get_quiz_recordings_1():
+    """Selection of quiz recordings should be random."""
+    species_set = baker.make(Species, _quantity=10)
+    for species in species_set:
+        baker.make(Recording, species=species, _quantity=10, _create_files=True)
+
+    selected_recordings_1 = services.get_quiz_recordings(species_set)
+    selected_recordings_2 = services.get_quiz_recordings(species_set)
+
+    assert {rec.id for rec in selected_recordings_1} != {rec.id for rec in selected_recordings_2}
+
+
+@pytest.mark.django_db
+def test_get_quiz_recordings_2():
+    """Recordings selected for a quiz should include one recording per species."""
+    species_set = baker.make(Species, _quantity=10)
+    for species in species_set:
+        baker.make(Recording, species=species, _quantity=10, _create_files=True)
+
+    selected_recordings = services.get_quiz_recordings(species_set)
+
+    assert len(selected_recordings) == 10  # there is the correct number of recordings (1 per species)
+    assert len({rec.species.id for rec in selected_recordings}) == 10  # species ids are unique
