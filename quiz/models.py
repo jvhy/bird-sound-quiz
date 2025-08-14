@@ -104,7 +104,8 @@ class Answer(models.Model):
         # TODO: This should NOT rely on current locale
         lang = get_language()
         name_field = f"name_{lang}"
-        return getattr(self.recording.species, name_field).capitalize() == self.user_answer.strip().capitalize()
+        fallback_field = "name_en"
+        return (getattr(self.recording.species, name_field) or getattr(self.recording.species, fallback_field)).capitalize() == self.user_answer.strip().capitalize()
 
     def __str__(self):
         return f"Answer {self.id} in Quiz {self.quiz_id}"

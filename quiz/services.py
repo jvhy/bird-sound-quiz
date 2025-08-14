@@ -51,15 +51,20 @@ def get_multiple_choices(
                 available_species
                     .exclude(id=target_species.id)
                     .order_by("?")
-                    .values_list(f"name_{locale}", flat=True)
+                    .values_list(f"name_{locale}", "name_en")
                 )[:num_choices]
         case "taxonomic":
             # TODO: Add taxonomic choice selection
             raise NotImplementedError("To be added")
         case _:
             raise ValueError('Unknown selection mode: mode should be one of {"random", "taxonomic"}')
+
+    # If name isn't available in selected locale, use English name instead
+    choice_species_names = [choice[0] or choice[1] for choice in choice_species_names]
+
     name_field = f"name_{locale}"
-    choice_species_names.append(getattr(target_species, name_field))
+    fallback_field = "name_en"
+    choice_species_names.append(getattr(target_species, name_field) or getattr(target_species, fallback_field).upper())
     choice_species_names = [name.capitalize() for name in choice_species_names]
     random.shuffle(choice_species_names)
     return choice_species_names

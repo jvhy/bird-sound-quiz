@@ -67,7 +67,9 @@ def check_answer(request):
     except Recording.DoesNotExist:
         return JsonResponse({"error": "Recording not found"}, status=404)
     correct_answer_field = f"name_{locale}"
-    correct_answer = getattr(recording.species, correct_answer_field).capitalize()
+    fallback_field = "name_en"
+    correct_answer = getattr(recording.species, correct_answer_field) or getattr(recording.species, fallback_field)
+    correct_answer = correct_answer.capitalize()
     correct = user_answer.strip().capitalize() == correct_answer.strip().capitalize() if user_answer else False
     return JsonResponse({"answer": correct_answer, "correct": correct})
 
@@ -103,10 +105,11 @@ def results_page_get(request, quiz_id):
     answers = Answer.objects.filter(quiz=quiz).order_by("id").select_related("recording__species")
     locale = get_language()
     name_field = f"name_{locale}"
+    fallback_field = "name_en"
     results = [
         (
             ans.user_answer.capitalize() or "<no answer>",
-            getattr(ans.recording.species, name_field).capitalize(),
+            (getattr(ans.recording.species, name_field) or getattr(ans.recording.species, fallback_field)).capitalize(),
             ans.recording.audio.url if settings.SELF_HOST_AUDIO else ans.recording.xc_audio_url
         )
         for ans in answers
