@@ -78,7 +78,7 @@ def construct_audio_url(recording: dict) -> str:
     return audio_url
 
 
-def convert_to_recording(recording: dict, species: Species) -> Recording | None:
+def convert_to_recording(recording_obj: dict, species: Species) -> Recording | None:
     """
     Converts recording object in Xeno-Canto API schema to Recording database object and validates the fields.
     If field validation fails, returns None.
@@ -87,26 +87,26 @@ def convert_to_recording(recording: dict, species: Species) -> Recording | None:
     :param species: DB object of the bird species that appears in the recording.
     :return recording: Converted Recording db object or None if validation fails.
     """
-    extension = extract_file_extension(recording["file-name"])
-    file_name = f"audio/XC{recording["id"]}{extension}"
-    recording_obj = Recording(
-        id=recording["id"],
+    extension = extract_file_extension(recording_obj["file-name"])
+    file_name = f"audio/XC{recording_obj["id"]}{extension}"
+    recording = Recording(
+        id=recording_obj["id"],
         species=species,
-        url=recording["url"],
-        xc_audio_url=construct_audio_url(recording),
-        recordist=recording["rec"],
-        country=recording["cnt"],
-        location=recording["loc"],
-        sound_type=recording["type"],
-        license=extract_license_type(recording["lic"]),
-        license_url=recording["lic"],
+        url=recording_obj["url"],
+        xc_audio_url=construct_audio_url(recording_obj),
+        recordist=recording_obj["rec"],
+        country=recording_obj["cnt"],
+        location=recording_obj["loc"],
+        sound_type=recording_obj["type"],
+        license=extract_license_type(recording_obj["lic"]),
+        license_url=recording_obj["lic"],
         audio=file_name
     )
     try:
-        recording_obj.clean_fields()
+        recording.clean_fields()
     except ValidationError:
         return
-    return recording_obj
+    return recording
 
 
 def download_audio(recording: Recording, session: requests.Session) -> bytes:
