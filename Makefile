@@ -18,6 +18,9 @@ populate_db:	## Populate database tables
 	uv run manage.py populate_observation_table FI
 	uv run manage.py populate_recording_table FI
 
+test:     ## Run tests
+	uv run pytest --verbose
+
 style:    ## Check code style with ruff
 	uv run ruff check
 
