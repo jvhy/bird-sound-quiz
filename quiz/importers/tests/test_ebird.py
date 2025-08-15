@@ -260,11 +260,10 @@ def test_convert_to_region_1():
     assert region.parent_region is None
 
 
-@pytest.mark.django_db
 def test_convert_to_region_2():
     """Parent region should be set successfully when converting to a region."""
     region_obj = {"code": "US-TX", "name": "Texas"}
-    parent_region = baker.make(Region, code="US", name_en="United States", parent_region=None)
+    parent_region = baker.prepare(Region, code="US", name_en="United States", parent_region=None)
     region = ebird.convert_to_region(region_obj, parent_region=parent_region)
 
     assert region.parent_region == parent_region
