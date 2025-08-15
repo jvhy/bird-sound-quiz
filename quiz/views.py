@@ -69,7 +69,7 @@ def check_answer_view(request):
         return JsonResponse({"error": "Recording not found"}, status=404)
     correct_answer_field = f"name_{locale}"
     fallback_field = "name_en"
-    correct_answer = (getattr(recording.species, correct_answer_field) or getattr(recording.species, fallback_field)).capitalize()
+    correct_answer = getattr(recording.species, correct_answer_field) or getattr(recording.species, fallback_field)
     correct = check_answer(user_answer, recording.species)
     return JsonResponse({"answer": correct_answer, "correct": correct})
 

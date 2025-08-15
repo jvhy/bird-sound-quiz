@@ -64,8 +64,7 @@ def get_multiple_choices(
 
     name_field = f"name_{locale}"
     fallback_field = "name_en"
-    choice_species_names.append(getattr(target_species, name_field) or getattr(target_species, fallback_field).upper())
-    choice_species_names = [name.capitalize() for name in choice_species_names]
+    choice_species_names.append(getattr(target_species, name_field) or getattr(target_species, fallback_field))
     random.shuffle(choice_species_names)
     return choice_species_names
 
