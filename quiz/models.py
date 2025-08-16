@@ -55,36 +55,38 @@ class Region(models.Model):
         return self.display_name
 
 
+class OccurrenceType(models.TextChoices):
+    REGULAR = "REG", _("Regular breeder")
+    IRREGULAR = "IRR", _("Irregular breeder")
+    WINTER = "WIN", _("Winter migrant")
+    PASSAGE = "PAS", _("Passage migrant")
+    VAGRANT = "VAG", _("Vagrant")
+    ESCAPEE = "ESC", _("Escapee")
+
+
+OCC_TYPE_DESCRIPTIONS = {
+    OccurrenceType.REGULAR: _(
+        "A species that breeds consistently in the region every year."
+    ),
+    OccurrenceType.IRREGULAR: _(
+        "A species that breeds in the region only occasionally or under certain conditions."
+    ),
+    OccurrenceType.WINTER: _(
+        "A species that migrates to and stays in the region during the non-breeding (winter) season."
+    ),
+    OccurrenceType.PASSAGE: _(
+        "A species that passes through the region during migration but does not breed or overwinter there."
+    ),
+    OccurrenceType.VAGRANT: _(
+        "A species found outside its normal range, typically due to unusual weather or navigation errors."
+    ),
+    OccurrenceType.ESCAPEE: _(
+        "A non-native species that has escaped from captivity and appears in the wild."
+    ),
+}
+
+
 class Observation(models.Model):
-    class OccurrenceType(models.TextChoices):
-        REGULAR = "REG", _("Regular breeder")
-        IRREGULAR = "IRR", _("Irregular breeder")
-        WINTER = "WIN", _("Winter migrant")
-        PASSAGE = "PAS", _("Passage migrant")
-        VAGRANT = "VAG", _("Vagrant")
-        ESCAPEE = "ESC", _("Escapee")
-
-    OCC_TYPE_DESCRIPTIONS = {
-        OccurrenceType.REGULAR: _(
-            "A species that breeds consistently in the region every year."
-        ),
-        OccurrenceType.IRREGULAR: _(
-            "A species that breeds in the region only occasionally or under certain conditions."
-        ),
-        OccurrenceType.WINTER: _(
-            "A species that migrates to and stays in the region during the non-breeding (winter) season."
-        ),
-        OccurrenceType.PASSAGE: _(
-            "A species that passes through the region during migration but does not breed or overwinter there."
-        ),
-        OccurrenceType.VAGRANT: _(
-            "A species found outside its normal range, typically due to unusual weather or navigation errors."
-        ),
-        OccurrenceType.ESCAPEE: _(
-            "A non-native species that has escaped from captivity and appears in the wild."
-        ),
-    }
-
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     type = models.CharField(max_length=3, choices=OccurrenceType, null=True, default=None)
