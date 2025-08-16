@@ -1,116 +1,121 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-13 19:58+0300\n"
+"POT-Creation-Date: 2025-08-16 06:21+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:68
+#: quiz/models.py:73
 msgid "Multiple choice"
 msgstr "Monivalinta"
 
-#: models.py:69
+#: quiz/models.py:74
 msgid "Open answer"
 msgstr "Avoin vastaus"
 
-#: templates/index.html:7
+#: quiz/templates/index.html:7
 msgid "Home"
 msgstr "Etusivu"
 
-#: templates/index.html:18
+#: quiz/templates/index.html:18
 #, python-format
 msgid "Welcome to %(br)sBird Sound Quiz!🐦"
 msgstr "Tervetuloa %(br)sBird Sound Quiz:iin!🐦"
 
-#: templates/index.html:22
+#: quiz/templates/index.html:22
 msgid "HomePageSubtitle"
 msgstr "Testaa kuinka hyvin tunnet lintujen äänet."
 
-#: templates/index.html:29
+#: quiz/templates/index.html:29
 msgid "RegionSelectorLabel"
 msgstr "Valitse alue"
 
-#: templates/index.html:31
+#: quiz/templates/index.html:31
 msgid "NoRegionSelectedOption"
 msgstr "Ei valittua aluetta"
 
-#: templates/index.html:36
+#: quiz/templates/index.html:36
 msgid "GameModeSelectorLabel"
 msgstr "Valitse pelimuoto"
 
-#: templates/index.html:38
+#: quiz/templates/index.html:38
 msgid "MultipleChoiceOption"
 msgstr "Monivalinta"
 
-#: templates/index.html:39
+#: quiz/templates/index.html:39
 msgid "OpenAnswerOption"
 msgstr "Avoin vastaus"
 
-#: templates/index.html:42
+#: quiz/templates/index.html:42
 msgid "QuizStartButtonLabel"
 msgstr "Aloita"
 
-#: templates/quiz.html:7
+#: quiz/templates/quiz.html:7
 msgid "Quiz"
 msgstr "Visa"
 
-#: templates/quiz.html:24
+#: quiz/templates/quiz.html:24
 msgid "QuizTitle"
 msgstr "Mikä lintu on äänessä?"
 
-#: templates/quiz.html:60
+#: quiz/templates/quiz.html:60
 #, python-format
 msgid "<strong>Recorded by:</strong> %(name)s"
 msgstr "<strong>Äänittäjä:</strong> %(name)s"
 
-#: templates/quiz.html:65
+#: quiz/templates/quiz.html:65
 #, python-format
 msgid "<strong>Location:</strong> %(location)s, %(country)s"
 msgstr "<strong>Sijainti:</strong> %(location)s, %(country)s"
 
-#: templates/quiz.html:70
+#: quiz/templates/quiz.html:70
 #, python-format
 msgid "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
 msgstr "<strong>Lisenssi:</strong> %(a_open)s%(license)s%(a_close)s"
 
-#: templates/quiz.html:118 templates/quiz.html:193 templates/quiz.html:258
+#: quiz/templates/quiz.html:118 quiz/templates/quiz.html:193
+#: quiz/templates/quiz.html:258
 msgid "CheckButtonLabel"
 msgstr "Tarkista"
 
-#: templates/quiz.html:137
+#: quiz/templates/quiz.html:137
 msgid "LanguageCannotChangeDuringQuizText"
 msgstr "Kieltä ei voi vaihtaa kesken visan"
 
-#: templates/quiz.html:249
+#: quiz/templates/quiz.html:249
 msgid "ResultsButtonLabel"
 msgstr "Tulokset"
 
-#: templates/quiz.html:253
+#: quiz/templates/quiz.html:253
 msgid "NextButtonLabel"
 msgstr "Seuraava"
 
-#: templates/results.html:6
+#: quiz/templates/results.html:6
 msgid "Results"
 msgstr "Tulokset"
 
-#: templates/results.html:16
+#: quiz/templates/results.html:16
 #, python-format
 msgid "Your Score: %(score)s/%(length)s"
 msgstr "Tuloksesi: %(score)s/%(length)s"
 
-#: templates/results.html:20
+#: quiz/templates/results.html:20
 msgid "ResultsPageSubtitle"
 msgstr "Kooste vastauksistasi:"
 
-#: templates/results.html:29
+#: quiz/templates/results.html:29
 msgid "YourAnswer"
 msgstr "Vastauksesi"
 
-#: templates/results.html:30
+#: quiz/templates/results.html:30
 msgid "CorrectAnswer"
 msgstr "Oikea vastaus"
 
-#: templates/results.html:48
+#: quiz/templates/results.html:48
 msgid "HomeButtonLabel"
 msgstr "Etusivu"
+
+#: quiz/views.py:110
+msgid "EmptyAnswerPlaceholderText"
+msgstr "ei vastausta"

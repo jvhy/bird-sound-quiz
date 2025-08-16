@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 from django.utils.translation import get_language
+from django.utils.translation import gettext_lazy as _
 
 from quiz.models import Recording, Quiz, Answer
 from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings, get_multiple_choices
@@ -106,9 +107,10 @@ def results_page_get(request, quiz_id):
     locale = get_language()
     name_field = f"name_{locale}"
     fallback_field = "name_en"
+    placeholder = _("EmptyAnswerPlaceholderText")
     results = [
         (
-            ans.user_answer or "<no answer>",
+            ans.user_answer or f"<{placeholder}>",
             (getattr(ans.recording.species, name_field) or getattr(ans.recording.species, fallback_field)),
             ans.is_correct,
             ans.recording.audio.url if settings.SELF_HOST_AUDIO else ans.recording.xc_audio_url

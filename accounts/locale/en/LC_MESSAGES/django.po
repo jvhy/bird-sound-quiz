@@ -1,89 +1,92 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-13 19:59+0300\n"
+"POT-Creation-Date: 2025-08-16 06:18+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:18
+#: accounts/forms.py:18
 msgid "Invalid CAPTCHA"
 msgstr "Invalid CAPTCHA"
 
-#: templates/account_deleted.html:5
+#: accounts/templates/account_deleted.html:5
 msgid "AccountDeleted"
 msgstr "Account Deleted"
 
-#: templates/account_deleted.html:11
+#: accounts/templates/account_deleted.html:11
 msgid "AccountDeletedSuccessText"
 msgstr "Account deleted succesfully."
 
-#: templates/account_deleted.html:13 templates/my_stats.html:41
-#: templates/password_change_done.html:13
+#: accounts/templates/account_deleted.html:13
+#: accounts/templates/my_stats.html:40
+#: accounts/templates/password_change_done.html:13
 msgid "HomeButtonLabel"
 msgstr "Home"
 
-#: templates/change_password.html:7 templates/password_change_done.html:5
+#: accounts/templates/change_password.html:7
+#: accounts/templates/password_change_done.html:5
 msgid "ChangePassword"
 msgstr "Change Password"
 
-#: templates/change_password.html:13
+#: accounts/templates/change_password.html:13
 msgid "ChangePasswordPageTitle"
 msgstr "Change password"
 
-#: templates/change_password.html:17
+#: accounts/templates/change_password.html:17
 msgid "InvalidPasswordErrorText"
 msgstr "Invalid password"
 
-#: templates/change_password.html:35 templates/my_profile.html:28
+#: accounts/templates/change_password.html:35
+#: accounts/templates/my_profile.html:28
 msgid "ChangePasswordButtonLabel"
 msgstr "Change password"
 
-#: templates/login.html:7
+#: accounts/templates/login.html:7
 msgid "Login"
 msgstr "Login"
 
-#: templates/login.html:13
+#: accounts/templates/login.html:13
 msgid "LoginPageTitle"
 msgstr "Log in to your account"
 
-#: templates/login.html:17 templates/register.html:21
+#: accounts/templates/login.html:17 accounts/templates/register.html:21
 msgid "InvalidUserPasswordErrorText"
 msgstr "Invalid username or password"
 
-#: templates/login.html:35
+#: accounts/templates/login.html:35
 msgid "LoginButtonLabel"
 msgstr "Login"
 
-#: templates/my_profile.html:5
+#: accounts/templates/my_profile.html:5
 msgid "MyProfile"
 msgstr "My Profile"
 
-#: templates/my_profile.html:9
+#: accounts/templates/my_profile.html:9
 msgid "MyAccount"
 msgstr "My Account"
 
-#: templates/my_profile.html:14
+#: accounts/templates/my_profile.html:14
 msgid "UsernameLabel"
 msgstr "Username"
 
-#: templates/my_profile.html:18
+#: accounts/templates/my_profile.html:18
 msgid "JoinedLabel"
 msgstr "Joined"
 
-#: templates/my_profile.html:22
+#: accounts/templates/my_profile.html:22
 msgid "FavoriteBirdLabel"
 msgstr "Favorite bird"
 
-#: templates/my_profile.html:33
+#: accounts/templates/my_profile.html:33
 msgid "DeleteAccountButtonLabel"
 msgstr "Delete account"
 
-#: templates/my_profile.html:45
+#: accounts/templates/my_profile.html:45
 msgid "ConfirmDeleteAccountTitle"
 msgstr "Confirm account deletion"
 
-#: templates/my_profile.html:49
+#: accounts/templates/my_profile.html:49
 msgid ""
 "Are you sure you want to delete your account? This action <strong>cannot</"
 "strong> be undone."
@@ -91,70 +94,70 @@ msgstr ""
 "Are you sure you want to delete your account? This action <strong>cannot</"
 "strong> be undone."
 
-#: templates/my_profile.html:54
+#: accounts/templates/my_profile.html:54
 msgid "CancelButtonLabel"
 msgstr "Cancel"
 
-#: templates/my_profile.html:57
+#: accounts/templates/my_profile.html:57
 msgid "ConfirmDeleteAccountButtonLabel"
 msgstr "Yes, delete"
 
-#: templates/my_stats.html:5
+#: accounts/templates/my_stats.html:5
 msgid "MyStats"
 msgstr "My Stats"
 
-#: templates/my_stats.html:9
+#: accounts/templates/my_stats.html:9
 msgid "MyStatsPageTitle"
 msgstr "My Quiz Stats"
 
-#: templates/my_stats.html:14
+#: accounts/templates/my_stats.html:14
 msgid "QuizzesTakenCardLabel"
 msgstr "Quizzes taken"
 
-#: templates/my_stats.html:22
+#: accounts/templates/my_stats.html:22
 msgid "AccuracyCardLabel"
 msgstr "Accuracy"
 
-#: templates/my_stats.html:30
+#: accounts/templates/my_stats.html:30
 msgid "BestScoreCardLabel"
 msgstr "Best score"
 
-#: templates/my_stats.html:37
+#: accounts/templates/my_stats.html:37
 msgid "StatsTBAText"
 msgstr "More stats to be added!"
 
-#: templates/password_change_done.html:11
+#: accounts/templates/password_change_done.html:11
 msgid "PasswordChangedText"
 msgstr "Password changed successfully!"
 
-#: templates/register.html:11
+#: accounts/templates/register.html:11
 msgid "Register"
 msgstr "Register"
 
-#: templates/register.html:17
+#: accounts/templates/register.html:17
 msgid "RegistrationPageTitle"
 msgstr "Register a new account"
 
-#: templates/register.html:29
+#: accounts/templates/register.html:29
 msgid "FavoriteBirdQuestionText"
 msgstr "What is your favorite bird?"
 
-#: templates/register.html:29
+#: accounts/templates/register.html:29
 msgid "FavoriteBirdQuestionTooltipText"
 msgstr "This answer can be used to reset your password."
 
-#: templates/register.html:43
+#: accounts/templates/register.html:43
 msgid "RegisterButtonLabel"
 msgstr "Register"
 
-#: views.py:16
+#: accounts/views.py:16
 msgid "LoginSuccessMessage"
 msgstr "Logged in succesfully."
 
-#: views.py:23
+#: accounts/views.py:23
 msgid "LogoutSuccessMessage"
 msgstr "Logged out succesfully."
 
-#: views.py:33
+#: accounts/views.py:33
 msgid "RegistrationSuccessMessage"
 msgstr "Registered succesfully."
