@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">{% trans "ContributeStartPageTitle" %}</h2>
+    <div class="card mx-auto my-5" style="max-width: 800px;">
+        <div class="card-body bg-body-secondary">
+            {% trans "ContributeStartPageInstructionsText" %}
+        </div>
+    </div>
+    <form method="POST" action="{% url 'start' %}">
+        {% csrf_token %}
+        <input id="task" type="hidden" name="task">
+        <div id="taskAccordion" class="accordion mx-auto" style="max-width: 800px;">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#speciesStatusTask" aria-expanded="false" aria-controls="speciesStatusTask">
+                        {% trans "SpeciesStatusTaskLabel" %}
+                    </button>
+                </h2>
+                <div id="speciesStatusTask" class="region-task accordion-collapse collapse" data-bs-parent="#taskAccordion">
+                    <div class="accordion-body">
+                        {% trans "SpeciesStatusTaskDescription" %}
+                        <h6 class="mt-5">{% trans "RegionSelectorLabel" %}</h6>
+                        <select name="species-status-task-region" class="form-select my-3" style="max-width: 300px;">
+                            <option value="" disabled selected>-- {% trans "NoRegionSelectedOption" %} --</option>
+                            {% for region in regions %}
+                            <option value="{{ region.id }}">{{ region.display_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center py-5">
+            <button id="startBtn" class="btn btn-success" disabled>{% trans "StartTaskButtonLabel" %}</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const startBtn = document.getElementById("startBtn");
+        const taskInput = document.getElementById("task");
+
+        function getSelectedTaskName() {
+            const selectedTask = document.querySelector(".collapse.show");
+            taskInput.value = selectedTask.id;
+        }
+        startBtn.addEventListener("click", getSelectedTaskName);
+
+        function updateButtonState() {
+            const selectedTask = document.querySelector(".collapse.show");
+            const taskIsSelected = (selectedTask !== null)
+            const requiresRegion = taskIsSelected ? selectedTask.classList.contains("region-task"): false;
+            const regionSelector = taskIsSelected ? selectedTask.querySelector(".accordion-body").querySelector(".form-select"): null;
+            const regionIsSelected = requiresRegion ? (regionSelector.value !== ""): true;
+            startBtn.disabled = (!taskIsSelected || !regionIsSelected);
+        }
+        const collapses = document.querySelectorAll(".accordion-collapse");
+        collapses.forEach(collapse => {
+            collapse.addEventListener("shown.bs.collapse", updateButtonState);
+            collapse.addEventListener("hidden.bs.collapse", updateButtonState);
+        });
+        const selectors = document.querySelectorAll(".form-select");
+        selectors.forEach(selector => {
+            selector.addEventListener("change", updateButtonState);
+        });
+    });
+</script>
+{% endblock %}

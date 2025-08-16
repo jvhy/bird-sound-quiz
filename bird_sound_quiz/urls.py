@@ -27,7 +27,7 @@ urlpatterns = [
 ]
 
 if settings.LOGIN_ENABLED:
-    urlpatterns.append(path("", include("accounts.urls")))
+    urlpatterns += [path("", include("accounts.urls")), path("contribute/", include("contribute.urls"))]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
