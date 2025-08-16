@@ -1,16 +1,82 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-16 06:21+0000\n"
+"POT-Creation-Date: 2025-08-16 14:02+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: quiz/models.py:73
+#: quiz/models.py:60
+msgid "Regular breeder"
+msgstr "Regular breeder"
+
+#: quiz/models.py:61
+msgid "Irregular breeder"
+msgstr "Irregular breeder"
+
+#: quiz/models.py:62
+msgid "Winter migrant"
+msgstr "Winter migrant"
+
+#: quiz/models.py:63
+msgid "Passage migrant"
+msgstr "Passage migrant"
+
+#: quiz/models.py:64
+msgid "Vagrant"
+msgstr "Vagrant"
+
+#: quiz/models.py:65
+msgid "Escapee"
+msgstr "Escapee"
+
+#: quiz/models.py:69
+msgid "A species that breeds consistently in the region every year."
+msgstr "A species that breeds consistently in the region every year."
+
+#: quiz/models.py:72
+msgid ""
+"A species that breeds in the region only occasionally or under certain "
+"conditions."
+msgstr ""
+"A species that breeds in the region only occasionally or under certain "
+"conditions."
+
+#: quiz/models.py:75
+msgid ""
+"A species that migrates to and stays in the region during the non-breeding "
+"(winter) season."
+msgstr ""
+"A species that migrates to and stays in the region during the non-breeding "
+"(winter) season."
+
+#: quiz/models.py:78
+msgid ""
+"A species that passes through the region during migration but does not breed "
+"or overwinter there."
+msgstr ""
+"A species that passes through the region during migration but does not breed "
+"or overwinter there."
+
+#: quiz/models.py:81
+msgid ""
+"A species found outside its normal range, typically due to unusual weather "
+"or navigation errors."
+msgstr ""
+"A species found outside its normal range, typically due to unusual weather "
+"or navigation errors."
+
+#: quiz/models.py:84
+msgid ""
+"A non-native species that has escaped from captivity and appears in the wild."
+msgstr ""
+"A non-native species that has escaped from captivity and appears in the wild."
+
+#: quiz/models.py:106
 msgid "Multiple choice"
 msgstr "Multiple choice"
 
-#: quiz/models.py:74
+#: quiz/models.py:107
 msgid "Open answer"
 msgstr "Open answer"
 
