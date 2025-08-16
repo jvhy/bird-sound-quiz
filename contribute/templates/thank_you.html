@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="card-title text-center mb-4">{% trans "ContributionThankYouPageTitle" %}</h2>
+    <div class="text-center py-3">
+        <a href="{% url 'index' %}" class="btn btn-success btn-lg">{% trans "HomeButtonLabel" %}</a>
+    </div>
+</div>
+{% endblock %}

@@ -13,61 +13,62 @@
 {% block content %}
 {% get_current_language as LANGUAGE_CODE %}
 <div class="container py-5">
-    <div class="text-center pb-3">
-        <h1>{% trans "SpeciesStatusTaskTitle" %}</h1>
-        <p class="lead">{% trans "Region" %}: {{ region }}</p>
-    </div>
-    <div id="taskCarousel" class="carousel slide mx-auto" data-bs-interval="false" data-bs-touch="false" style="max-width: 400px;">
-        <div class="carousel-inner">
-            <div class="carousel-item active" id="slide_{{ forloop.counter }}">
-                <div class="card p-4 bg-light rounded-4">
-                    <div class="pb-3">
-                        <div class="text-center">
-                            <h4 class="pb-3">{% trans "TaskInstructionsTitle" %}</h4>
+    <form method="post" action="{{ request.path }}">
+        {% csrf_token %}
+        <div class="text-center pb-3">
+            <h1>{% trans "SpeciesStatusTaskTitle" %}</h1>
+            <p class="lead">{% trans "Region" %}: {{ region }}</p>
+        </div>
+        <div id="taskCarousel" class="carousel slide mx-auto" data-bs-interval="false" data-bs-touch="false" style="max-width: 400px;">
+            <div class="carousel-inner">
+                <div class="carousel-item active" id="slide_{{ forloop.counter }}">
+                    <div class="card p-4 bg-light rounded-4">
+                        <div class="pb-3">
+                            <div class="text-center">
+                                <h4 class="pb-3">{% trans "TaskInstructionsTitle" %}</h4>
+                            </div>
+                            <p>{% trans "SpeciesStatusTaskInstructionsText" %}</p>
                         </div>
-                        <p>{% trans "SpeciesStatusTaskInstructionsText" %}</p>
                     </div>
                 </div>
-            </div>
-            {% for observation in observations %}
-            <div class="carousel-item" id="slide_{{ forloop.counter }}">
-                <div class="card p-4 bg-light rounded-4">
-                    <div class="text-center pb-3">
-                        <h4>{% get_localized_value observation.species "name" LANGUAGE_CODE %}</h4>
-                        <p><em>{{ observation.species.name_sci }}</em></p>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div style="max-width: 300px;">
-                            <div class="option-card-container">
-                                {% with forloop.counter as species_counter %}
-                                {% for option in options %}
-                                <input
-                                    type="radio"
-                                    class="d-none"
-                                    name="option_{{ species_counter }}"
-                                    value="{{ option.0 }}"
-                                    id="option{{ species_counter }}_{{ forloop.counter }}"
-                                >
-                                <div class="option-card" data-radio-id="option{{ species_counter }}_{{ forloop.counter }}">
-                                    {{ option.1 }}
+                {% for observation in observations %}
+                <div class="carousel-item" id="slide_{{ forloop.counter }}">
+                    <div class="card p-4 bg-light rounded-4">
+                        <div class="text-center pb-3">
+                            <h4>{% get_localized_value observation.species "name" LANGUAGE_CODE %}</h4>
+                            <p><em>{{ observation.species.name_sci }}</em></p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div style="max-width: 300px;">
+                                <div class="option-card-container">
+                                    {% for option in options %}
+                                    <input
+                                        type="radio"
+                                        class="d-none"
+                                        name="option_{{ observation.id }}"
+                                        value="{{ option.0 }}"
+                                        id="option_{{ observation.id }}_{{ forloop.counter }}"
+                                    >
+                                    <div class="option-card" data-radio-id="option_{{ observation.id }}_{{ forloop.counter }}">
+                                        {{ option.1 }}
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
-                                {% endwith %}
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <div class="text-center pt-3">
+                <button class="btn btn-outline-success mx-2" type="button" data-bs-target="#taskCarousel" data-bs-slide="prev" style="width: 120px;"><i class="bi bi-arrow-left"></i>&nbsp;{% trans "PrevButtonLabel" %}</button>
+                <button class="btn btn-outline-success mx-2" type="button" data-bs-target="#taskCarousel" data-bs-slide="next" style="width: 120px;">{% trans "NextButtonLabel" %}&nbsp;<i class="bi bi-arrow-right"></i></button>
+            </div>
+            <div class="text-center pt-3">
+                <button class="btn btn-outline-primary" style="width: 90px;">{% trans "FinishTaskButtonLabel" %}</button>
+            </div>
         </div>
-        <div class="text-center pt-3">
-            <button class="btn btn-outline-success mx-2" data-bs-target="#taskCarousel" data-bs-slide="prev" style="width: 120px;"><i class="bi bi-arrow-left"></i>&nbsp;{% trans "PrevButtonLabel" %}</button>
-            <button class="btn btn-outline-success mx-2" data-bs-target="#taskCarousel" data-bs-slide="next" style="width: 120px;">{% trans "NextButtonLabel" %}&nbsp;<i class="bi bi-arrow-right"></i></button>
-        </div>
-        <div class="text-center pt-3">
-            <button class="btn btn-outline-primary" style="width: 90px;">{% trans "FinishTaskButtonLabel" %}</button>
-        </div>
-    </div>
+    </form>
 </div>
 
 <script>
