@@ -27,4 +27,6 @@ def species_status_task_view(request, region_id):
     region = Region.objects.get(id=region_id)
     observations = get_observations_to_type_annotate(region=region)
     options = Observation.OccurrenceType.choices
-    return render(request, "species_status_task.html", context={"observations": observations, "options": options, "region": region.name_en})
+    locale = get_language()
+    region_name = getattr(region, f"name_{locale}") or getattr(region, f"name_en")
+    return render(request, "species_status_task.html", context={"observations": observations, "options": options, "region": region_name})
