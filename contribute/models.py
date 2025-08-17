@@ -13,3 +13,11 @@ class ObservationTypeAnnotation(models.Model):
     annotation = models.CharField(max_length=3, choices=OccurrenceType)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "observation"],
+                name="unique_user_observation"
+            )
+        ]
