@@ -21,18 +21,8 @@
         </div>
         <div id="taskCarousel" class="carousel slide mx-auto" data-bs-interval="false" data-bs-touch="false" style="max-width: 400px;">
             <div class="carousel-inner">
-                <div class="carousel-item active" id="slide_{{ forloop.counter }}">
-                    <div class="card p-4 bg-light rounded-4">
-                        <div class="pb-3">
-                            <div class="text-center">
-                                <h4 class="pb-3">{% trans "TaskInstructionsTitle" %}</h4>
-                            </div>
-                            <p>{% trans "SpeciesStatusTaskInstructionsText" %}</p>
-                        </div>
-                    </div>
-                </div>
                 {% for observation in observations %}
-                <div class="carousel-item" id="slide_{{ forloop.counter }}">
+                <div class="carousel-item {% if forloop.first %}active{% endif %}" id="slide_{{ forloop.counter }}">
                     <div class="card p-4 bg-light rounded-4">
                         <div class="text-center pb-3">
                             <h4>{% get_localized_value observation.species "name" LANGUAGE_CODE %}</h4>
@@ -70,9 +60,30 @@
         </div>
     </form>
 </div>
+<div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">{% trans "TaskInstructionsTitle" %}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% trans "SpeciesStatusTaskInstructionsText" %}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary mx-auto" data-bs-dismiss="modal" aria-label='{% trans "Start" %}'>{% trans "StartTaskButtonLabel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        // Open modal when page is loaded
+        var myModal = new bootstrap.Modal(document.getElementById('instructionsModal'));
+        console.log(myModal)
+        myModal.show();
+
         document.querySelectorAll('.option-card').forEach(card => {
             card.addEventListener('click', function () {
                 const radioId = this.getAttribute('data-radio-id');
