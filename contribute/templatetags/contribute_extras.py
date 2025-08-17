@@ -20,3 +20,8 @@ def get_localized_value(obj: Any, field: str, locale: str) -> Any:
         The localized field value.
     """
     return getattr(obj, f"{field}_{locale}")
+
+
+@register.filter
+def dict_get(dictionary: dict, key: Any):
+    return dictionary[key]

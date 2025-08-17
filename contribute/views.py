@@ -4,7 +4,7 @@ from django.utils.translation import get_language
 
 from contribute.services import get_observations_to_type_annotate
 from contribute.models import ObservationTypeAnnotation
-from quiz.models import Region, Observation, OccurrenceType
+from quiz.models import Region, Observation, OccurrenceType, OCC_TYPE_DESCRIPTIONS
 from quiz.services import get_available_regions
 
 
@@ -48,7 +48,7 @@ def species_status_task_view(request, region_id):
     options = OccurrenceType.choices
     locale = get_language()
     region_name = getattr(region, f"name_{locale}") or getattr(region, f"name_en")
-    return render(request, "species_status_task.html", context={"observations": observations, "options": options, "region": region_name})
+    return render(request, "species_status_task.html", context={"observations": observations, "options": options, "option_descriptions": OCC_TYPE_DESCRIPTIONS, "region": region_name})
 
 
 @login_required
