@@ -1,32 +1,32 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-16 14:02+0000\n"
+"POT-Creation-Date: 2025-08-17 06:57+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: quiz/models.py:60
+#: quiz/models.py:59
 msgid "Regular breeder"
-msgstr "Säännöllinen pesimälaji"
+msgstr "Säännöllinen pesijä"
+
+#: quiz/models.py:60
+msgid "Irregular breeder"
+msgstr "Satunnainen pesijä"
 
 #: quiz/models.py:61
-msgid "Irregular breeder"
-msgstr "Epäsäännöllinen pesimälaji"
-
-#: quiz/models.py:62
 msgid "Winter migrant"
 msgstr "Talvehtija"
 
-#: quiz/models.py:63
+#: quiz/models.py:62
 msgid "Passage migrant"
 msgstr "Läpimuuttaja"
 
-#: quiz/models.py:64
+#: quiz/models.py:63
 msgid "Vagrant"
 msgstr "Harhailija"
 
-#: quiz/models.py:65
+#: quiz/models.py:64
 msgid "Escapee"
 msgstr "Tarhakarkuri"
 
@@ -57,20 +57,21 @@ msgid ""
 "A species found outside its normal range, typically due to unusual weather "
 "or navigation errors."
 msgstr ""
-"Laji on alueella tavanomaisen esiintymisalueensa ulkopuolella, "
-"usein suunnistusvirheen seurauksena tai sääolosuhteiden pakosta."
+"Laji on alueella tavanomaisen esiintymisalueensa ulkopuolella, usein "
+"suunnistusvirheen tai haastavien sääolosuhteiden seurauksena."
 
 #: quiz/models.py:84
 msgid ""
 "A non-native species that has escaped from captivity and appears in the wild."
 msgstr ""
-"Laji ei esiinny alueella luonnonvaraisesti, vaan ainoastaan tarha- tai häkkikarkulaisena."
+"Laji ei esiinny alueella luonnonvaraisesti, vaan ainoastaan tarha- tai "
+"häkkikarkulaisena."
 
-#: quiz/models.py:106
+#: quiz/models.py:108
 msgid "Multiple choice"
 msgstr "Monivalinta"
 
-#: quiz/models.py:107
+#: quiz/models.py:109
 msgid "Open answer"
 msgstr "Avoin vastaus"
 

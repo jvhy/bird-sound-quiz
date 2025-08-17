@@ -1,43 +1,49 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-16 12:25+0000\n"
+"POT-Creation-Date: 2025-08-17 06:57+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contribute/templates/species_status_task.html:14
+#: contribute/templates/species_status_task.html:19
 msgid "SpeciesStatusTaskTitle"
 msgstr "Lajien esiintyminen alueella"
 
-#: contribute/templates/species_status_task.html:15
+#: contribute/templates/species_status_task.html:20
 msgid "Region"
 msgstr "Alue"
 
-#: contribute/templates/species_status_task.html:22
-msgid "TaskInstructionsTitle"
-msgstr "Tehtäväohjeet"
-
-#: contribute/templates/species_status_task.html:23
-msgid "SpeciesStatusTaskInstructionsText"
-msgstr ""
-"Valitse annetuista vaihtoehdoista se, joka parhaiten "
-"kuvastaa lajin esiintymistä valitulla alueella. "
-"Ulkoisten lähteiden kuten lintuoppaiden tai "
-"verkkosivustojen käyttö on suositeltavaa."
-"<br><br>"
-"Mikäli olet epävarma valinnasta, voit siirtyä seuraavaan lajiin. "
-"Voit merkitä minkä tahansa määrän lajeja. "
-"Kun haluat lopettaa tehtävän ja tallentaa vastauksesi, paina "
-"\"Lopeta\"-nappia sivun alalaidassa."
-
-#: contribute/templates/species_status_task.html:58
+#: contribute/templates/species_status_task.html:54
 msgid "PrevButtonLabel"
 msgstr "Edellinen"
 
-#: contribute/templates/species_status_task.html:62
+#: contribute/templates/species_status_task.html:59
 msgid "FinishTaskButtonLabel"
 msgstr "Lopeta"
+
+#: contribute/templates/species_status_task.html:68
+msgid "TaskInstructionsTitle"
+msgstr "Tehtäväohjeet"
+
+#: contribute/templates/species_status_task.html:72
+msgid "SpeciesStatusTaskInstructionsText"
+msgstr ""
+"Valitse annetuista vaihtoehdoista se, joka parhaiten kuvastaa lajin "
+"esiintymistä valitulla alueella. Ulkoisten lähteiden kuten lintuoppaiden tai "
+"verkkosivustojen käyttö on suositeltavaa.<br><br>Mikäli olet epävarma "
+"valinnasta, voit siirtyä seuraavaan lajiin. Voit merkitä minkä tahansa "
+"määrän lajeja. Kun haluat lopettaa tehtävän ja tallentaa vastauksesi, paina "
+"\"Lopeta\"-nappia sivun alalaidassa."
+
+#: contribute/templates/species_status_task.html:74
+msgid "SpeciesStatusTaskOptionDescriptionsTitle"
+msgstr "Vaihtoehtojen kuvaukset"
+
+#: contribute/templates/species_status_task.html:81
+#: contribute/templates/start.html:38
+msgid "StartTaskButtonLabel"
+msgstr "Aloita"
 
 #: contribute/templates/start.html:7
 msgid "ContributeStartPageTitle"
@@ -46,16 +52,13 @@ msgstr "Osallistu"
 #: contribute/templates/start.html:10
 msgid "ContributeStartPageInstructionsText"
 msgstr ""
-"Tämä sivu sisältää tehtäviä, joita tekemällä "
-"voit olla mukana kehittämässä Bird Sound Quiz:ia "
-"paremmaksi. Tehtävissä täydennät puuttuvaa tai "
-"osittaista tietoa lintulajeista, havainnoista tai "
-"alueista. Tehtävän suorittamisen jälkeen se arvioidaan. "
-"Onnistuneesti suoritetut tehtävät auttavat uusien "
+"Tämä sivu sisältää tehtäviä, joita tekemällä voit olla mukana kehittämässä "
+"Bird Sound Quiz:ia paremmaksi. Tehtävissä täydennät puuttuvaa tai osittaista "
+"tietoa lintulajeista, havainnoista tai alueista. Tehtävän suorittamisen "
+"jälkeen se arvioidaan. Onnistuneesti suoritetut tehtävät auttavat uusien "
 "ominaisuuksien, kuten pelimuotojen ja valikkojen kehittämisessä."
-"<br><br>"
-"Aloittaaksesi tehtävän, valitse tehtävä "
-"alla olevasta listasta ja paina \"Aloita\"."
+"<br><br>Aloittaaksesi tehtävän, valitse tehtävä alla olevasta listasta ja "
+"paina \"Aloita\"."
 
 #: contribute/templates/start.html:20
 msgid "SpeciesStatusTaskLabel"
@@ -63,8 +66,10 @@ msgstr "Lajien esiintyminen alueella"
 
 #: contribute/templates/start.html:25
 msgid "SpeciesStatusTaskDescription"
-msgstr "Merkitse lintulajeille aluekohtainen esiintymistyyppi (vakituinen pesijä, harhailija, tarhakarkuri jne.)"
+msgstr ""
+"Merkitse lintulajeille aluekohtainen esiintymistyyppi (säännöllinen pesijä, "
+"harhailija, tarhakarkuri jne.)"
 
-#: contribute/templates/start.html:38
-msgid "StartTaskButtonLabel"
-msgstr "Aloita"
+#: contribute/templates/thank_you.html:7
+msgid "ContributionThankYouPageTitle"
+msgstr "Kiitos osallistumisestasi!"

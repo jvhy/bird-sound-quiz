@@ -1,44 +1,49 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-16 12:25+0000\n"
+"POT-Creation-Date: 2025-08-17 06:57+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contribute/templates/species_status_task.html:14
+#: contribute/templates/species_status_task.html:19
 msgid "SpeciesStatusTaskTitle"
 msgstr "Species occurrence in region"
 
-#: contribute/templates/species_status_task.html:15
+#: contribute/templates/species_status_task.html:20
 msgid "Region"
 msgstr "Region"
 
-#: contribute/templates/species_status_task.html:22
-msgid "TaskInstructionsTitle"
-msgstr "Task instructions"
-
-#: contribute/templates/species_status_task.html:23
-msgid "SpeciesStatusTaskInstructionsText"
-msgstr ""
-"Select the option that best describes "
-"how the species occurs in the selected region. "
-"The use of external sources such as field guides "
-" or web sites is encouraged."
-"<br><br>"
-"You do not have to annotate species you are unsure about: "
-"you can simply move on to the next species. "
-"You may annotate as few or as many species as you like. "
-"When you want to stop working on the task and save your answers, "
-"click the \"Finish\" button at the bottom of the page. "
-
-#: contribute/templates/species_status_task.html:58
+#: contribute/templates/species_status_task.html:54
 msgid "PrevButtonLabel"
 msgstr "Previous"
 
-#: contribute/templates/species_status_task.html:62
+#: contribute/templates/species_status_task.html:59
 msgid "FinishTaskButtonLabel"
 msgstr "Finish"
+
+#: contribute/templates/species_status_task.html:68
+msgid "TaskInstructionsTitle"
+msgstr "Task instructions"
+
+#: contribute/templates/species_status_task.html:72
+msgid "SpeciesStatusTaskInstructionsText"
+msgstr ""
+"Select the option that best describes how the species occurs in the selected "
+"region. The use of external sources such as field guides  or web sites is "
+"encouraged.<br><br>You do not have to annotate species you are unsure about: "
+"you can simply move on to the next species. You may annotate as few or as "
+"many species as you like. When you want to stop working on the task and save "
+"your answers, click the \"Finish\" button at the bottom of the page. "
+
+#: contribute/templates/species_status_task.html:74
+msgid "SpeciesStatusTaskOptionDescriptionsTitle"
+msgstr "Option descriptions"
+
+#: contribute/templates/species_status_task.html:81
+#: contribute/templates/start.html:38
+msgid "StartTaskButtonLabel"
+msgstr "Start task"
 
 #: contribute/templates/start.html:7
 msgid "ContributeStartPageTitle"
@@ -47,14 +52,12 @@ msgstr "Contribute"
 #: contribute/templates/start.html:10
 msgid "ContributeStartPageInstructionsText"
 msgstr ""
-"This page contains different tasks you can complete to help make "
-"Bird Sound Quiz better. In these tasks, you will fill missing or "
-"incomplete information about birds species, observations or regions. "
-"After completing a task, your contribution will be reviewed. "
-"User contributions are used for the development of new features, "
-"such as game modes or quiz options."
-"<br><br>"
-"To get started, select a task from the menu below."
+"This page contains different tasks you can complete to help make Bird Sound "
+"Quiz better. In these tasks, you will fill missing or incomplete information "
+"about birds species, observations or regions. After completing a task, your "
+"contribution will be reviewed. User contributions are used for the "
+"development of new features, such as game modes or quiz options.<br><br>To "
+"get started, select a task from the menu below."
 
 #: contribute/templates/start.html:20
 msgid "SpeciesStatusTaskLabel"
@@ -62,8 +65,10 @@ msgstr "Species occurrence status"
 
 #: contribute/templates/start.html:25
 msgid "SpeciesStatusTaskDescription"
-msgstr "Annotate species based on how they occur in a selected region (regular breeder, vagrant, escapee etc.)."
+msgstr ""
+"Annotate species based on how they occur in a selected region (regular "
+"breeder, vagrant, escapee etc.)."
 
-#: contribute/templates/start.html:38
-msgid "StartTaskButtonLabel"
-msgstr "Start task"
+#: contribute/templates/thank_you.html:7
+msgid "ContributionThankYouPageTitle"
+msgstr "Thank you for the contribution!"

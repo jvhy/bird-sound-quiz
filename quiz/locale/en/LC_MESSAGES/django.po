@@ -1,32 +1,32 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-16 14:02+0000\n"
+"POT-Creation-Date: 2025-08-17 06:57+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: quiz/models.py:60
+#: quiz/models.py:59
 msgid "Regular breeder"
 msgstr "Regular breeder"
 
-#: quiz/models.py:61
+#: quiz/models.py:60
 msgid "Irregular breeder"
 msgstr "Irregular breeder"
 
-#: quiz/models.py:62
+#: quiz/models.py:61
 msgid "Winter migrant"
 msgstr "Winter migrant"
 
-#: quiz/models.py:63
+#: quiz/models.py:62
 msgid "Passage migrant"
 msgstr "Passage migrant"
 
-#: quiz/models.py:64
+#: quiz/models.py:63
 msgid "Vagrant"
 msgstr "Vagrant"
 
-#: quiz/models.py:65
+#: quiz/models.py:64
 msgid "Escapee"
 msgstr "Escapee"
 
@@ -72,11 +72,11 @@ msgid ""
 msgstr ""
 "A non-native species that has escaped from captivity and appears in the wild."
 
-#: quiz/models.py:106
+#: quiz/models.py:108
 msgid "Multiple choice"
 msgstr "Multiple choice"
 
-#: quiz/models.py:107
+#: quiz/models.py:109
 msgid "Open answer"
 msgstr "Open answer"
 
