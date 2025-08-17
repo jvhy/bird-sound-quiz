@@ -1,6 +1,10 @@
+from django.contrib.auth import get_user_model
+
 from quiz.models import Region, Observation
 
 
-def get_observations_to_type_annotate(region: Region):
-    observations = Observation.objects.filter(region=region, type__isnull=True)
+User = get_user_model()
+
+def get_observations_to_type_annotate(region: Region, user: User):
+    observations = Observation.objects.filter(region=region, type__isnull=True).exclude(observationtypeannotation__user=user)
     return observations

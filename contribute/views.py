@@ -44,7 +44,7 @@ def species_status_task_view(request, region_id):
                     observation.save()
         return redirect("thank_you")
     region = Region.objects.get(id=region_id)
-    observations = get_observations_to_type_annotate(region=region)
+    observations = get_observations_to_type_annotate(region=region, user=request.user)
     options = OccurrenceType.choices
     locale = get_language()
     region_name = getattr(region, f"name_{locale}") or getattr(region, f"name_en")
