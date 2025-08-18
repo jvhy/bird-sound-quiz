@@ -46,13 +46,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{% url 'user_profile' %}">My Account</a>
+                            <a class="dropdown-item" href="{% url 'user_profile' %}">{% trans "MyAccount" %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{% url 'user_stats' %}">My Stats</a>
+                            <a class="dropdown-item" href="{% url 'user_stats' %}">{% trans "MyStats" %}</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{% url 'start' %}">Contribute</a>
+                            <a class="dropdown-item" href="{% url 'start' %}">{% trans "Contribute" %}</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -78,7 +78,7 @@
                 {% endif %}
                 {% endif %}
                 <!-- Language selection -->
-                <li class="nav-item mx-2 dropdown">
+                <li class="nav-item mx-2 dropdown" style="min-width: 90px !important;">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {% trans "Language" %}
                     </a>
@@ -106,7 +106,7 @@
         <!-- Sidebar -->
         <div id="offcanvasNavbar" class="offcanvas offcanvas-end bg-success" style="max-width: 75%;">
             <div class="offcanvas-header" style="height: 3.5em;">
-                <h5 class="offcanvas-title text-light">Menu</h5>
+                <h5 class="offcanvas-title text-light">{% trans "Menu" %}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <hr style="margin: 0px;">
@@ -130,13 +130,13 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user_profile' %}">My Account</a>
+                        <a class="nav-link" href="{% url 'user_profile' %}">{% trans "MyAccount" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user_stats' %}">My Stats</a>
+                        <a class="nav-link" href="{% url 'user_stats' %}">{% trans "MyStats" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'start' %}">Contribute</a>
+                        <a class="nav-link" href="{% url 'start' %}">{% trans "Contribute" %}</a>
                     </li>
                     {% else %}
                     <li class="nav-item">

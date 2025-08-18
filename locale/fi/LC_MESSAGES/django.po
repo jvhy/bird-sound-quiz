@@ -1,39 +1,51 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-13 19:57+0300\n"
+"POT-Creation-Date: 2025-08-18 08:51+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/base.html:54
+#: templates/base.html:43
 #, python-format
 msgid "Logged in as %(username)s"
 msgstr "Kirjautunut käyttäjänä %(username)s"
 
-#: templates/base.html:59 templates/base.html:60
+#: templates/base.html:55 templates/base.html:139
+msgid "Contribute"
+msgstr "Osallistu"
+
+#: templates/base.html:64 templates/base.html:127
 msgid "LogoutButtonLabel"
 msgstr "Kirjaudu ulos"
 
-#: templates/base.html:63 templates/base.html:64
+#: templates/base.html:73 templates/base.html:144
 msgid "LoginButtonLabel"
 msgstr "Kirjaudu sisään"
 
-#: templates/base.html:65 templates/base.html:66
+#: templates/base.html:76 templates/base.html:146
 msgid "RegisterButtonLabel"
 msgstr "Rekisteröidy"
 
-#: templates/base.html:96
+#: templates/base.html:83 templates/base.html:153
+msgid "Language"
+msgstr "Kieli"
+
+#: templates/base.html:109
+msgid "Menu"
+msgstr "Valikko"
+
+#: templates/base.html:198
 #, python-format
 msgid "%(project)s by %(author)s"
 msgstr "%(project)s - %(author)s"
 
-#: templates/base.html:100
+#: templates/base.html:202
 #, python-format
 msgid "Audio from %(source)s"
 msgstr "Äänitteet: %(source)s"
 
-#: templates/base.html:104
+#: templates/base.html:206
 #, python-format
 msgid "Taxonomic and observation data from %(source)s"
 msgstr "Taksonomia ja havaintoaineisto: %(source)s"
