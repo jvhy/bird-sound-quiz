@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-17 06:57+0000\n"
+"POT-Creation-Date: 2025-08-18 16:18+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,6 +68,22 @@ msgid "SpeciesStatusTaskDescription"
 msgstr ""
 "Annotate species based on how they occur in a selected region (regular "
 "breeder, vagrant, escapee etc.)."
+
+#: contribute/templates/task_done.html:7
+msgid "TaskAlreadyCompletedTitle"
+msgstr "Task completed!"
+
+#: contribute/templates/task_done.html:10
+msgid "TaskAlreadyCompletedText"
+msgstr ""
+"Looks like the users have already completed this task with the settings you've selected.<br><br>"
+"To contribute to this task, you can try to change the task settings (e.g. choose another region). "
+"Alternatively, you can see if there are other types of tasks to complete.<br><br>"
+"Thank you for making Bird Sound Quiz better!"
+
+#: contribute/templates/task_done.html:18
+msgid "Back"
+msgstr "Back"
 
 #: contribute/templates/thank_you.html:7
 msgid "ContributionThankYouPageTitle"

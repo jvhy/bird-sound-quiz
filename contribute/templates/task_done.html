@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="card-title text-center mb-4">{% trans "TaskAlreadyCompletedTitle" %}</h2>
+    <div class="card mx-auto my-5" style="max-width: 800px;">
+        <div class="card-body bg-body-secondary">
+            {% trans "TaskAlreadyCompletedText" %}
+        </div>
+    </div>
+    <div class="text-center py-3">
+        <a href="{% url 'start' %}" class="btn btn-success btn-lg">{% trans "Back" %}</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-17 06:57+0000\n"
+"POT-Creation-Date: 2025-08-18 16:18+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -69,6 +69,22 @@ msgid "SpeciesStatusTaskDescription"
 msgstr ""
 "Merkitse lintulajeille aluekohtainen esiintymistyyppi (säännöllinen pesijä, "
 "harhailija, tarhakarkuri jne.)"
+
+#: contribute/templates/task_done.html:7
+msgid "TaskAlreadyCompletedTitle"
+msgstr "Tehtävä valmis!"
+
+#: contribute/templates/task_done.html:10
+msgid "TaskAlreadyCompletedText"
+msgstr ""
+"Käyttäjät ovat jo saaneet tämän tehtävän valmiiksi valitsemillasi asetuksilla.<br><br>"
+"Tehdäksesi tehtävän voit yrittää vaihtaa tehtäväasetuksia, esimerkiksi valitun alueen. "
+"Voit myös tarkistaa aloitussivulta, onko muita tehtäviä saatavilla.<br><br>"
+"Kiitos osallistumisestasi Bird Sound Quiz:in kehittämiseen!"
+
+#: contribute/templates/task_done.html:18
+msgid "Back"
+msgstr "Takaisin"
 
 #: contribute/templates/thank_you.html:7
 msgid "ContributionThankYouPageTitle"
