@@ -21,52 +21,154 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light text-dark">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success position-relative">
-        <div class="container-fluid position-relative">
-            <div class="dropdown">
-                <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center p-0">
-                    {% csrf_token %}
-                    <select id="language-select" name="language" class="form-select form-select-sm" onchange="this.form.submit()">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% get_available_languages as LANGUAGES %}
-                        {% for lang_code, lang_name in LANGUAGES %}
-                            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
-                                {{ lang_code }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </div>
-            <a id="navbarTitleMobile" class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
+    <nav class="navbar navbar-dark bg-success px-3" style="height: 3.5em;">
+        <div class="d-flex d-flex-row w-100 justify-content-between">
+            <!-- Title -->
+            <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="{% static 'images/bsq-logo.svg' %}" 
                     alt="Logo" 
                     width="24" 
                     height="24"
                     style="vertical-align: middle; position: relative; bottom: 2px;">
-                BSQ
-            </a>
-            <a id="navbarTitleDesktop" class="navbar-brand position-absolute top-50 start-50 translate-middle" href="{% url 'index' %}">
                 Bird Sound Quiz
             </a>
-            {% if LOGIN_ENABLED %}
-            <div class="ms-auto d-flex align-items-center">
+            <!-- Navbar items (desktop) -->
+            <ul class="desktop-element navbar-nav d-flex flex-row">
+                {% if LOGIN_ENABLED %}
                 {% if user.is_authenticated %}
-                    <span id="loggedInText" class="text-white me-2">{% blocktrans trimmed with username=user.username%}Logged in as {{ username }}{% endblocktrans %}</span>
-                    <a class="btn btn-outline-light btn-sm me-2" title="Profile" href="{% url 'user_profile' %}"><i class="bi bi-person-fill"></i></a>
-                    <a class="btn btn-outline-light btn-sm me-2" title="My stats" href="{% url 'user_stats' %}"><i class="bi bi-bar-chart-line"></i></a>
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button class="mobile-element btn btn-outline-light btn-sm" title='{% trans "LogoutButtonLabel" %}' href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i></button>
-                        <button class="desktop-element btn btn-outline-light btn-sm">{% trans "LogoutButtonLabel" %}</button>
-                    </form>
+                <!-- Account actions menu -->
+                <li class="nav-item px-2 dropdown">
+                    <a class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person"></i>
+                        {% blocktrans trimmed with username=user.username %}
+                            Logged in as {{ username }}
+                        {% endblocktrans %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'user_profile' %}">My Account</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'user_stats' %}">My Stats</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'start' %}">Contribute</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button class="dropdown-item" type="submit" class="btn btn-link">
+                                    {% trans "LogoutButtonLabel" %}
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
                 {% else %}
-                    <a class="mobile-element btn btn-outline-light btn-sm me-2" title='{% trans "LoginButtonLabel" %}' href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i></a>
-                    <a class="desktop-element btn btn-outline-light btn-sm me-2" href="{% url 'login' %}">{% trans "LoginButtonLabel" %}</a>
-                    <a class="mobile-element btn btn-light btn-sm" title='{% trans "RegisterButtonLabel" %}' href="{% url 'register' %}"><i class="bi bi-person-plus"></i></a>
-                    <a class="desktop-element btn btn-light btn-sm" href="{% url 'register' %}">{% trans "RegisterButtonLabel" %}</a>
+                <!-- Login / Register -->
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="{% url 'login' %}">{% trans "LoginButtonLabel" %}</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="{% url 'register' %}">{% trans "RegisterButtonLabel" %}</a>
+                </li>
                 {% endif %}
+                {% endif %}
+                <!-- Language selection -->
+                <li class="nav-item mx-2 dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% trans "Language" %}
+                    </a>
+                    <ul id="language-menu" class="dropdown-menu position-absolute">
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="{{ lang_code }}">
+                                <button type="submit" class="btn">
+                                    {{ lang_name }}
+                                </button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        <!-- Sidebar toggler (mobile) -->
+        <button class="mobile-element navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+        <!-- Sidebar -->
+        <div id="offcanvasNavbar" class="offcanvas offcanvas-end bg-success" style="max-width: 75%;">
+            <div class="offcanvas-header" style="height: 3.5em;">
+                <h5 class="offcanvas-title text-light">Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            {% endif %}
+            <hr style="margin: 0px;">
+            <div class="offcanvas-body">
+                <ul class="navbar-nav">
+                    {% if LOGIN_ENABLED %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-person text-light"></i>
+                            <span class="text-white ms-1">
+                                {{ user.username }}
+                            </span>
+                            <div class="vr mx-2 my-2"></div>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link">
+                                    {% trans "LogoutButtonLabel" %}
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_profile' %}">My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_stats' %}">My Stats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'start' %}">Contribute</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <div class="d-flex d-flex-row">
+                            <a class="nav-link me-1" href="{% url 'login' %}">{% trans "LoginButtonLabel" %}</a>
+                            <div class="vr mx-1 my-2"></div>
+                            <a class="nav-link mx-1" href="{% url 'register' %}">{% trans "RegisterButtonLabel" %}</a>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% trans "Language" %}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang_code, lang_name in LANGUAGES %}
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="language" value="{{ lang_code }}">
+                                    <button type="submit" class="dropdown-item">
+                                        {{ lang_name }}
+                                    </button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <!-- Main Content -->

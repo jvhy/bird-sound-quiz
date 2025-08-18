@@ -63,20 +63,13 @@
 }
 
 #navbarTitleMobile { display: none }
-.mobile-element { display: none; }
+.mobile-element { display: none !important; }
 
 @media only screen and (max-device-width: 450px) {
   #navbarTitleMobile { display: block }
   #navbarTitleDesktop { display: none }
-  .mobile-element { display: block; }
-  .desktop-element { display: none; }
-}
-
-@media only screen and (min-device-height: 1024px) {
-  .navbar {
-    padding-top: 1em;
-    padding-bottom: 1em;
-  }
+  .mobile-element { display: block !important; }
+  .desktop-element { display: none !important; }
 }
 
 @media only screen and (max-device-width: 768px) {
@@ -87,4 +80,16 @@
   .messages {
     bottom: 0rem;
   }
+}
+
+.nav-item.dropdown {
+  z-index: 1050;
+}
+
+#language-menu {
+  min-width: 100px;     /* at least this wide */
+  max-width: 100px;     /* never wider than this */
+  width: max-content;   /* grow to fit items, but stop at max-width */
+  overflow-wrap: break-word; /* break long words instead of overflowing */
+  white-space: normal;  /* allow wrapping instead of one long line */
 }

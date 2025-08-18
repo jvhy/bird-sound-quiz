@@ -39,7 +39,7 @@
                             <option value="OPEN">{% trans "OpenAnswerOption" %}</option>
                         </select>
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-success btn-lg w-100">{% trans "QuizStartButtonLabel" %}</button>
+                            <button id="startButton" type="submit" class="btn btn-success btn-lg w-100">{% trans "QuizStartButtonLabel" %}</button>
                         </div>
                     </form>
                 </div>
@@ -49,7 +49,7 @@
 </div>
     <script>
     const regionSelect = document.getElementById('regionSelect');
-    const startButton = document.querySelector('button[type="submit"]');
+    const startButton = document.getElementById('startButton');
     // Disable Start Quiz button until region is selected
     function toggleButton() {
         startButton.disabled = !regionSelect.value;
