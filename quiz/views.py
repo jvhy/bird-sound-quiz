@@ -22,6 +22,7 @@ def index(request):
 @require_http_methods(["POST"])
 def quiz_page(request):
     region_id = request.POST.get("region")
+    request.session["region_id"] = region_id
     mode = request.POST.get("mode")
     locale = get_language()
     started_at = timezone.now().astimezone(timezone.get_default_timezone()).isoformat()
