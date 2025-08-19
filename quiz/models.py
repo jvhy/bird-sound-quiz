@@ -9,8 +9,7 @@ from quiz.utils import create_region_display_name, check_answer
 
 
 class Species(models.Model):
-    name_en = models.CharField(max_length=50, verbose_name="English name", blank=True, null=True)
-    name_fi = models.CharField(max_length=50, verbose_name="Finnish name", blank=True, null=True)
+    name = models.CharField(max_length=50, verbose_name="Localized common name")
     name_sci = models.CharField(max_length=50, unique=True, verbose_name="Scientific (latin) name")
     order = models.CharField(max_length=50, verbose_name="Taxonomic order", null=True, default=None)
     family = models.CharField(max_length=50, verbose_name="Taxonomic family", null=True, default=None)
@@ -35,8 +34,7 @@ class Recording(models.Model):
 
 class Region(models.Model):
     code = models.CharField(max_length=9, unique=True)
-    name_en = models.CharField(max_length=100)
-    name_fi = models.CharField(max_length=100, null=True, blank=True, default=None)
+    name = models.CharField(max_length=100)
     parent_region = models.ForeignKey(
         'self',
         on_delete=models.CASCADE,
@@ -48,8 +46,7 @@ class Region(models.Model):
 
     @property
     def display_name(self):
-        locale = get_language()
-        return create_region_display_name(self, locale)
+        return create_region_display_name(self)
 
     def __str__(self):
         return self.display_name

@@ -42,6 +42,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="127.0.0.1").split(",")
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,6 +141,10 @@ LANGUAGES = [
     ("en", _("English")),
     ("fi", _("Finnish"))
 ]
+
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    "default": ("en",)
+}
 
 TIME_ZONE = 'UTC'
 
