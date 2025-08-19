@@ -29,7 +29,6 @@ def get_species_by_region(region_id: int) -> QuerySet[Species]:
 def get_multiple_choices(
     target_species: Species,
     available_species: QuerySet[Species],
-    locale: str,
     num_choices: int = 3,
     mode: SelectionMode = "random"
 ) -> list[str]:
@@ -51,7 +50,7 @@ def get_multiple_choices(
                 available_species
                     .exclude(id=target_species.id)
                     .order_by("?")
-                    .values_list(f"name_{locale}", "name_en")
+                    .values_list("name", flat=True)
                 )[:num_choices]
         case "taxonomic":
             # TODO: Add taxonomic choice selection
@@ -59,12 +58,7 @@ def get_multiple_choices(
         case _:
             raise ValueError('Unknown selection mode: mode should be one of {"random", "taxonomic"}')
 
-    # If name isn't available in selected locale, use English name instead
-    choice_species_names = [choice[0] or choice[1] for choice in choice_species_names]
-
-    name_field = f"name_{locale}"
-    fallback_field = "name_en"
-    choice_species_names.append(getattr(target_species, name_field) or getattr(target_species, fallback_field))
+    choice_species_names.append(target_species.name)
     random.shuffle(choice_species_names)
     return choice_species_names
 
@@ -91,8 +85,7 @@ def get_quiz_recordings(species_set: QuerySet[Species]) -> QuerySet[Recording]:
     return selected_recordings
 
 
-def get_available_regions(locale: str) -> QuerySet[Region]:
+def get_available_regions() -> QuerySet[Region]:
     """List all regions in the database that appear in at least one observation."""
-    name_field = f"name_{locale}"
-    regions = Region.objects.filter(observation__isnull=False).distinct().order_by(name_field)
+    regions = Region.objects.filter(observation__isnull=False).distinct().order_by("name")
     return regions

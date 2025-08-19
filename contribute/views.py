@@ -48,9 +48,7 @@ def species_status_task_view(request, region_id):
     if not observations:
         return render(request, "task_done.html")
     options = OccurrenceType.choices
-    locale = get_language()
-    region_name = getattr(region, f"name_{locale}") or getattr(region, f"name_en")
-    return render(request, "species_status_task.html", context={"observations": observations, "options": options, "option_descriptions": OCC_TYPE_DESCRIPTIONS, "region": region_name})
+    return render(request, "species_status_task.html", context={"observations": observations, "options": options, "option_descriptions": OCC_TYPE_DESCRIPTIONS, "region": region.name})
 
 
 @login_required

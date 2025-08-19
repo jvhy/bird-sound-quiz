@@ -36,7 +36,6 @@ def quiz_page(request):
                 sp_options = get_multiple_choices(
                     target_species=sp,
                     available_species=region_species,
-                    locale=locale,
                     num_choices=3,
                     mode="random"
                 )
@@ -69,9 +68,7 @@ def check_answer_view(request):
         recording = Recording.objects.get(id=recording_id)
     except Recording.DoesNotExist:
         return JsonResponse({"error": "Recording not found"}, status=404)
-    correct_answer_field = f"name_{locale}"
-    fallback_field = "name_en"
-    correct_answer = getattr(recording.species, correct_answer_field) or getattr(recording.species, fallback_field)
+    correct_answer = recording.species.name
     correct = check_answer(user_answer, recording.species)
     return JsonResponse({"answer": correct_answer, "correct": correct})
 
@@ -105,14 +102,11 @@ def results_page(request):
 def results_page_get(request, quiz_id):
     quiz = Quiz.objects.select_related("user").get(id=quiz_id)
     answers = Answer.objects.filter(quiz=quiz).order_by("id").select_related("recording__species")
-    locale = get_language()
-    name_field = f"name_{locale}"
-    fallback_field = "name_en"
     placeholder = _("EmptyAnswerPlaceholderText")
     results = [
         (
             ans.user_answer or f"<{placeholder}>",
-            (getattr(ans.recording.species, name_field) or getattr(ans.recording.species, fallback_field)),
+            ans.recording.species.name,
             ans.is_correct,
             ans.recording.audio.url if settings.SELF_HOST_AUDIO else ans.recording.xc_audio_url
         )

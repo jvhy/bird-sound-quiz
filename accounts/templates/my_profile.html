@@ -42,7 +42,7 @@
                                     <input type="hidden" name="region" value="{{ region.id }}">
                                     {% get_current_language as LANGUAGE_CODE %}
                                     <button type="submit" class="btn">
-                                        {% get_localized_value region "name" LANGUAGE_CODE %}
+                                        {{ region.name }}
                                     </button>
                                 </form>
                             </li>
