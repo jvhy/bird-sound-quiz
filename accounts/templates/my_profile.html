@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load account_extras %}
+
 {% load i18n %}
 
 {% block title %}{% trans "MyProfile" %} | Bird Sound Quiz{% endblock %}
@@ -21,6 +23,32 @@
                 <li class="list-group-item d-flex justify-content-between">
                     <span class="fw-bold text-muted"><i class="bi bi-feather"></i> {% trans "FavoriteBirdLabel" %}:</span>
                     <span>{{ request.user.security_answer|capfirst }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="fw-bold text-muted"><i class="bi bi-globe"></i> {% trans "PreferredRegionLabel" %}:</span>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle px-1" href="#" role="button" id="regionMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if request.user.preferred_region %}
+                                {{ request.user.preferred_region }}
+                            {% else %}
+                                {% trans "NotSelected" %}
+                            {% endif %}
+                        </a>
+                        <ul id="regionMenu" class="dropdown-menu" aria-labelledby="regionMenuBtn">
+                            {% for region in regions %}
+                            <li>
+                                <form action="{{ request.path }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="region" value="{{ region.id }}">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    <button type="submit" class="btn">
+                                        {% get_localized_value region "name" LANGUAGE_CODE %}
+                                    </button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </li>
             </ul>
             <div class="text-center mt-4">
