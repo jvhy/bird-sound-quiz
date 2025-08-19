@@ -1,5 +1,6 @@
 """Unit tests for business logic"""
 
+from django.utils.translation import override
 from model_bakery import baker
 import pytest
 
@@ -35,7 +36,7 @@ def test_get_available_regions_1():
     # no observations for region 3
     baker.make(Observation, region=region_4)
 
-    available_regions = services.get_available_regions(locale="en")
+    available_regions = services.get_available_regions()
 
     assert len(available_regions) == 3
     assert [region.code for region in available_regions] == ["AQ", "BB", "DE"]  # ordered by English name
@@ -65,7 +66,8 @@ def test_get_available_regions_2():
     baker.make(Observation, region=region_2)
     baker.make(Observation, region=region_3)
 
-    available_regions = services.get_available_regions(locale="fi")
+    with override("fi"):
+        available_regions = services.get_available_regions()
 
     assert len(available_regions) == 3
     assert [region.name_fi for region in available_regions] == ["A-Alue", "B-Alue", "C-Alue"]  # ordered by Finnish name, as specified by locale arg
@@ -166,7 +168,7 @@ def test_get_species_by_region_4():
 @pytest.mark.django_db
 def test_get_quiz_recordings_1():
     """Selection of quiz recordings should be random."""
-    species_set = baker.make(Species, _quantity=10, _fill_optional=True)
+    species_set = baker.make(Species, _quantity=10)
     for species in species_set:
         baker.make(Recording, species=species, _quantity=10, _create_files=True)
 
@@ -179,7 +181,7 @@ def test_get_quiz_recordings_1():
 @pytest.mark.django_db
 def test_get_quiz_recordings_2():
     """Recordings selected for a quiz should include one recording per species."""
-    species_set = baker.make(Species, _quantity=10, _fill_optional=True)
+    species_set = baker.make(Species, _quantity=10)
     for species in species_set:
         baker.make(Recording, species=species, _quantity=10, _create_files=True)
 
@@ -192,15 +194,14 @@ def test_get_quiz_recordings_2():
 @pytest.mark.django_db
 def test_get_multiple_choices_1():
     """There should be the correct number of multiple choice species and they should include the target species."""
-    target_species = baker.make(Species, _fill_optional=True)
-    available_species = baker.make(Species, _quantity=9, _fill_optional=True)
+    target_species = baker.make(Species, name_en="Rough-faced Shag")
+    available_species = baker.make(Species, _quantity=9)
     available_species.append(target_species)
     available_species_qs = Species.objects.filter(id__in=[sp.id for sp in available_species])
 
     multiple_choice_species = services.get_multiple_choices(
         target_species=target_species,
         available_species=available_species_qs,
-        locale="en",
         num_choices=3,
         mode="random"
     )
@@ -212,15 +213,14 @@ def test_get_multiple_choices_1():
 @pytest.mark.django_db
 def test_get_multiple_choices_2():
     """Multiple choice species should be randomly selected."""
-    target_species = baker.make(Species, _fill_optional=True)
-    available_species = baker.make(Species, _quantity=99, _fill_optional=True)
+    target_species = baker.make(Species)
+    available_species = baker.make(Species, _quantity=99)
     available_species.append(target_species)
     available_species_qs = Species.objects.filter(id__in=[sp.id for sp in available_species])
 
     multiple_choice_species_1 = services.get_multiple_choices(
         target_species=target_species,
         available_species=available_species_qs,
-        locale="en",
         num_choices=9,
         mode="random"
     )
@@ -228,7 +228,6 @@ def test_get_multiple_choices_2():
     multiple_choice_species_2 = services.get_multiple_choices(
         target_species=target_species,
         available_species=available_species_qs,
-        locale="en",
         num_choices=9,
         mode="random"
     )
@@ -239,15 +238,14 @@ def test_get_multiple_choices_2():
 @pytest.mark.django_db
 def test_get_multiple_choices_3():
     """Multiple choices should be randomly ordered."""
-    target_species = baker.make(Species, _fill_optional=True)
-    available_species = baker.make(Species, _quantity=9, _fill_optional=True)
+    target_species = baker.make(Species)
+    available_species = baker.make(Species, _quantity=9)
     available_species.append(target_species)
     available_species_qs = Species.objects.filter(id__in=[sp.id for sp in available_species])
 
     multiple_choice_species_1 = services.get_multiple_choices(
         target_species=target_species,
         available_species=available_species_qs,
-        locale="en",
         num_choices=9,
         mode="random"
     )
@@ -255,7 +253,6 @@ def test_get_multiple_choices_3():
     multiple_choice_species_2 = services.get_multiple_choices(
         target_species=target_species,
         available_species=available_species_qs,
-        locale="en",
         num_choices=9,
         mode="random"
     )
@@ -267,7 +264,7 @@ def test_get_multiple_choices_3():
 
 @pytest.mark.django_db
 def test_get_multiple_choices_4():
-    """Multiple choice species names should use English name as fallback if name in specified locale is unavailable."""
+    """Multiple choice species names should use English name as fallback if name in current locale is unavailable."""
     target_species = baker.make(Species, name_en="Fallback name 1", name_fi=None)
     species_no_fi_name = baker.make(Species, name_en="Fallback name 2", name_fi=None)
     species_with_fi_name_1 = baker.make(Species, name_fi="Finnish name 1")
@@ -276,12 +273,12 @@ def test_get_multiple_choices_4():
     available_species = [target_species, species_no_fi_name, species_with_fi_name_1, species_with_fi_name_2]
     available_species_qs = Species.objects.filter(id__in=[sp.id for sp in available_species])
 
-    multiple_choice_species = services.get_multiple_choices(
-        target_species=target_species,
-        available_species=available_species_qs,
-        locale="fi",  # if not available, should fallback to English name
-        num_choices=3,
-        mode="random"
-    )
+    with override("fi"):
+        multiple_choice_species = services.get_multiple_choices(
+            target_species=target_species,
+            available_species=available_species_qs,
+            num_choices=3,
+            mode="random"
+        )
 
     assert set(multiple_choice_species) == {"Fallback name 1", "Fallback name 2", "Finnish name 1", "Finnish name 2"}

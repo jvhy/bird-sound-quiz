@@ -1,5 +1,7 @@
 """Unit tests for utility functions"""
 
+from django.utils.translation import override
+
 from quiz.models import Species, Region
 from quiz import utils
 
@@ -53,17 +55,18 @@ def test_create_region_display_name_1():
         parent_region=region_2
     )
 
-    display_name_en_1 = utils.create_region_display_name(region_1, locale="en")
-    display_name_en_2 = utils.create_region_display_name(region_2, locale="en")
-    display_name_en_3 = utils.create_region_display_name(region_3, locale="en")
+    display_name_en_1 = utils.create_region_display_name(region_1)
+    display_name_en_2 = utils.create_region_display_name(region_2)
+    display_name_en_3 = utils.create_region_display_name(region_3)
 
     assert display_name_en_1 == "United States"
     assert display_name_en_2 == "United States - Texas"
     assert display_name_en_3 == "United States - Texas - Austin"
 
-    display_name_fi_1 = utils.create_region_display_name(region_1, locale="fi")
-    display_name_fi_2 = utils.create_region_display_name(region_2, locale="fi")
-    display_name_fi_3 = utils.create_region_display_name(region_3, locale="fi")
+    with override("fi"):
+        display_name_fi_1 = utils.create_region_display_name(region_1)
+        display_name_fi_2 = utils.create_region_display_name(region_2)
+        display_name_fi_3 = utils.create_region_display_name(region_3)
 
     assert display_name_fi_1 == "Yhdysvallat"
     assert display_name_fi_2 == "Yhdysvallat - Texas"
@@ -71,13 +74,14 @@ def test_create_region_display_name_1():
 
 
 def test_create_region_display_name_2():
-    """Region display name should fall back to English if selected locale is empty."""
+    """Region display name should fall back to English if current locale is empty."""
     region = Region(
         code="JP",
         name_en="Japan",
         parent_region=None
     )
 
-    display_name = utils.create_region_display_name(region, locale="fi")
+    with override("fi"):
+        display_name = utils.create_region_display_name(region)  # name_fi is empty -> use name_en
 
     assert display_name == "Japan"
