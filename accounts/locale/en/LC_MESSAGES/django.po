@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-16 06:18+0000\n"
+"POT-Creation-Date: 2025-08-19 08:56+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +38,7 @@ msgid "InvalidPasswordErrorText"
 msgstr "Invalid password"
 
 #: accounts/templates/change_password.html:35
-#: accounts/templates/my_profile.html:28
+#: accounts/templates/my_profile.html:56
 msgid "ChangePasswordButtonLabel"
 msgstr "Change password"
 
@@ -58,35 +58,43 @@ msgstr "Invalid username or password"
 msgid "LoginButtonLabel"
 msgstr "Login"
 
-#: accounts/templates/my_profile.html:5
+#: accounts/templates/my_profile.html:7
 msgid "MyProfile"
 msgstr "My Profile"
 
-#: accounts/templates/my_profile.html:9
+#: accounts/templates/my_profile.html:11
 msgid "MyAccount"
 msgstr "My Account"
 
-#: accounts/templates/my_profile.html:14
+#: accounts/templates/my_profile.html:16
 msgid "UsernameLabel"
 msgstr "Username"
 
-#: accounts/templates/my_profile.html:18
+#: accounts/templates/my_profile.html:20
 msgid "JoinedLabel"
 msgstr "Joined"
 
-#: accounts/templates/my_profile.html:22
+#: accounts/templates/my_profile.html:24
 msgid "FavoriteBirdLabel"
 msgstr "Favorite bird"
 
-#: accounts/templates/my_profile.html:33
+#: accounts/templates/my_profile.html:28
+msgid "PreferredRegionLabel"
+msgstr "Preferred region"
+
+#: accounts/templates/my_profile.html:34
+msgid "NotSelected"
+msgstr "Not Selected"
+
+#: accounts/templates/my_profile.html:61
 msgid "DeleteAccountButtonLabel"
 msgstr "Delete account"
 
-#: accounts/templates/my_profile.html:45
+#: accounts/templates/my_profile.html:73
 msgid "ConfirmDeleteAccountTitle"
 msgstr "Confirm account deletion"
 
-#: accounts/templates/my_profile.html:49
+#: accounts/templates/my_profile.html:77
 msgid ""
 "Are you sure you want to delete your account? This action <strong>cannot</"
 "strong> be undone."
@@ -94,11 +102,11 @@ msgstr ""
 "Are you sure you want to delete your account? This action <strong>cannot</"
 "strong> be undone."
 
-#: accounts/templates/my_profile.html:54
+#: accounts/templates/my_profile.html:82
 msgid "CancelButtonLabel"
 msgstr "Cancel"
 
-#: accounts/templates/my_profile.html:57
+#: accounts/templates/my_profile.html:85
 msgid "ConfirmDeleteAccountButtonLabel"
 msgstr "Yes, delete"
 
@@ -150,14 +158,14 @@ msgstr "This answer can be used to reset your password."
 msgid "RegisterButtonLabel"
 msgstr "Register"
 
-#: accounts/views.py:16
+#: accounts/views.py:18
 msgid "LoginSuccessMessage"
 msgstr "Logged in succesfully."
 
-#: accounts/views.py:23
+#: accounts/views.py:25
 msgid "LogoutSuccessMessage"
 msgstr "Logged out succesfully."
 
-#: accounts/views.py:33
+#: accounts/views.py:35
 msgid "RegistrationSuccessMessage"
 msgstr "Registered succesfully."
