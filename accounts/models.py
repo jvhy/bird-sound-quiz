@@ -30,6 +30,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_contributor = models.BooleanField(default=False)
     security_answer = models.CharField(max_length=50, blank=False)
+    preferred_region = models.ForeignKey(
+        "quiz.Region",  # use string reference to avoid circular import
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None
+    )
 
     objects = CustomUserManager()
 
