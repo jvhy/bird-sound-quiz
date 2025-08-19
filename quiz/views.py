@@ -14,8 +14,7 @@ from quiz.utils import check_answer
 
 
 def index(request):
-    locale = get_language()
-    regions = sorted(get_available_regions(locale), key=lambda r: r.display_name.lower())
+    regions = sorted(get_available_regions(), key=lambda r: r.display_name.lower())
     return render(request, 'index.html', context={"regions": regions})
 
 
@@ -24,7 +23,6 @@ def quiz_page(request):
     region_id = request.POST.get("region")
     request.session["region_id"] = region_id
     mode = request.POST.get("mode")
-    locale = get_language()
     started_at = timezone.now().astimezone(timezone.get_default_timezone()).isoformat()
     region_species = get_species_by_region(region_id)
     quiz_species = random.sample(list(region_species), 10)
@@ -63,7 +61,6 @@ def quiz_page(request):
 def check_answer_view(request):
     recording_id = request.POST.get("id")
     user_answer = request.POST.get("user_answer")
-    locale = get_language()
     try:
         recording = Recording.objects.get(id=recording_id)
     except Recording.DoesNotExist:

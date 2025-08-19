@@ -18,8 +18,7 @@ def start_view(request):
                 return redirect("species_status", region_id=region_id)
             case _:
                 raise ValueError("Unknown task")
-    locale = get_language()
-    regions = sorted(get_available_regions(locale), key=lambda r: r.display_name.lower())
+    regions = sorted(get_available_regions(), key=lambda r: r.display_name.lower())
     return render(request, "start.html", context={"regions": regions})
 
 

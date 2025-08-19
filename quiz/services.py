@@ -37,7 +37,6 @@ def get_multiple_choices(
 
     :param target_species: Species for which choices are selected.
     :param available_species: Query set of species from which choices are selected.
-    :param locale: Which locale to use for common names.
     :param num_choices: How many choices to select.
     :param mode: How to select choice species: 
         "random" -> select randomly

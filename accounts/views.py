@@ -81,6 +81,5 @@ def user_profile(request):
         user = request.user
         user.preferred_region_id = region_id
         user.save()
-    locale = get_language()
-    available_regions = sorted(get_available_regions(locale), key=lambda r: r.display_name.lower())
+    available_regions = sorted(get_available_regions(), key=lambda r: r.display_name.lower())
     return render(request, "my_profile.html", context={"regions": available_regions})
