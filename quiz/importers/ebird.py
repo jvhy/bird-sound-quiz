@@ -58,10 +58,6 @@ def convert_to_species(species_obj: dict, locale: str = "en") -> Species | None:
     else:
         setattr(species, f"name_{locale}", species_obj["comName"])
 
-    try:
-        species.clean_fields()
-    except ValidationError:
-        return
     return species
 
 

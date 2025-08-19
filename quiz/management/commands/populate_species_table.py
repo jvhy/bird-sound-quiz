@@ -1,6 +1,7 @@
 """Command for populating the database"""
 
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 from tqdm import tqdm
 
@@ -21,21 +22,13 @@ class Command(BaseCommand):
             default="ebird",
             help="Which API to get species information from (default: %(default)s)"
         )
-        parser.add_argument(
-            "--locale", "-l",
-            type=str,
-            nargs="+",
-            choices=[lang[0] for lang in settings.LANGUAGES],
-            default=["en", "fi"],
-            help="Which locale(s) to include for the common names of species. Multiple locales can be entered (default: %(default)s). Only applicable if using eBird as source."
-        )
 
     def handle(self, *args, **kwargs):
         session = get_retry_request_session()
         match kwargs["source"]:
             case "ebird":
                 all_species_objs = []
-                for locale in kwargs["locale"]:
+                for locale, _ in settings.LANGUAGES:
                     species_list = ebird.get_species_info(session, settings.EBIRD_API_KEY, locale)
                     all_species_objs.extend([ebird.convert_to_species(species, locale) for species in species_list])
                 merged_species = {}
@@ -54,7 +47,13 @@ class Command(BaseCommand):
                 species_objs = [lajifi.convert_to_species(species) for species in species_list]
             case _:
                 raise ValueError("Invalid species info source")
-        valid_species_objs = [obj for obj in species_objs if obj is not None]
+        valid_species_objs = []
+        for sp_obj in species_objs:
+            try:
+                sp_obj.clean_fields()
+            except ValidationError:
+                continue
+            valid_species_objs.append(sp_obj)
         if len(species_objs) > len(valid_species_objs):
             self.stdout.write(
                 self.style.WARNING(f"Validation failed for {len(species_objs) - len(valid_species_objs)} species. Omitting failed species.")
