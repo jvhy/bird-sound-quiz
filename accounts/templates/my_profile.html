@@ -26,29 +26,27 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span class="fw-bold text-muted"><i class="bi bi-globe"></i> {% trans "PreferredRegionLabel" %}:</span>
-                    <div class="dropdown">
-                        <a class="btn dropdown-toggle px-1" href="#" role="button" id="regionMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                            {% if request.user.preferred_region %}
-                                {{ request.user.preferred_region }}
-                            {% else %}
+                    <form method="post" action="{{ request.path }}">
+                        {% csrf_token %}
+                        <select id="regionSelect" name="region" class="form-select" style="max-width: 15em;" onchange="this.form.submit()">
+                            <option
+                                value=""
+                                {% if not request.user.preferred_region.id %}
+                                    selected
+                                {% endif %}>
                                 {% trans "NotSelected" %}
-                            {% endif %}
-                        </a>
-                        <ul id="regionMenu" class="dropdown-menu" aria-labelledby="regionMenuBtn">
+                            </option>
                             {% for region in regions %}
-                            <li>
-                                <form action="{{ request.path }}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="region" value="{{ region.id }}">
-                                    {% get_current_language as LANGUAGE_CODE %}
-                                    <button type="submit" class="btn">
-                                        {{ region.name }}
-                                    </button>
-                                </form>
-                            </li>
+                            <option
+                                value="{{ region.id }}"
+                                {% if request.user.preferred_region.id == region.id %}
+                                    selected
+                                {% endif %}>
+                                {{ region.display_name }}
+                            </option>
                             {% endfor %}
-                        </ul>
-                    </div>
+                        </select>
+                    </form>
                 </li>
             </ul>
             <div class="text-center mt-4">
