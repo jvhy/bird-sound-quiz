@@ -1,5 +1,7 @@
 """Command for populating the database"""
 
+import pathlib
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from tqdm import tqdm
@@ -13,11 +15,17 @@ class Command(BaseCommand):
     help = "Populate recording database table"
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            "region",
+        group = parser.add_mutually_exclusive_group(required=True)
+        group.add_argument(
+            "-r", "--region",
             type=str,
             nargs="+",
             help="Include recordings of species observed in selected regions (multiple regions can be selected)"
+        )
+        group.add_argument(
+            "-f", "--region-file",
+            type=str,
+            help="Path to a file containing regions (one per line)",
         )
         parser.add_argument(
             "-s", "--skip-existing",
@@ -28,7 +36,23 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         session = get_retry_request_session()
-        regions = Region.objects.filter(code__in=kwargs["region"])
+        region_provided = kwargs.get("region") or kwargs.get("region_file")
+        if not region_provided:
+            self.stdout.write(
+                self.style.ERROR("No region(s) provided. Please provide region(s) with --region or --region-file options.")
+            )
+            return
+        region_codes = kwargs.get("region")
+        if not region_codes:
+            region_file_path = pathlib.Path(kwargs["region_file"])
+            if not region_file_path.exists():
+                self.stdout.write(
+                    self.style.ERROR("Region file doesn't exist. Please check the path.")
+                )
+                return
+            with open(region_file_path, "r") as f_in:
+                region_codes = [code.strip() for code in f_in.readlines() if code]
+        regions = Region.objects.filter(code__in=region_codes)
         observed_species_ids = Observation.objects.filter(region__in=regions).values_list("species", flat=True).distinct()
         observed_species = Species.objects.filter(id__in=observed_species_ids)
         if kwargs["skip_existing"]:

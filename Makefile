@@ -15,8 +15,8 @@ serve:    ## Launch quiz app
 populate_db:	## Populate database tables
 	uv run manage.py populate_species_table
 	uv run manage.py populate_region_table
-	uv run manage.py populate_observation_table FI
-	uv run manage.py populate_recording_table FI
+	uv run manage.py populate_observation_table -r FI
+	uv run manage.py populate_recording_table -r FI
 
 test:     ## Run tests
 	uv run pytest --verbose
