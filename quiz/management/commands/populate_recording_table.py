@@ -19,12 +19,20 @@ class Command(BaseCommand):
             nargs="+",
             help="Include recordings of species observed in selected regions (multiple regions can be selected)"
         )
+        parser.add_argument(
+            "-s", "--skip-existing",
+            type=bool,
+            default=True,
+            help="Skip recordings of species that already have recordings in the database (default: %(default)s)"
+        )
 
     def handle(self, *args, **kwargs):
         session = get_retry_request_session()
         regions = Region.objects.filter(code__in=kwargs["region"])
         observed_species_ids = Observation.objects.filter(region__in=regions).values_list("species", flat=True).distinct()
         observed_species = Species.objects.filter(id__in=observed_species_ids)
+        if kwargs["skip_existing"]:
+            observed_species = observed_species.filter(recording__isnull=True).distinct()
         for species in tqdm(observed_species):
             recording_pages = get_recordings_by_species(species=species, session=session, api_key=settings.XENOCANTO_API_KEY)
             for page in recording_pages:
