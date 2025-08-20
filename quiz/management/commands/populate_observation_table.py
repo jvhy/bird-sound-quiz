@@ -4,6 +4,7 @@ import pathlib
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from tqdm import tqdm
 
 from quiz.importers.ebird import get_species_codes_by_region
 from quiz.importers.util import get_retry_request_session
@@ -58,7 +59,7 @@ class Command(BaseCommand):
             )
         if len(missing_regions) == len(region_codes):
             return
-        for region in regions:
+        for region in tqdm(regions):
             observed_species_codes = get_species_codes_by_region(region.code, session, settings.EBIRD_API_KEY)
             observed_species = [sp for sp in species if sp.code in observed_species_codes]
             observations = [
