@@ -5,7 +5,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
-from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from quiz.models import Recording, Quiz, Answer
@@ -78,18 +77,28 @@ def results_page(request):
     )
     quiz.user_id = request.user.id
     quiz.region_id = request.POST.get("region_id")
-    quiz.save()
 
     recording_ids = request.POST.getlist("ids[]")
+    answer_statuses = request.POST.getlist("is_correct[]")
+
     user_answers = []
-    for i in range(10):
+    score = 0
+    for i, (recording_id, answer_status) in enumerate(zip(recording_ids, answer_statuses)):
         user_answer = request.POST.get(f"answer_{i}")
+        recording = Recording.objects.get(id=recording_id)
+        is_correct = bool(int(answer_status))
+        score += is_correct
         answer = Answer(
             quiz=quiz,
-            user_answer=user_answer or ""
+            recording=recording,
+            user_answer=user_answer or "",
+            is_correct=is_correct
         )
-        answer.recording_id = recording_ids[i]
         user_answers.append(answer)
+
+    quiz.length = len(user_answers)
+    quiz.score = score
+    quiz.save()
     Answer.objects.bulk_create(user_answers)
 
     return redirect("results_get", quiz_id=quiz.id)

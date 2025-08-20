@@ -99,6 +99,7 @@
                                 {% endwith %}
                                 <input type="hidden" name="ids[]" value="{{ recording.id }}">
                                 <input type="hidden" name="audio_urls[]" value="{{ recording|get_attr:audio_field }}">
+                                <input type="hidden" name="is_correct[]" data-recording-id="{{ recording.id }}">
                             </div>
                         </div>
                         {% if mode == "OPEN" %}
@@ -208,6 +209,8 @@
                 })
                 .then(data => {
                     const answerDiv = activeSlide.querySelector(".correct-answer");
+                    const answerStatus = activeSlide.querySelector(`input[name="is_correct[]"][data-recording-id="${recordingId}"]`);
+                    answerStatus.value = data.correct ? 1 : 0;
                     if (gameMode === "OPEN") {
                         userAnswerInput.readOnly = true;
                         userAnswerInput.classList.add("readonly-input");
