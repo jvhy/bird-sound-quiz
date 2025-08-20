@@ -109,16 +109,10 @@ class Quiz(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True)
     mode = models.CharField(max_length=8, choices=QuizMode)
+    length = models.IntegerField()
+    score = models.IntegerField()
     started_at = models.DateTimeField()
     finished_at = models.DateTimeField(auto_now_add=True)
-
-    @property
-    def length(self) -> int:
-        return self.answers.count()
-
-    @property
-    def score(self) -> int:
-        return sum(ans.is_correct for ans in self.answers.all())
 
     def __str__(self):
         return f"Quiz {self.id} by {self.user}"
@@ -128,12 +122,7 @@ class Answer(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="answers")
     recording = models.ForeignKey(Recording, on_delete=models.SET_NULL, null=True)
     user_answer = models.CharField(max_length=255)
-
-    @property
-    def is_correct(self) -> bool:
-        if not self.recording:
-            return False
-        return check_answer(self.user_answer, self.recording.species)
+    is_correct = models.BooleanField()
 
     def __str__(self):
         return f"Answer {self.id} in Quiz {self.quiz_id}"
