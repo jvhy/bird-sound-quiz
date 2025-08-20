@@ -71,16 +71,17 @@ def get_quiz_recordings(species_set: QuerySet[Species]) -> QuerySet[Recording]:
     :return selected_recordings: Selected recording objects.
     """
     species_ids = [sp.id for sp in species_set]
-    candidate_recordings = Recording.objects.filter(species_id__in=species_ids)
+    candidate_recordings = Recording.objects.filter(species_id__in=species_ids).values_list("species_id", "id")
 
     recordings_by_species = defaultdict(list)
-    for rec in candidate_recordings:
-        recordings_by_species[rec.species.id].append(rec)
+    for sp_id, rec_id in candidate_recordings:
+        recordings_by_species[sp_id].append(rec_id)
 
-    selected_recordings = []
-    for species in species_set:
-        recs = recordings_by_species[species.id]
-        selected_recordings.append(random.choice(recs))
+    selected_recording_ids = []
+    for recs in recordings_by_species.values():
+        selected_recording_ids.append(random.choice(recs))
+    selected_recordings = Recording.objects.filter(id__in=selected_recording_ids)
+
     return selected_recordings
 
 
