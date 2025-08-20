@@ -47,6 +47,17 @@ class Command(BaseCommand):
             with open(region_file_path, "r") as f_in:
                 region_codes = [code.strip() for code in f_in.readlines() if code]
         regions = Region.objects.filter(code__in=region_codes)
+        missing_regions = set(region_codes).difference({region.code for region in regions})
+        if missing_regions:
+            self.stdout.write(
+                self.style.WARNING(
+                    "Some regions were not found in the database. "
+                    "Please run the populate_regions_command.\n\n"
+                    f"Missing regions: {missing_regions}"
+                )
+            )
+        if len(missing_regions) == len(region_codes):
+            return
         for region in regions:
             observed_species_codes = get_species_codes_by_region(region.code, session, settings.EBIRD_API_KEY)
             observed_species = [sp for sp in species if sp.code in observed_species_codes]

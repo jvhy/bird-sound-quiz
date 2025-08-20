@@ -53,7 +53,26 @@ class Command(BaseCommand):
             with open(region_file_path, "r") as f_in:
                 region_codes = [code.strip() for code in f_in.readlines() if code]
         regions = Region.objects.filter(code__in=region_codes)
+        missing_regions = set(region_codes).difference({region.code for region in regions})
+        if missing_regions:
+            self.stdout.write(
+                self.style.WARNING(
+                    "Some regions were not found in the database. "
+                    "Please run the populate_regions_command.\n\n"
+                    f"Missing regions: {missing_regions}"
+                )
+            )
+        if len(missing_regions) == len(region_codes):
+            return
         observed_species_ids = Observation.objects.filter(region__in=regions).values_list("species", flat=True).distinct()
+        if not observed_species_ids:
+            self.stdout.write(
+                self.style.ERROR(
+                    "No observations were found for the selected region(s). "
+                    "Please run the populate_observation_table command for the region(s) first."
+                )
+            )
+            return
         observed_species = Species.objects.filter(id__in=observed_species_ids)
         if kwargs["skip_existing"]:
             observed_species = observed_species.filter(recording__isnull=True).distinct()
