@@ -80,7 +80,7 @@ def get_quiz_recordings(species_set: QuerySet[Species]) -> QuerySet[Recording]:
     selected_recording_ids = []
     for recs in recordings_by_species.values():
         selected_recording_ids.append(random.choice(recs))
-    selected_recordings = Recording.objects.filter(id__in=selected_recording_ids)
+    selected_recordings = Recording.objects.select_related("species").filter(id__in=selected_recording_ids)
 
     return selected_recordings
 
