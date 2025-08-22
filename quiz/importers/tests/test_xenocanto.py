@@ -6,7 +6,7 @@ import requests
 import responses
 
 from quiz.importers import xenocanto
-from quiz.models import Species, Recording
+from quiz.models import Species, Recording, SoundType
 
 
 def test_extract_license_type():
@@ -33,6 +33,23 @@ def test_construct_audio_url():
     audio_url = xenocanto.construct_audio_url(recording)
 
     assert audio_url == "https://xeno-canto.org/sounds/uploaded/ABCDEFGHIJ/XC123.mp3"
+
+
+def test_extract_primary_sound_type():
+    st_1 = "song"  # -> song
+    st_2 = "call, song"  # -> call
+    st_3 = "subsong"  # -> song
+    st_4 = "maybe a song?"  # -> other
+
+    result_1 = xenocanto.extract_primary_sound_type(st_1)
+    result_2 = xenocanto.extract_primary_sound_type(st_2)
+    result_3 = xenocanto.extract_primary_sound_type(st_3)
+    result_4 = xenocanto.extract_primary_sound_type(st_4)
+
+    assert result_1 == SoundType.SONG
+    assert result_2 == SoundType.CALL
+    assert result_3 == SoundType.SONG
+    assert result_4 == SoundType.OTHER
 
 
 @responses.activate
