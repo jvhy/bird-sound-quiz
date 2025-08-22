@@ -5,7 +5,24 @@ import pathlib
 from django.core.exceptions import ValidationError
 import requests
 
-from quiz.models import Recording, Species
+from quiz.models import Recording, SoundType, Species
+
+
+SOUND_TYPE_MAPPING = {
+    "song": SoundType.SONG,
+    "dawn song": SoundType.SONG,
+    "subsong": SoundType.SONG,
+    "call": SoundType.CALL,
+    "flight call": SoundType.FLIGHT,
+    "nocturnal flight call": SoundType.FLIGHT,
+    "alarm call": SoundType.ALARM,
+    "begging call": SoundType.BEGGING,
+    "duet": SoundType.DUET,
+    "drumming": SoundType.DRUMMING,
+    "drum": SoundType.DRUMMING,
+    "aberrant": SoundType.ABERRANT,
+    "imitation": SoundType.IMITATION
+}
 
 
 def get_recordings_by_species(species: Species, session: requests.Session, api_key: str) -> Iterator[dict]:
@@ -78,6 +95,18 @@ def construct_audio_url(recording: dict) -> str:
     return audio_url
 
 
+def extract_primary_sound_type(sound_type: str) -> SoundType:
+    """
+    Extracts the primary sound type from a comma-separated list of sound types in a Xeno-Canto recoding object.
+
+    :param sound_type: Comma-separated list of sound types.
+    :returns primary_type: Extracted primary sound type.
+    """
+    primary_type_str = sound_type.split(",")[0]
+    primary_type = SOUND_TYPE_MAPPING.get(primary_type_str, SoundType.OTHER)
+    return primary_type
+
+
 def convert_to_recording(recording_obj: dict, species: Species) -> Recording | None:
     """
     Converts recording object in Xeno-Canto API schema to Recording database object and validates the fields.
@@ -97,7 +126,7 @@ def convert_to_recording(recording_obj: dict, species: Species) -> Recording | N
         recordist=recording_obj["rec"],
         country=recording_obj["cnt"],
         location=recording_obj["loc"],
-        sound_type=recording_obj["type"],
+        sound_type=extract_primary_sound_type(recording_obj["type"]),
         license=extract_license_type(recording_obj["lic"]),
         license_url=recording_obj["lic"],
         audio=file_name
