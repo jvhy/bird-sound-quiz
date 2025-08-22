@@ -17,6 +17,19 @@ class Species(models.Model):
     code = models.CharField(max_length=9, verbose_name="eBird species code", null=True, blank=True, default=None)
 
 
+class SoundType(models.TextChoices):
+    SONG = "SNG", _("Song")
+    CALL = "CAL", _("Call")
+    ALARM = "ALR", _("Alarm call")
+    FLIGHT = "FLG", _("Flight call")
+    BEGGING = "BEG", _("Begging call")
+    DUET = "DUE", _("Duet")
+    ABERRANT = "ABR", _("Aberrant")
+    IMITATION = "IMI", _("Imitation")
+    DRUMMING = "DRU", _("Drumming")
+    OTHER = "OTH", _("Other")
+
+
 class Recording(models.Model):
     id = models.IntegerField(primary_key=True, verbose_name="Xeno-Canto ID")
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
@@ -25,7 +38,7 @@ class Recording(models.Model):
     recordist = models.CharField(max_length=100)
     country = models.CharField(max_length=50)
     location = models.CharField(max_length=255)
-    sound_type = models.CharField(max_length=100, null=True)
+    sound_type = models.CharField(max_length=3, choices=SoundType, db_index=True)
     license = models.CharField(max_length=30, verbose_name="Creative Commons license type")
     license_url = models.CharField(max_length=255, verbose_name="Creative Commons license info URL", null=True)
     audio = models.FileField(upload_to="audio", max_length=255, unique=True)
