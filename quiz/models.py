@@ -16,6 +16,13 @@ class Species(models.Model):
     genus = models.CharField(max_length=50, verbose_name="Taxonomic genus", null=True, default=None)
     code = models.CharField(max_length=9, verbose_name="eBird species code", null=True, blank=True, default=None)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Species"
+        verbose_name_plural = "Species"
+
 
 class SoundType(models.TextChoices):
     SONG = "SNG", _("Song")
