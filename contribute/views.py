@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.utils.translation import get_language
 
 from contribute.services import get_observations_to_type_annotate
 from contribute.models import ObservationTypeAnnotation

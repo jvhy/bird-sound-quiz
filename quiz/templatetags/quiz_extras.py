@@ -17,7 +17,7 @@ def get_attr(recording: Recording, attr: str):
     :param attr: Attribute to get from Recording object, eg. "xc_audio_url" or "audio.url"
     """
     return attrgetter(attr)(recording)
- 
+
 
 @register.filter
 def dict_get(dictionary: dict, key: Any):

@@ -59,7 +59,7 @@ def test_get_recordings_by_species_1():
     url = "https://xeno-canto.org/api/3/recordings"
     api_key = "verysecretapikey"
     params = {
-        "query": f'sp:"Larus canus" grp:birds q:A len:5-30',
+        "query": 'sp:"Larus canus" grp:birds q:A len:5-30',
         "key": api_key
     }
 
@@ -95,7 +95,7 @@ def test_get_recordings_by_species_2():
     api_key = "verysecretapikey"
 
     params_sci = {
-        "query": f'sp:"Larus canus" grp:birds q:A len:5-30',
+        "query": 'sp:"Larus canus" grp:birds q:A len:5-30',
         "key": api_key
     }
     responses.add(
@@ -112,7 +112,7 @@ def test_get_recordings_by_species_2():
     )
 
     params_en = {
-        "query": f'en:"=Common Gull" grp:birds q:A len:5-30',
+        "query": 'en:"=Common Gull" grp:birds q:A len:5-30',
         "key": api_key
     }
     responses.add(
@@ -147,7 +147,7 @@ def test_get_recordings_by_species_3():
     api_key = "verysecretapikey"
 
     params = {
-        "query": f'sp:"Larus canus" grp:birds q:A len:5-30',
+        "query": 'sp:"Larus canus" grp:birds q:A len:5-30',
         "key": api_key
     }
 
@@ -227,7 +227,7 @@ def test_convert_to_recording_1():
 
     recording = xenocanto.convert_to_recording(recording_obj, species)
 
-    assert type(recording) == Recording
+    assert type(recording) is Recording
     assert recording.audio == "audio/XC123.mp3"
 
 

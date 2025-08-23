@@ -1,11 +1,10 @@
 import uuid
 
 from django.db import models
-from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from accounts.models import User
-from quiz.utils import create_region_display_name, check_answer
+from quiz.utils import create_region_display_name
 
 
 class Species(models.Model):

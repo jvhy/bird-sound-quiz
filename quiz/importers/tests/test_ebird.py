@@ -129,7 +129,7 @@ def test_convert_to_species_1():
 
     species = ebird.convert_to_species(sp_obj)
 
-    assert type(species) == Species
+    assert type(species) is Species
     assert species.name_en == "White Wagtail"
     assert species.name_fi is None
     assert species.name_sci == "Motacilla alba"
@@ -254,7 +254,7 @@ def test_convert_to_region_1():
     region_obj = {"code": "FI", "name": "Finland"}
     region = ebird.convert_to_region(region_obj, parent_region=None)
 
-    assert type(region) == Region
+    assert type(region) is Region
     assert region.code == "FI"
     assert region.name_en == "Finland"
     assert region.parent_region is None

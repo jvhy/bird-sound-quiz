@@ -4,7 +4,6 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.decorators.http import require_http_methods
-from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 
 from accounts.forms import CustomAuthenticationForm, CustomUserCreationForm

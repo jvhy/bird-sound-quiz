@@ -4,7 +4,7 @@ import random
 
 from django.db.models.query import QuerySet
 
-from quiz.models import Species, SpeciesList, Recording, Region
+from quiz.models import Species, Recording, Region
 
 
 class SelectionMode(str, Enum):
@@ -56,7 +56,7 @@ def get_multiple_choices(
     :param target_species: Species for which choices are selected.
     :param available_species: Query set of species from which choices are selected.
     :param num_choices: How many choices to select.
-    :param mode: How to select choice species: 
+    :param mode: How to select choice species:
         "random" -> select randomly
         "taxonomic" -> select from species taxonomically close to the target species
     :return choice_species_names: List of choice species names in a random order (target species included)
