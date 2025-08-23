@@ -1,58 +1,98 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-17 06:57+0000\n"
+"POT-Creation-Date: 2025-08-23 13:14+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: quiz/models.py:59
+#: quiz/models.py:28
+msgid "Song"
+msgstr "Laulu"
+
+#: quiz/models.py:29
+msgid "Call"
+msgstr "Kutsuääni"
+
+#: quiz/models.py:30
+msgid "Alarm call"
+msgstr "Varoitusääni"
+
+#: quiz/models.py:31
+msgid "Flight call"
+msgstr "Lentoääni"
+
+#: quiz/models.py:32
+msgid "Begging call"
+msgstr "Kerjäysääni"
+
+#: quiz/models.py:33
+msgid "Duet"
+msgstr "Duetto"
+
+#: quiz/models.py:34
+msgid "Aberrant"
+msgstr "Poikkeava"
+
+#: quiz/models.py:35
+msgid "Imitation"
+msgstr "Matkiminen"
+
+#: quiz/models.py:36
+msgid "Drumming"
+msgstr "Rummutus"
+
+#: quiz/models.py:37
+msgid "Other"
+msgstr "Muu"
+
+#: quiz/models.py:76
 msgid "Regular breeder"
 msgstr "Säännöllinen pesijä"
 
-#: quiz/models.py:60
+#: quiz/models.py:77
 msgid "Irregular breeder"
 msgstr "Satunnainen pesijä"
 
-#: quiz/models.py:61
+#: quiz/models.py:78
 msgid "Winter migrant"
 msgstr "Talvehtija"
 
-#: quiz/models.py:62
+#: quiz/models.py:79
 msgid "Passage migrant"
 msgstr "Läpimuuttaja"
 
-#: quiz/models.py:63
+#: quiz/models.py:80
 msgid "Vagrant"
 msgstr "Harhailija"
 
-#: quiz/models.py:64
+#: quiz/models.py:81
 msgid "Escapee"
 msgstr "Tarhakarkuri"
 
-#: quiz/models.py:69
+#: quiz/models.py:86
 msgid "A species that breeds consistently in the region every year."
 msgstr "Laji pesii alueella vuosittain."
 
-#: quiz/models.py:72
+#: quiz/models.py:89
 msgid ""
 "A species that breeds in the region only occasionally or under certain "
 "conditions."
 msgstr "Laji pesii alueella harvemmin kuin vuosittain."
 
-#: quiz/models.py:75
+#: quiz/models.py:92
 msgid ""
 "A species that migrates to and stays in the region during the non-breeding "
 "(winter) season."
 msgstr "Laji muuttaa alueelle pesimäkauden ulkopuoliseksi ajaksi (talveksi)."
 
-#: quiz/models.py:78
+#: quiz/models.py:95
 msgid ""
 "A species that passes through the region during migration but does not breed "
 "or overwinter there."
 msgstr "Laji muuttaa alueen läpi, mutta ei pesi tai talvehdi alueella."
 
-#: quiz/models.py:81
+#: quiz/models.py:98
 msgid ""
 "A species found outside its normal range, typically due to unusual weather "
 "or navigation errors."
@@ -60,20 +100,24 @@ msgstr ""
 "Laji on alueella tavanomaisen esiintymisalueensa ulkopuolella, usein "
 "suunnistusvirheen tai haastavien sääolosuhteiden seurauksena."
 
-#: quiz/models.py:84
+#: quiz/models.py:101
 msgid ""
 "A non-native species that has escaped from captivity and appears in the wild."
 msgstr ""
 "Laji ei esiinny alueella luonnonvaraisesti, vaan ainoastaan tarha- tai "
 "häkkikarkulaisena."
 
-#: quiz/models.py:108
+#: quiz/models.py:125
 msgid "Multiple choice"
 msgstr "Monivalinta"
 
-#: quiz/models.py:109
+#: quiz/models.py:126
 msgid "Open answer"
 msgstr "Avoin vastaus"
+
+#: quiz/models.py:152
+msgid "List of easily recognizable species, used for regional beginner quizzes"
+msgstr "Lista helposti tunnistettavia lajeja, käytetään alueellisiin aloittelijavisoihin"
 
 #: quiz/templates/index.html:7
 msgid "Home"
@@ -96,21 +140,37 @@ msgstr "Valitse alue"
 msgid "NoRegionSelectedOption"
 msgstr "Ei valittua aluetta"
 
-#: quiz/templates/index.html:36
+#: quiz/templates/index.html:45
+msgid "DifficultySelectorLabel"
+msgstr "Valitse vaikeustaso"
+
+#: quiz/templates/index.html:47
+msgid "BeginnerDifficulty"
+msgstr "Helppo"
+
+#: quiz/templates/index.html:48
+msgid "NormalDifficulty"
+msgstr "Normaali"
+
+#: quiz/templates/index.html:50
 msgid "GameModeSelectorLabel"
 msgstr "Valitse pelimuoto"
 
-#: quiz/templates/index.html:38
+#: quiz/templates/index.html:52
 msgid "MultipleChoiceOption"
 msgstr "Monivalinta"
 
-#: quiz/templates/index.html:39
+#: quiz/templates/index.html:53
 msgid "OpenAnswerOption"
 msgstr "Avoin vastaus"
 
-#: quiz/templates/index.html:42
+#: quiz/templates/index.html:56
 msgid "QuizStartButtonLabel"
 msgstr "Aloita"
+
+#: quiz/templates/index.html:78
+msgid "BeginnerModeUnavailableInRegionTooltip"
+msgstr "Helppo vaikeustaso ei ole valittavissa tälle alueelle"
 
 #: quiz/templates/quiz.html:7
 msgid "Quiz"
@@ -135,20 +195,20 @@ msgstr "<strong>Sijainti:</strong> %(location)s, %(country)s"
 msgid "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
 msgstr "<strong>Lisenssi:</strong> %(a_open)s%(license)s%(a_close)s"
 
-#: quiz/templates/quiz.html:118 quiz/templates/quiz.html:193
-#: quiz/templates/quiz.html:258
+#: quiz/templates/quiz.html:119 quiz/templates/quiz.html:194
+#: quiz/templates/quiz.html:261
 msgid "CheckButtonLabel"
 msgstr "Tarkista"
 
-#: quiz/templates/quiz.html:137
+#: quiz/templates/quiz.html:138
 msgid "LanguageCannotChangeDuringQuizText"
 msgstr "Kieltä ei voi vaihtaa kesken visan"
 
-#: quiz/templates/quiz.html:249
+#: quiz/templates/quiz.html:252
 msgid "ResultsButtonLabel"
 msgstr "Tulokset"
 
-#: quiz/templates/quiz.html:253
+#: quiz/templates/quiz.html:256
 msgid "NextButtonLabel"
 msgstr "Seuraava"
 
@@ -177,6 +237,6 @@ msgstr "Oikea vastaus"
 msgid "HomeButtonLabel"
 msgstr "Etusivu"
 
-#: quiz/views.py:110
+#: quiz/views.py:121
 msgid "EmptyAnswerPlaceholderText"
 msgstr "ei vastausta"

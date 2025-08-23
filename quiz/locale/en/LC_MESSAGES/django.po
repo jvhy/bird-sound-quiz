@@ -1,40 +1,81 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-08-17 06:57+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-23 13:14+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: quiz/models.py:59
+#: quiz/models.py:28
+msgid "Song"
+msgstr "Song"
+
+#: quiz/models.py:29
+msgid "Call"
+msgstr "Call"
+
+#: quiz/models.py:30
+msgid "Alarm call"
+msgstr "Alarm call"
+
+#: quiz/models.py:31
+msgid "Flight call"
+msgstr "Flight call"
+
+#: quiz/models.py:32
+msgid "Begging call"
+msgstr "Begging call"
+
+#: quiz/models.py:33
+msgid "Duet"
+msgstr "Duet"
+
+#: quiz/models.py:34
+msgid "Aberrant"
+msgstr "Aberrant"
+
+#: quiz/models.py:35
+msgid "Imitation"
+msgstr "Imitation"
+
+#: quiz/models.py:36
+msgid "Drumming"
+msgstr "Drumming"
+
+#: quiz/models.py:37
+msgid "Other"
+msgstr "Other"
+
+#: quiz/models.py:76
 msgid "Regular breeder"
 msgstr "Regular breeder"
 
-#: quiz/models.py:60
+#: quiz/models.py:77
 msgid "Irregular breeder"
 msgstr "Irregular breeder"
 
-#: quiz/models.py:61
+#: quiz/models.py:78
 msgid "Winter migrant"
 msgstr "Winter migrant"
 
-#: quiz/models.py:62
+#: quiz/models.py:79
 msgid "Passage migrant"
 msgstr "Passage migrant"
 
-#: quiz/models.py:63
+#: quiz/models.py:80
 msgid "Vagrant"
 msgstr "Vagrant"
 
-#: quiz/models.py:64
+#: quiz/models.py:81
 msgid "Escapee"
 msgstr "Escapee"
 
-#: quiz/models.py:69
+#: quiz/models.py:86
 msgid "A species that breeds consistently in the region every year."
 msgstr "A species that breeds consistently in the region every year."
 
-#: quiz/models.py:72
+#: quiz/models.py:89
 msgid ""
 "A species that breeds in the region only occasionally or under certain "
 "conditions."
@@ -42,7 +83,7 @@ msgstr ""
 "A species that breeds in the region only occasionally or under certain "
 "conditions."
 
-#: quiz/models.py:75
+#: quiz/models.py:92
 msgid ""
 "A species that migrates to and stays in the region during the non-breeding "
 "(winter) season."
@@ -50,7 +91,7 @@ msgstr ""
 "A species that migrates to and stays in the region during the non-breeding "
 "(winter) season."
 
-#: quiz/models.py:78
+#: quiz/models.py:95
 msgid ""
 "A species that passes through the region during migration but does not breed "
 "or overwinter there."
@@ -58,7 +99,7 @@ msgstr ""
 "A species that passes through the region during migration but does not breed "
 "or overwinter there."
 
-#: quiz/models.py:81
+#: quiz/models.py:98
 msgid ""
 "A species found outside its normal range, typically due to unusual weather "
 "or navigation errors."
@@ -66,19 +107,23 @@ msgstr ""
 "A species found outside its normal range, typically due to unusual weather "
 "or navigation errors."
 
-#: quiz/models.py:84
+#: quiz/models.py:101
 msgid ""
 "A non-native species that has escaped from captivity and appears in the wild."
 msgstr ""
 "A non-native species that has escaped from captivity and appears in the wild."
 
-#: quiz/models.py:108
+#: quiz/models.py:125
 msgid "Multiple choice"
 msgstr "Multiple choice"
 
-#: quiz/models.py:109
+#: quiz/models.py:126
 msgid "Open answer"
 msgstr "Open answer"
+
+#: quiz/models.py:152
+msgid "List of easily recognizable species, used for regional beginner quizzes"
+msgstr "List of easily recognizable species, used for regional beginner quizzes"
 
 #: quiz/templates/index.html:7
 msgid "Home"
@@ -101,21 +146,37 @@ msgstr "Select Region"
 msgid "NoRegionSelectedOption"
 msgstr "No region selected"
 
-#: quiz/templates/index.html:36
+#: quiz/templates/index.html:45
+msgid "DifficultySelectorLabel"
+msgstr "Select Difficulty"
+
+#: quiz/templates/index.html:47
+msgid "BeginnerDifficulty"
+msgstr "Easy"
+
+#: quiz/templates/index.html:48
+msgid "NormalDifficulty"
+msgstr "Normal"
+
+#: quiz/templates/index.html:50
 msgid "GameModeSelectorLabel"
 msgstr "Select Game Mode"
 
-#: quiz/templates/index.html:38
+#: quiz/templates/index.html:52
 msgid "MultipleChoiceOption"
 msgstr "Multiple choice"
 
-#: quiz/templates/index.html:39
+#: quiz/templates/index.html:53
 msgid "OpenAnswerOption"
 msgstr "Open answer"
 
-#: quiz/templates/index.html:42
+#: quiz/templates/index.html:56
 msgid "QuizStartButtonLabel"
 msgstr "Start Quiz"
+
+#: quiz/templates/index.html:78
+msgid "BeginnerModeUnavailableInRegionTooltip"
+msgstr "Easy difficulty is not available for this region"
 
 #: quiz/templates/quiz.html:7
 msgid "Quiz"
@@ -140,20 +201,20 @@ msgstr "<strong>Location:</strong> %(location)s, %(country)s"
 msgid "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
 msgstr "<strong>License:</strong> %(a_open)s%(license)s%(a_close)s"
 
-#: quiz/templates/quiz.html:118 quiz/templates/quiz.html:193
-#: quiz/templates/quiz.html:258
+#: quiz/templates/quiz.html:119 quiz/templates/quiz.html:194
+#: quiz/templates/quiz.html:261
 msgid "CheckButtonLabel"
 msgstr "Check"
 
-#: quiz/templates/quiz.html:137
+#: quiz/templates/quiz.html:138
 msgid "LanguageCannotChangeDuringQuizText"
 msgstr "Language cannot be changed during quiz"
 
-#: quiz/templates/quiz.html:249
+#: quiz/templates/quiz.html:252
 msgid "ResultsButtonLabel"
 msgstr "Results"
 
-#: quiz/templates/quiz.html:253
+#: quiz/templates/quiz.html:256
 msgid "NextButtonLabel"
 msgstr "Next"
 
@@ -182,6 +243,6 @@ msgstr "Correct answer"
 msgid "HomeButtonLabel"
 msgstr "Home"
 
-#: quiz/views.py:110
+#: quiz/views.py:121
 msgid "EmptyAnswerPlaceholderText"
 msgstr "no answer"
