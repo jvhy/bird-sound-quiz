@@ -4,7 +4,7 @@ import random
 
 from django.db.models.query import QuerySet
 
-from quiz.models import Species, Recording, Region
+from quiz.models import Species, SpeciesList, Recording, Region
 
 
 class SelectionMode(str, Enum):
@@ -24,6 +24,26 @@ def get_species_by_region(region_id: int) -> QuerySet[Species]:
         recording__isnull=False
     ).distinct()
     return region_species
+
+
+def get_regions_with_beginner_quiz():
+    region_ids = Region.objects.filter(
+        specieslist__is_official=True,
+        specieslist__type="BGN"
+    ).values_list("id", flat=True).distinct()
+    return region_ids
+
+
+def get_beginner_species_by_region(region_id: int) -> QuerySet[Species]:
+    species_qs = Species.objects.filter(
+        listspecies__list__type="BGN",
+        listspecies__list__regions__id=region_id,
+        listspecies__list__is_official=True,
+        recording__sound_type__in=["SNG", "CAL"]
+    ).distinct()
+    print(species_qs.query)
+    print(len(species_qs))
+    return species_qs
 
 
 def get_multiple_choices(

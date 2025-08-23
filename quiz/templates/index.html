@@ -42,6 +42,11 @@
                             </option>
                             {% endfor %}
                         </select>
+                        <h5 class="card-title text-center mb-4">{% trans "DifficultySelectorLabel" %}</h5>
+                        <select id="difficultySelect" name="difficulty" class="form-select" required style="margin-bottom: 20px;">
+                            <option value="BGN">{% trans "BeginnerDifficulty" %}</option>
+                            <option value="NML">{% trans "NormalDifficulty" %}</option>
+                        </select>
                         <h5 class="card-title text-center mb-4">{% trans "GameModeSelectorLabel" %}</h5>
                         <select id="modeSelect" name="mode" class="form-select" required>
                             <option value="MULTI" selected>{% trans "MultipleChoiceOption" %}</option>
@@ -57,7 +62,26 @@
     </div>
 </div>
     <script>
+    const beginnerQuizRegions = "{{ beginner_quiz_regions|safe }}";
     const regionSelect = document.getElementById('regionSelect');
+    const difficultySelect = document.getElementById('difficultySelect');
+    const beginnerOption = difficultySelect.querySelector('option[value="BGN"]');
+    const normalOption = difficultySelect.querySelector('option[value="NML"]');
+
+    function updateDifficulty() {
+        const selectedRegionId = parseInt(regionSelect.value);
+        if (beginnerQuizRegions.includes(selectedRegionId)) {
+            beginnerOption.disabled = false;
+        } else {
+            beginnerOption.disabled = true;
+            // TODO: use BS5 tooltip
+            beginnerOption.title = "{% trans 'BeginnerModeUnavailableInRegionTooltip' %}";
+            normalOption.selected = true;
+        }
+    }
+    updateDifficulty();
+    regionSelect.addEventListener('change', updateDifficulty);
+
     const startButton = document.getElementById('startButton');
     // Disable Start Quiz button until region is selected
     function toggleButton() {

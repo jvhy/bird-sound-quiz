@@ -8,13 +8,14 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from quiz.models import Recording, Quiz, Answer
-from quiz.services import get_available_regions, get_species_by_region, get_quiz_recordings, get_multiple_choices
+from quiz.services import get_available_regions, get_regions_with_beginner_quiz, get_species_by_region, get_beginner_species_by_region, get_quiz_recordings, get_multiple_choices
 from quiz.utils import check_answer
 
 
 def index(request):
     regions = sorted(get_available_regions(), key=lambda r: r.display_name.lower())
-    return render(request, 'index.html', context={"regions": regions})
+    regions_with_beginner_quiz = get_regions_with_beginner_quiz()
+    return render(request, 'index.html', context={"regions": regions, "beginner_quiz_regions": regions_with_beginner_quiz})
 
 
 @require_http_methods(["POST"])
@@ -23,7 +24,16 @@ def quiz_page(request):
     request.session["region_id"] = region_id
     mode = request.POST.get("mode")
     started_at = timezone.now().astimezone(timezone.get_default_timezone()).isoformat()
-    region_species = get_species_by_region(region_id)
+    difficulty = request.POST.get("difficulty")
+    match difficulty:
+        case "BGN":
+            region_species = get_beginner_species_by_region(region_id)
+            num_choices = 2
+        case "NML":
+            region_species = get_species_by_region(region_id)
+            num_choices = 3
+        case _:
+            raise ValueError("Unexpected difficulty")
     quiz_species = random.sample(list(region_species), 10)
     recordings = get_quiz_recordings(quiz_species)
     options = {}
@@ -33,7 +43,7 @@ def quiz_page(request):
                 sp_options = get_multiple_choices(
                     target_species=sp,
                     available_species=region_species,
-                    num_choices=3,
+                    num_choices=num_choices,
                     mode="random"
                 )
                 options[sp.id] = sp_options
