@@ -41,8 +41,6 @@ def get_beginner_species_by_region(region_id: int) -> QuerySet[Species]:
         listspecies__list__is_official=True,
         recording__sound_type__in=["SNG", "CAL"]
     ).distinct()
-    print(species_qs.query)
-    print(len(species_qs))
     return species_qs
 
 
