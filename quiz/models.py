@@ -124,9 +124,14 @@ class Quiz(models.Model):
         MULTI = "MULTI", _("Multiple choice")
         OPEN = "OPEN", _("Open answer")
 
+    class QuizDifficulty(models.TextChoices):
+        BEGINNER = ("BGN", _("Beginner / Easy difficulty"))
+        NORMAL = ("NML", _("Normal / default difficulty"))
+
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True)
+    difficulty = models.CharField(max_length=3, choices=QuizDifficulty)
     mode = models.CharField(max_length=8, choices=QuizMode)
     length = models.IntegerField()
     score = models.IntegerField()
