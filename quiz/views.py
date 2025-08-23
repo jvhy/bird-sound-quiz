@@ -59,6 +59,7 @@ def quiz_page(request):
             "recordings": recordings,
             "audio_field": audio_field,
             "options": options,
+            "difficulty": difficulty,
             "mode": mode,
             "region_id": region_id,
             "started_at": started_at
@@ -83,6 +84,7 @@ def check_answer_view(request):
 def results_page(request):
     quiz = Quiz(
         mode=request.POST.get("mode"),
+        difficulty=request.POST.get("difficulty"),
         started_at=request.POST.get("started_at")
     )
     quiz.user_id = request.user.id
