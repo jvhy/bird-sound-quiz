@@ -139,3 +139,44 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Answer {self.id} in Quiz {self.quiz_id}"
+
+
+class SpeciesListType(models.TextChoices):
+    BEGINNER = ("BGN", _("List of easily recognizable species, used for regional beginner quizzes"))
+
+
+class SpeciesList(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    type = models.CharField(max_length=3, choices=SpeciesListType, db_index=True, blank=True, null=True, default=None)
+    regions = models.ManyToManyField(Region, blank=True)
+
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="species_lists")
+    is_official = models.BooleanField(default=False, db_index=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            # Lists created by same user must be uniquely named
+            models.UniqueConstraint(
+                fields=["created_by", "name"],
+                name="unique_user_list_name"
+            )
+        ]
+
+
+class ListSpecies(models.Model):
+    species = models.ForeignKey(Species, on_delete=models.CASCADE)
+    list = models.ForeignKey(SpeciesList, on_delete=models.CASCADE, related_name="species_entries")
+
+    class Meta:
+        constraints = [
+            # species can only appear once in a given list
+            models.UniqueConstraint(
+                fields=["list", "species"],
+                name="unique_species_per_list"
+            )
+        ]
