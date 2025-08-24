@@ -62,7 +62,7 @@
     </div>
 </div>
     <script>
-    const beginnerQuizRegions = "{{ beginner_quiz_regions|safe }}";
+    const beginnerQuizRegions = {{ beginner_quiz_regions|safe }};
     const regionSelect = document.getElementById('regionSelect');
     const difficultySelect = document.getElementById('difficultySelect');
     const beginnerOption = difficultySelect.querySelector('option[value="BGN"]');

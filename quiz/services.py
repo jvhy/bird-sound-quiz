@@ -27,10 +27,10 @@ def get_species_by_region(region_id: int) -> QuerySet[Species]:
 
 
 def get_regions_with_beginner_quiz():
-    region_ids = Region.objects.filter(
+    region_ids = list(Region.objects.filter(
         specieslist__is_official=True,
         specieslist__type="BGN"
-    ).values_list("id", flat=True).distinct()
+    ).values_list("id", flat=True).distinct())
     return region_ids
 
 
